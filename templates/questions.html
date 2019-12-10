@@ -1,0 +1,24 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <p>
+        What type of questions would you like to see
+      </p>
+      <div class="list-group list-group-horizontal-sm">
+        <a href="#" class="list-group-item list-group-item-action active">Reading</a>
+        <a href="#" class="list-group-item list-group-item-action">Writing</a>
+        <a href="#" class="list-group-item list-group-item-action">Combination</a>
+      </div>
+      <a href="{{url_for('new_question')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add</a>
+    </div>
+
+    <div class="col-sm">
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

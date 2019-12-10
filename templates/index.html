@@ -1,0 +1,19 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Hoshuko Kanji Test System</h1>
+    <p class="lead">Welcome to the Kanji Test System. There are {{question_count}} questions in the system and {{test_count}} tests have been created.</p>
+    <hr class="my-4">
+    <p>You can use the menu to create questions or test, or the search at the top to jump directly to questions for a specific kanji</p>
+
+    <div class="btn-group" role="group" aria-label="Quick Menu">
+      <a href="{{url_for('questions')}}" class="btn btn-primary">Questions</a>
+      <a href="{{url_for('tests')}}" class="btn btn-primary">Tests</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
