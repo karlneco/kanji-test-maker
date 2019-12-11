@@ -2,6 +2,12 @@
 
 {% block content %}
 <div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Question Bank</h1>
+    <p class="lead">Here you can review and manage the question bank.</p>
+    <hr class="my-2">
+    Please select the type of question first, then select a question from the list below
+  </div>
   <div class="row">
     <div class="col-sm">
       <p>
@@ -12,7 +18,8 @@
         <a href="#" class="list-group-item list-group-item-action">Writing</a>
         <a href="#" class="list-group-item list-group-item-action">Combination</a>
       </div>
-      <a href="{{url_for('new_question')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add</a>
+      <br>
+      <a href="{{url_for('new_question')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Question...</a>
     </div>
 
     <div class="col-sm">

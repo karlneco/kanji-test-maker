@@ -1,10 +1,13 @@
 {% extends "chrome.html" %}
 
 {% block content %}
-<br>
-
 <div class="container-sm">
-  <h2>Please select a test to review</h2>
+  <div class="jumbotron">
+    <h1 class="display-4">Test Bank</h1>
+    <p class="lead">You can review and manage test here.</p>
+    <hr class="my-2">
+    Please select a test from the list below
+  </div>
   <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
       Test 1
@@ -19,5 +22,7 @@
       <span class="badge badge-primary badge-pill">10</span>
     </li>
   </ul>
+  <br>
+  <a href="{{url_for('new_test')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Test...</a>
 </div>
 {% endblock %}
