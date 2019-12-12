@@ -11,12 +11,13 @@
   <form method="POST">
       {{form.hidden_tag()}}
       <div class="form-group">
-        {{form.question_type.label}}
-        {{form.question_type(class='form-control')}}
+        {{form.type.label}}
+        {{form.type(class='form-control')}}
+        {{form.grade.label}} {{form.grade(class='form-control')}}
       </div>
       <div class="form-group">
-        {{form.question_text.label}}
-        {{form.question_text(class='form-control')}}
+        {{form.question.label}}
+        {{form.question(class='form-control')}}
       </div>
       {{form.submit(class='btn btn-primary')}}
     </div>

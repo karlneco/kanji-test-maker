@@ -1,6 +1,6 @@
-from Question import Question
+from hktm.questions.QuestionBase import QuestionBase
 
-class ComboQuestion(Question):
+class ComboQuestion(QuestionBase):
     """
     This is the class for combination type questions.
     """
@@ -10,4 +10,4 @@ class ComboQuestion(Question):
 
     def render(self):
 
-        return self.question_text
+        return f'This is a combo question {self.question_text}'

@@ -1,6 +1,6 @@
-from Question import Question
+from hktm.questions.QuestionBase import QuestionBase
 
-class WritingQuestion(Question):
+class WritingQuestion(QuestionBase):
     """
     This is the class for writing type questions.
     """
@@ -10,4 +10,4 @@ class WritingQuestion(Question):
 
     def render(self):
 
-        return self.question_text
+        return f'This is a writing question {self.question_text}'

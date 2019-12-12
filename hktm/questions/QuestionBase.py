@@ -1,4 +1,4 @@
-class Question():
+class QuestionBase():
     """
     This defines the data common for all questions
     """

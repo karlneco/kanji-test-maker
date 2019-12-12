@@ -1,7 +1,7 @@
 {% extends "chrome.html" %}
 
 {% block content %}
-<div class="container">
+<div class="container-sm">
   <div class="jumbotron">
     <h1 class="display-4">Question Bank</h1>
     <p class="lead">Here you can review and manage the question bank.</p>
@@ -19,7 +19,16 @@
         <a href="#" class="list-group-item list-group-item-action">Combination</a>
       </div>
       <br>
-      <a href="{{url_for('new_question')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Question...</a>
+
+      <div class="row">
+          <div class="list-group" role="tablist">
+            {% for question in questions %}
+                <a class="list-group-item list-group-item-action" id=list-{{question.id}} href="{{ url_for('questions.edit',id=question.id) }}">{{ question.question }}</a>
+            {% endfor %}
+          </div>
+      </div>
+      <br>
+      <a href="{{url_for('questions.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Question...</a>
     </div>
 
     <div class="col-sm">

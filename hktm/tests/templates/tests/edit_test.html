@@ -1,0 +1,33 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">Test Editor</h1>
+    <p class="lead">Here you can build a test from existing questions, or add new ones</p>
+    <hr class="my-2">
+    <p>Syntax explenation here</p>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <form method="POST">
+          {{form.hidden_tag()}}
+          <div class="form-group">
+            {{form.name.label}}
+            {{form.name(class='form-control')}}
+            {{form.grade.label}} {{form.grade(class='form-control')}}
+          </div>
+          <div class="form-group">
+            {{form.comments.label}}
+            {{form.comments(class='form-control')}}
+          </div>
+          {{form.submit(class='btn btn-primary')}}
+      </form>
+      </div>
+    <div class="col-4">
+      Test questions selector goes here
+    </div>
+  </div>
+</div>
+{% endblock %}
