@@ -13,6 +13,6 @@ def question_factory(db_question):
     else: base = ComboQuestion
 
     # instentiate the correct question type
-    question_object = base(db_question.question,db_question.grade)
+    question_object = base(db_question.grade,db_question.question)
 
     return question_object
