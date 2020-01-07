@@ -27,6 +27,13 @@ class ReadingQuestion(QuestionBase):
                             # extract the kanji characters and out put them in the div
                             text(self.question_text[si+1:self.question_text.find(')',si)])
                     # now eat the block nom nom nom
+                        with tag('div',('class','kanji_reading_brackets')):
+                            doc.stag('img', src='/static/top_bracket.png', height='20px')
+                            with tag('div'):
+                                text(' ')
+                            doc.stag('img', src='/static/btm_bracket.png', height='20px')
+
+
                     si = self.question_text.find(')',si)+1
                 else:
                     # other wise its not a kanji block, so output it as standard reading text
