@@ -13,10 +13,10 @@
 
 .kanji_writing{
   font-size: 90px;
-  font-weight: bold;
-  line-height: 1em;
+  line-height: 127px;
   display: grid;
   grid-template-columns: 95px 30px;
+  grid-template-rows: 95px;
 }
 
 .hiragana{
