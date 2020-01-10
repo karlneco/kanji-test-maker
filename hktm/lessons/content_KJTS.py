@@ -33,22 +33,19 @@ class ContentKJTS():
 
     def combo(self,question):
         doc, tag, text = Doc().tagtext()
+        token = question[0:question.find('}')]
         with tag('div',('class','combo_question')):
             with tag('div'):
                 doc.stag('img', src='/static/top_brace.png', width='90px')
-                space_counter = 0
-                while (question[space_counter-1:]!='') and (question[space_counter:space_counter+1] not in '}'):
+                for c in token:
                     doc.stag('img', src='/static/empty.png', width='90px')
-                    space_counter+=1
                 doc.stag('img', src='/static/btm_brace.png', width='90px')
             # now eat the block nom nom nom
             with tag('div',('class','furigana-combo')):
                 # extract the kanji characters and out put them in the div
-                furi_counter = 0
-                while (question[furi_counter-1:]!='') and (question[furi_counter:furi_counter+1] not in '}'):
+                for c in token:
                     with tag('div',('class','furigana-combo-row')):
-                        text(question[furi_counter])
-                    furi_counter+=1
+                        text(c)
         return doc.getvalue()
 
     def __init__(self,question_bundle):
