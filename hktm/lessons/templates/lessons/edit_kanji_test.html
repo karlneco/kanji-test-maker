@@ -1,0 +1,27 @@
+<form method="POST">
+<h2>Kanji Test</h2>
+  <div class="form-group">
+  {{kanji_form.hidden_tag()}}
+
+    <div class="row py-3">
+      <div class="col-lg">
+        {{kanji_form.mat_name.label}}
+        {{kanji_form.mat_name(class='form-control')}}
+      </div>
+      <div class="col-sm-4">
+        {{kanji_form.mat_type.label}}
+        {{kanji_form.mat_type(class='form-control')}}
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-4">
+        {{kanji_form.mat_content.label}}
+        {{kanji_form.mat_content(class='form-control',rows='13')}}
+      </div>
+      <div class="col-xl">
+        Rendered preview here
+      </div>
+  </div>
+    {{kanji_form.mat_submit(class='btn btn-primary')}}
+
+</form>

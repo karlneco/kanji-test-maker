@@ -26,13 +26,8 @@ class WritingQuestion(QuestionBase):
                             doc.stag('img', src='/static/kanji-box.png', height='90px')
                     # now eat the block nom nom nom
                         with tag('div',('class','furigana')):
-                            with tag('div'):
-                                text(' ')
-                            with tag('div'):
                                 # extract the kanji characters and out put them in the div
                                 text(self.question_text[si+1:self.question_text.find(']',si)])
-                            with tag('div'):
-                                text(' ')
 
                     si = self.question_text.find(']',si)+1
                 else:

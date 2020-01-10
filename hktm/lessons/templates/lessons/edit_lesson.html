@@ -1,0 +1,46 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">Lesson Editor</h1>
+    <p class="lead">Here you can edit a lesson and add materials to it.</p>
+    <hr class="my-2">
+    <p>Syntax explenation here</p>
+  </div>
+  <br>
+  <form method="POST">
+    <div class="row">
+      <div class="col-md">
+          {{form.hidden_tag()}}
+          <div class="form-group">
+            {{form.name.label}}
+            {{form.name(class='form-control')}}
+            {{form.date.label}}
+            {{form.date(class='form-control')}}
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-group">
+            {{form.grade.label}} {{form.grade(class='form-control')}}
+            {{form.comments.label}}
+            {{form.comments(class='form-control')}}
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md'>
+          {{form.submit(class='btn btn-primary')}}
+        </div>
+      </div>
+</form>
+      <div class="row">
+        <div class="col">
+          {% with kanji_form=kanji_form %}
+            {% include 'edit_kanji_test.html' %}
+          {% endwith %}
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

@@ -4,15 +4,18 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Hoshuko Kanji Test System</h1>
-    <p class="lead">Welcome to the Kanji Test System. There are {{question_count}} questions in the system and {{test_count}} tests have been created.</p>
+    <h1 class="display-4">Hoshuko Kanji Lesson System</h1>
+    <p class="lead">Welcome to the Kanji Lesson System.</p>
     <hr class="my-4">
-    <p>You can use the menu to create questions or test, or the search at the top to jump directly to questions for a specific kanji</p>
+    <p>To get started, select a lesson to edit from the list  below, or create a new lesson using the "New Lesson..." button</p>
 
-    <div class="btn-group" role="group" aria-label="Quick Menu">
-      <a href="{{url_for('questions.list')}}" class="btn btn-primary">Questions</a>
-      <a href="{{url_for('tests.list')}}" class="btn btn-primary">Tests</a>
+    <div class="list-group" role="tablist">
+      {% for lesson in lessons %}
+          <a class="list-group-item list-group-item-action" id=list-{{lesson.id}} href="{{ url_for('lessons.edit',id=lesson.id) }}">{{ lesson.name }}</a>
+      {% endfor %}
     </div>
+    <br>
+    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Lesson...</a>
   </div>
 </div>
 

@@ -1,0 +1,19 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">Saved Lessons</h1>
+    <p class="lead">You can review and manage saved lessons here.</p>
+    <hr class="my-2">
+    Please select a lesson from the list below
+  </div>
+  <div class="list-group" role="tablist">
+    {% for lesson in lessons %}
+        <a class="list-group-item list-group-item-action" id=list-{{lesson.id}} href="{{ url_for('lessons.edit',id=lesson.id) }}">{{ lesson.name }}</a>
+    {% endfor %}
+  </div>
+  <br>
+  <a href="{{url_for('tests.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Lesson...</a>
+</div>
+{% endblock %}

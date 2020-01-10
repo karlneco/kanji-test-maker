@@ -15,25 +15,19 @@
   line-height: 1em;
   display: grid;
   grid-template-columns: 95px 30px;
-  grid-template-rows: 95px;
-  verstical-align: top;
 }
 
 .hiragana{
   font-size: 70px;
-  line-height: 1em;
   text-align: center;
-  display: grid;
-  grid-template-columns: 95px 30px;
+  writing-mode: vertical-lr;
 }
 
 .furigana{
   font-size: 20px;
   line-height: 1em;
   text-align: center;
-   display: grid;
-   grid-template-rows: 20px auto 20px
-
+  writing-mode: vertical-lr
 }
 
 .kanji_reading_brackets{

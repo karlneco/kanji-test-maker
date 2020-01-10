@@ -26,7 +26,9 @@
       </form>
       </div>
     <div class="col-4">
-      Test questions selector goes here
+      {% with kanji_test=lesson_material[0] %}
+        {% include 'edit_kanji_test.html' %}
+      {% endwith %}
     </div>
   </div>
 </div>

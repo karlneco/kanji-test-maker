@@ -1,11 +1,11 @@
 from hktm import app
 from flask import render_template
+from hktm.models import Lesson
 
 @app.route('/')
 def index():
-    question_count = 100
-    test_count = 4
-    return render_template('index.html', question_count=question_count,test_count=test_count)
+    lessons = Lesson.query.all()
+    return render_template('index.html', )
 
 @app.errorhandler(404)
 def page_not_found(e):
