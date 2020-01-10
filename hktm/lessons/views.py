@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
 from hktm.models import Lesson, LessonMaterial
 from hktm.lessons.forms import AddForm, MaterialForm
+from hktm.lessons.content_KJTS import ContentKJTS
 
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
@@ -51,11 +52,17 @@ def edit(id):
     form = AddForm()
     kanji_form = MaterialForm()
 
-    if form.validate_on_submit():
+    if form.submit.data and form.validate():
         lesson_to_edit.name = form.name.data
-        lesson_to_edit.date = form.name.date
+        lesson_to_edit.date = form.date.data
         lesson_to_edit.grade = form.grade.data
         lesson_to_edit.comments = form.comments.data
+        db.session.commit()
+        return redirect(url_for('lessons.list'))
+
+    if kanji_form.mat_submit.data and kanji_form.validate():
+        lesson_to_edit.lesson_materials[0].name = kanji_form.mat_name.data
+        lesson_to_edit.lesson_materials[0].content = kanji_form.mat_content.data
         db.session.commit()
         return redirect(url_for('lessons.list'))
 
@@ -65,11 +72,12 @@ def edit(id):
         form.date.default = lesson_to_edit.date
         form.grade.default = lesson_to_edit.grade
         form.comments.default = lesson_to_edit.comments
-        kanji_content = lesson_to_edit.lesson_materials[0]
-        kanji_form.mat_name.default = kanji_content.name
-        kanji_form.mat_type.default = kanji_content.material_code
-        kanji_form.mat_content.default = kanji_content.content
+        kanji_test = lesson_to_edit.lesson_materials[0]
+        kanji_form.mat_name.default = kanji_test.name
+        kanji_form.mat_type.default = kanji_test.material_code
+        kanji_form.mat_content.default = kanji_test.content
         form.process()
         kanji_form.process()
 
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, lesson_materials=lesson_to_edit.lesson_materials)
+        test_content = ContentKJTS(kanji_test.content)
+    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=test_content)

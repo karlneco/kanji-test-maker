@@ -19,7 +19,7 @@
         {{kanji_form.mat_content(class='form-control',rows='13')}}
       </div>
       <div class="col-xl">
-        Rendered preview here
+        {{ test_content.preview()|safe }}
       </div>
   </div>
     {{kanji_form.mat_submit(class='btn btn-primary')}}
