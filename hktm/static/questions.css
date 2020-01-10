@@ -6,16 +6,17 @@
 .preview{
   display: flex;
   flex-direction: row-reverse;
+  font-size: 90px;
 }
 
 .question{
   font-family: hoshuko_kanji;
   display: flex;
   flex-direction:column;
+  padding-left: 30px;
 }
 
 .kanji_reading{
-  font-size: 90px;
   font-weight: bold;
   line-height: 1em;
   display: grid;
@@ -53,7 +54,6 @@
   text-align: center;
   writing-mode: vertical-lr;
   display:table;
-  --letter-spacing: 3em;
 }
 
 .furigana-combo-row{

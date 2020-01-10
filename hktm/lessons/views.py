@@ -80,4 +80,10 @@ def edit(id):
         kanji_form.process()
 
         test_content = ContentKJTS(kanji_test.content)
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=test_content)
+    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=kanji_test.content)
+
+
+@lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
+def kanji_test_preview(content):
+    mat = ContentKJTS(content)
+    return render_template('kanji_test_preview.html',test=mat);

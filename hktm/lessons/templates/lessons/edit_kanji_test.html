@@ -19,9 +19,12 @@
         {{kanji_form.mat_content(class='form-control',rows='13')}}
       </div>
       <div class="col-xl">
-        {{ test_content.preview()|safe }}
+        <iframe class="col-xl" src="/lessons/kanji_test_preview/{{test_content}}" >
+
       </div>
   </div>
-    {{kanji_form.mat_submit(class='btn btn-primary')}}
+  {{kanji_form.mat_submit(class='btn btn-primary')}}
+  {{kanji_form.mat_preview(class='btn btn-secondary')}}
+
 
 </form>
