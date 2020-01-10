@@ -1,9 +1,15 @@
+@font-face{
+  font-family: hoshuko_kanji;
+  font-style: normal;
+  src: local("UD Digi Kyokasho NK-R")
+}
 .preview{
   display: flex;
   flex-direction: row-reverse;
 }
 
 .question{
+  font-family: hoshuko_kanji;
   display: flex;
   flex-direction:column;
 }
@@ -22,6 +28,12 @@
   grid-template-columns: 95px 30px;
 }
 
+.combo_question{
+  line-height: 1em;
+  display: grid;
+  grid-template-columns: 95px 30px;
+}
+
 .hiragana{
   font-size: 70px;
   text-align: center;
@@ -33,6 +45,19 @@
   line-height: 1em;
   text-align: center;
   writing-mode: vertical-lr
+}
+
+.furigana-combo{
+  font-size: 20px;
+  line-height: 1em;
+  text-align: center;
+  writing-mode: vertical-lr;
+  display:table;
+  --letter-spacing: 3em;
+}
+
+.furigana-combo-row{
+  display:table-cell;
 }
 
 .kanji_reading_brackets{
