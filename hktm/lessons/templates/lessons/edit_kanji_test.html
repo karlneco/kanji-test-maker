@@ -1,4 +1,16 @@
-<form method="POST">
+<script >
+function test_preview(){
+  form = document.forms['kanji_test_form']
+  document.getElementById('kanji_preview').src='/lessons/kanji_test_preview/' + encodeURIComponent(form['mat_content'].value);
+}
+
+function print_preview(){
+  form = document.forms['kanji_test_form'];
+  window.open('/lessons/kanji_test_preview/' + encodeURIComponent(form['mat_content'].value), '_blank', 'height=772,width=1000,scrollbars=yes');
+}
+</script>
+
+<form method="POST" id='kanji_test_form'>
 <h2>Kanji Test</h2>
   <div class="form-group">
   {{kanji_form.hidden_tag()}}
@@ -17,14 +29,18 @@
       <div class="col-sm-4">
         {{kanji_form.mat_content.label}}
         {{kanji_form.mat_content(class='form-control',rows='13')}}
-      </div>
-      <div class="col-xl">
-        <iframe class="col-xl" src="/lessons/kanji_test_preview/{{test_content}}" >
+        {{kanji_form.mat_submit(class='btn btn-primary')}}
+        {{kanji_form.mat_delete(class='btn btn-danger')}}
+
+        <button type="button" class="btn btn-secondary" onclick="test_preview();">Preview</button>
+        <button type="button" class="btn btn-secondary" onclick="print_preview();">Print View</button>
 
       </div>
+      <div class="col-xl">
+        <iframe id='kanji_preview' height="600" class="preview-frame col-xl" src="{{ url_for('lessons.kanji_test_preview',content=test_content) }}" />
+      </div>
   </div>
-  {{kanji_form.mat_submit(class='btn btn-primary')}}
-  {{kanji_form.mat_preview(class='btn btn-secondary')}}
+
 
 
 </form>

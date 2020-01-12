@@ -3,57 +3,86 @@
   font-style: normal;
   src: local("UD Digi Kyokasho NK-R")
 }
+
+@counter-style circled-decimal {
+	system: fixed 0;
+	symbols: '⓪' '①' '②' '③' '④' '⑤' '⑥' '⑦' '⑧' '⑨' '⑩' '⑪' '⑫' '⑬' '⑭' '⑮' '⑯' '⑰' '⑱' '⑲' '⑳' '㉑' '㉒' '㉓' '㉔' '㉕' '㉖' '㉗' '㉘' '㉙' '㉚' '㉛' '㉜' '㉝' '㉞' '㉟' '㊱' '㊲' '㊳' '㊴' '㊵' '㊶' '㊷' '㊸' '㊹' '㊺' '㊻' '㊼' '㊽' '㊾' '㊿';
+	suffix: ' ';
+}
+
+li {
+  list-style-type: circled-decimal;
+}
+
 .preview{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
+  font-size: 40px;
+  writing-mode: vertical-lr;
+  --colwidth: 70px;
+}
+.preview .hiragana{
+  padding-left: 7px;
+  Xletter-spacing: 0.3em
+}
+.preview .kanji_reading{
+  padding-left: 7px;
+  letter-spacing: 0.3em;
+}
+
+
+.preview .kanji_reading_brackets{
+    margin-left: -20px;
+}
+.preview img {
+   width: 80%;
+}
+
+.preview-frame{
+  border:none;
+  height: 400px;
 }
 
 .question{
   font-family: hoshuko_kanji;
   display: flex;
-  flex-direction:column;
+  flex-direction: row;
+  padding-left: 30px;
 }
 
 .kanji_reading{
-  font-size: 90px;
   font-weight: bold;
-  line-height: 1em;
   display: grid;
-  grid-template-columns: 95px 30px;
+  grid-template-rows: var(--colwidth) 30px;
 }
 
 .kanji_writing{
-  line-height: 1em;
   display: grid;
-  grid-template-columns: 95px 30px;
+  grid-template-rows: var(--colwidth) 30px;
 }
 
 .combo_question{
   line-height: 1em;
   display: grid;
-  grid-template-columns: 95px 30px;
+  grid-template-rows: var(--colwidth) 30px;
 }
 
 .hiragana{
-  font-size: 70px;
+  font-size: 90%;
   text-align: center;
-  writing-mode: vertical-lr;
 }
 
 .furigana{
   font-size: 20px;
   line-height: 1em;
   text-align: center;
-  writing-mode: vertical-lr
 }
 
 .furigana-combo{
   font-size: 20px;
   line-height: 1em;
   text-align: center;
-  writing-mode: vertical-lr;
   display:table;
-  --letter-spacing: 3em;
 }
 
 .furigana-combo-row{
@@ -62,7 +91,7 @@
 
 .kanji_reading_brackets{
   display: grid;
-  grid-template-rows: 20px auto 20px
+  grid-template-columns: 20px auto 20px
 }
 .border{
   border: 1px solid black;

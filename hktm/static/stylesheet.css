@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'UD Digi Kyokasho NP-R';
+    src: url('UDDigiKyokashoNP-R.woff2') format('woff2'),
+        url('UDDigiKyokashoNP-R.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
