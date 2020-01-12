@@ -55,7 +55,7 @@ class ContentKJTS():
 
         doc, tag, text = Doc().tagtext()
         with tag('div',('class','kanji_writing')):
-            with tag('div'):
+            with tag('div',('class','kanji_box')):
                 doc.stag('img', src='/static/kanji-box.png', height=self.render_mode[mode])
         # now eat the block nom nom nom
             with tag('div',('class','furigana')):
