@@ -25,10 +25,8 @@ Migrate(app,db)
 ####################################################
 ### Blueprints Setup
 ####################################################
-from hktm.questions.views import questions_bp
-from hktm.tests.views import tests_bp
 from hktm.lessons.views import lessons_bp
+from hktm.lesson_contents.views import lesson_contents_bp
 
-app.register_blueprint(questions_bp, url_prefix='/questions')
-app.register_blueprint(tests_bp, url_prefix='/tests')
 app.register_blueprint(lessons_bp, url_prefix='/lessons')
+app.register_blueprint(lesson_contents_bp, url_prefix='/lesson_contents')

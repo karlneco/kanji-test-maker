@@ -1,4 +1,4 @@
-from hktm.lessons.RenderContentBase import RenderContentBase
+from hktm.lesson_contents.RenderContentBase import RenderContentBase
 from yattag import Doc
 
 class RenderContentKJTS(RenderContentBase):

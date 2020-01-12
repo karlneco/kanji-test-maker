@@ -1,46 +1,48 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MeterialType
-from hktm.lessons.forms import AddForm, MaterialForm
+from hktm.lesson_contents.forms import AddForm
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
 
-lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
+'''
+The lesson contents are managed through these routes, except the intial kanji
+test thats added as part of the lesson add interface
+'''
+
+lesson_contents_bp = Blueprint('lesson_contents', __name__, template_folder='templates/lesson_contents')
+
+
 ## list route
-@lessons_bp.route('/list')
-def list():
+@lesson_contents_bp.route('/list/<int:lesson_id>')
+def list(lesson_id):
+    '''
+    List all the lesson content for a specifis lesson id
+    '''
     lessons = Lesson.query.all()
     return render_template('list_lessons.html',lessons=lessons)
 
 
 
 ## add route
-@lessons_bp.route('/add',methods=['GET','POST'])
-def add():
+@lesson_contents_bp.route('/add/<int:lesson_id>/<content_code>',methods=['GET','POST'])
+def add(lesson_id,content_code):
     form = AddForm()
     if form.validate_on_submit():
-        flash('New Lesson Created')
+        flash('New Lesson Content Added')
         name = form.name.data
-        date = form.date.data
-        grade = form.grade.data
-        comments = form.comments.data
-        kanji_test = form.kanji_test.data
+        content = form.content.data
+        type = form.type.data
 
-
-        new_lesson = Lesson(name,date,grade,comments)
-        db.session.add(new_lesson)
-        db.session.flush()
-        db.session.refresh(new_lesson)
-
-        new_material = LessonMaterial(name+' '+date, kanji_test,new_lesson.id,'KJTS')
-        db.session.add(new_material)
+        new_lesson_content = LessonMaterial(name,content,lesson_id,type)
+        db.session.add(new_lesson_content)
         db.session.commit()
 
         return redirect(url_for('lessons.edit',id=new_lesson.id))
 
-    return render_template('add_lesson.html',form=form)
+    return render_template(content_code + '_content.html',form=form, content_code=content_code)
 
 
-@lessons_bp.route('/delete/<int:id>', methods=['GET'])
+@lesson_contents_bp.route('/delete/<int:id>', methods=['GET'])
 def delete(id):
     lesson_to_delete = Lesson.query.get(id)
 
@@ -53,7 +55,7 @@ def delete(id):
 
 ### edit route, we need to provide a list of ALL questions as well as
 #   those on this test.
-@lessons_bp.route('/edit/<int:id>', methods=['GET','POST'])
+@lesson_contents_bp.route('/edit/<int:id>', methods=['GET','POST'])
 def edit(id):
     lesson_to_edit = Lesson.query.get(id)
 
@@ -78,35 +80,34 @@ def edit(id):
 
     # pre-populate for form for editing
     elif request.method == 'GET':
-        #get the different content types to pass to the form
-        content_list = MeterialType.query.all()
-
         form.name.default = lesson_to_edit.name
         form.date.default = lesson_to_edit.date
         form.grade.default = lesson_to_edit.grade
         form.comments.default = lesson_to_edit.comments
         kanji_test = lesson_to_edit.lesson_materials[0]
         kanji_form.mat_name.default = kanji_test.name
-#        kanji_form.mat_type.choices =[(c.code,c.name) for c in content_list]
         kanji_form.mat_type.default = kanji_test.material_code
         kanji_form.mat_content.default = kanji_test.content
         form.process()
         kanji_form.process()
 
         test_content = RenderContentKJTS(kanji_test.content)
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form,
-                            test_content=kanji_test.content,
-                            lesson_id=lesson_to_edit.id,
-                            content_types=content_list)
+    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=kanji_test.content, lesson_id=lesson_to_edit.id)
 
 
-@lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
+@lesson_contents_bp.route('/preview_factory/<string:content_type>/<string:content>', methods=['GET'])
+def preview_factory(content_type, content):
+    pass
+
+
+
+@lesson_contents_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
 def kanji_test_preview(content):
-    mat = RenderContentKJTS(content)
+    mat = ContentKJTS(content)
     return render_template('kanji_test_preview.html',test=mat);
 
 
-@lessons_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
+@lesson_contents_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
 def kanji_test_pint(content):
     mat = RenderContentKJTS(content)
     return render_template('kanji_test_print.html',test=mat);

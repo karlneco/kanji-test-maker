@@ -1,0 +1,22 @@
+{% extends "add_lesson_contents.html" %}
+{% block head %}
+
+<script >
+function preview(){
+  form = document.forms['kanji_test_form']
+  document.getElementById('kanji_preview').src='/lessons/kanji_test_preview/' + encodeURIComponent(form['mat_content'].value);
+}
+
+function print_preview(){
+  form = document.forms['kanji_test_form'];
+  window.open('/lessons/kanji_test_print/' + encodeURIComponent(form['mat_content'].value), '_blank', 'height=772,width=1000,scrollbars=yes');
+}
+</script>
+
+  <div class="jumbotron">
+    <h1 class="display-4">New Tracing Practice Content</h1>
+    <p class="lead">Please search and select the questions that will comprise this new lesson.</p>
+    <hr class="my-2">
+    Tracing Practice specific insturctions go here
+  </div>
+{% endblock head%}
