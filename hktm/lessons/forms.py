@@ -15,4 +15,3 @@ class MaterialForm(FlaskForm):
     mat_content = TextAreaField(u'Here are the questions for this material')
     mat_type = SelectField(u'Content Type', choices=[('T','Kanji Test'),('W','Worksheet'),('P','Kanji Practice')])
     mat_submit = SubmitField(u'Save')
-    mat_delete = SubmitField(u'Delete...')

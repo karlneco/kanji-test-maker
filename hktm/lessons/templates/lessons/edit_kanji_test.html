@@ -29,18 +29,20 @@ function print_preview(){
       <div class="col-sm-4">
         {{kanji_form.mat_content.label}}
         {{kanji_form.mat_content(class='form-control',rows='13')}}
-        {{kanji_form.mat_submit(class='btn btn-primary')}}
-        {{kanji_form.mat_delete(class='btn btn-danger')}}
 
-        <button type="button" class="btn btn-secondary" onclick="test_preview();">Preview</button>
-        <button type="button" class="btn btn-secondary" onclick="print_preview();">Print View</button>
-
+        <div class="row py-3">
+          <div class="col-sm-3 float-left">
+            {{kanji_form.mat_submit(class='btn btn-primary')}}
+          </div>
+          <div class="col-xl-9">
+            <button type="button" class="btn btn-secondary float-right" onclick="print_preview();">Print View</button>
+            <button type="button" class="btn btn-secondary float-right mr-2" onclick="test_preview();">Preview</button>
+          </div>
+        </div>
       </div>
       <div class="col-xl">
         <iframe id='kanji_preview' height="600" class="preview-frame col-xl" src="{{ url_for('lessons.kanji_test_preview',content=test_content) }}" />
       </div>
+    </div>
   </div>
-
-
-
 </form>

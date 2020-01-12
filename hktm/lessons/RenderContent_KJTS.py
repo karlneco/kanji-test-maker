@@ -1,6 +1,7 @@
+from hktm.lessons.rendercontentbase import RenderContentBase
 from yattag import Doc
 
-class ContentKJTS():
+class RenderContentKJTS(RenderContentBase):
     """
     This is the class for rednering kanji tests.
     """
@@ -98,7 +99,7 @@ class ContentKJTS():
 
 #################################################################### constructor
     def __init__(self,question_bundle):
-        self.question_list = question_bundle.splitlines()
+        super().__init__(question_bundle)
         self.close_tokens = '）」｝'
         self.tokens = '（「｛'
         self.render_mode = {

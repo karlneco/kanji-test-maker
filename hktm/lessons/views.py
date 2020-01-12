@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
 from hktm.models import Lesson, LessonMaterial
 from hktm.lessons.forms import AddForm, MaterialForm
-from hktm.lessons.content_KJTS import ContentKJTS
+from hktm.lessons.rendercontent_kjts import ContentKJTS
 
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
@@ -31,7 +31,7 @@ def add():
         db.session.flush()
         db.session.refresh(new_lesson)
 
-        new_material = LessonMaterial(name+' '+date, kanji_test,new_lesson.id,'T')
+        new_material = LessonMaterial(name+' '+date, kanji_test,new_lesson.id,'KJTS')
         db.session.add(new_material)
         db.session.commit()
 
@@ -39,6 +39,16 @@ def add():
 
     return render_template('add_lesson.html',form=form)
 
+
+@lessons_bp.route('/delete/<int:id>', methods=['GET'])
+def delete(id):
+    lesson_to_delete = Lesson.query.get(id)
+
+    lesson_name = lesson_to_delete.name
+    flash(f'Lesson {lesson_name} deleted.')
+    db.session.delete(lesson_to_delete)
+    db.session.commit()
+    return redirect(url_for('lessons.list'))
 
 
 ### edit route, we need to provide a list of ALL questions as well as
@@ -80,7 +90,7 @@ def edit(id):
         kanji_form.process()
 
         test_content = ContentKJTS(kanji_test.content)
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=kanji_test.content)
+    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=kanji_test.content, lesson_id=lesson_to_edit.id)
 
 
 @lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
