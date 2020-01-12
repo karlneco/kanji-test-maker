@@ -5,5 +5,11 @@
     <link rel="stylesheet" href="/static/questions.css"/>
   </head>
   <body>
-    {{ test.preview()|safe }}
+    <div class='page'>
+      <div class='header'>
+        <img src='/static/header.png' width='140px'>
+      </div>
+      <div class='content'>
+        {{ test.render()|safe }}
+      </div>
   </body>

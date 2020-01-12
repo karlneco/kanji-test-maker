@@ -87,3 +87,9 @@ def edit(id):
 def kanji_test_preview(content):
     mat = ContentKJTS(content)
     return render_template('kanji_test_preview.html',test=mat);
+
+
+@lessons_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
+def kanji_test_pint(content):
+    mat = ContentKJTS(content)
+    return render_template('kanji_test_print.html',test=mat);
