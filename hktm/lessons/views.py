@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
 from hktm.models import Lesson, LessonMaterial
 from hktm.lessons.forms import AddForm, MaterialForm
-from hktm.lessons.rendercontent_kjts import ContentKJTS
+from hktm.lessons.RenderContent_KJTS import RenderContentKJTS
 
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
@@ -101,5 +101,5 @@ def kanji_test_preview(content):
 
 @lessons_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
 def kanji_test_pint(content):
-    mat = ContentKJTS(content)
+    mat = RenderContentKJTS(content)
     return render_template('kanji_test_print.html',test=mat);
