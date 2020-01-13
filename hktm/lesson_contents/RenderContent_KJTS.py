@@ -3,7 +3,7 @@ from yattag import Doc
 
 class RenderContentKJTS(RenderContentBase):
     """
-    This is the class for rednering kanji tests.
+    This is the class for rendering kanji tests.
     """
 
 ############################################################### reading question

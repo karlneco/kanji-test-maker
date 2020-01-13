@@ -4,7 +4,7 @@
 <div class="container-sm">
 {% block head %} {% endblock head %}
 {% block form %}
-  <form method="POST">
+  <form method="POST" id="content_form">
     {{form.hidden_tag()}}
     <div class="row">
       <div class="col-sm-auto">
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-xl">
-        <iframe id='preview' height="600" class="preview-frame col-xl" src="{{ url_for('lessons.kanji_test_preview',content=test_content) }}" />
+        <iframe id='preview' height="600" class="preview-frame col-xl" src="{{ url_for('lesson_contents.preview_factory',content_code=content_type,content=content) }}" />
       </div>
     </div>
   </form>

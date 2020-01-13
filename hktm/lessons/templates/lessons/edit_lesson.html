@@ -39,50 +39,61 @@ $('#myModal').on('shown.bs.modal', function () {
   <br>
   <form method="POST">
     <div class="row">
-      <div class="col-md">
+      <div class="col-md-6">
+        <div class="row">
           {{form.hidden_tag()}}
-          <div class="form-group">
-            {{form.name.label}}
-            {{form.name(class='form-control')}}
-            {{form.date.label}}
-            {{form.date(class='form-control')}}
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-group">
+          <div class="form-group col-xl">
+            {{form.name.label}} {{form.name(class='form-control')}}
             {{form.grade.label}} {{form.grade(class='form-control')}}
-            {{form.comments.label}}
-            {{form.comments(class='form-control')}}
+          </div>
+        </div>
+        <div class="row">
+          <div class='col'>
+            {{form.submit(class='btn btn-primary')}}
+          </div>
+          <div class='col'>
+            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">Delete</button>
           </div>
         </div>
       </div>
-      <div class='row'>
-        <div class='col-md'>
-          {{form.submit(class='btn btn-primary')}}
+      <div class="col-md-6">
+        <div class="row">
+          <div class="form-group col-xl">
+            <label>Available Content</label>
+            <ul class="list-group">
+            {% for c in lesson_content %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="list-group-item-action" id=list-{{c.id}} href="{{ url_for('lesson_contents.edit',id=c. id) }}">{{ c.name }}</a>
+                <span class="badge badge-primary badge-pill">{{c.material.name}}</span>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
         </div>
-        <div class='col-md'>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Add Material
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% for t in content_types %}
-                <a class="dropdown-item" href="{{url_for('lesson_contents.add', lesson_id=lesson_id, content_code=t.code)}}">{{t.name}}</a>
-              {% endfor %}
+        <div class="row">
+          <div class='col-md'>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add Material
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for t in content_types %}
+                  <a class="dropdown-item" href="{{url_for('lesson_contents.add', lesson_id=lesson_id, content_code=t.code)}}">{{t.name}}</a>
+                {% endfor %}
+              </div>
             </div>
-          </div>        </div>
-        <div class='col-md'>
-          <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">Delete</button>
         </div>
       </div>
+    </div>
+  </div>
 </form>
-      <div class="row">
-        <div class="col">
-          {% with kanji_form=kanji_form %}
-            {% include 'edit_kanji_test.html' %}
-          {% endwith %}
-        </div>
+    <div class="row">
+      <div class="col-xl">
+        {% with kanji_form=kanji_form %}
+          {% include 'edit_kanji_test.html' %}
+        {% endwith %}
       </div>
+    </div>
   </div>
 </div>
 

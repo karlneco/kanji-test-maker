@@ -1,8 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
-from hktm.models import Lesson, LessonMaterial, MeterialType
+from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lesson_contents.forms import AddForm
+from hktm.lesson_contents.RenderContent_KJRD import RenderContentKJRD
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
+from hktm.lesson_contents.RenderContent_KJWR import RenderContentKJWR
+from hktm.lesson_contents.RenderContent_NWRD import RenderContentNWRD
+from hktm.lesson_contents.RenderContent_TRCP import RenderContentTRCP
+
 
 '''
 The lesson contents are managed through these routes, except the intial kanji
@@ -27,17 +32,19 @@ def list(lesson_id):
 @lesson_contents_bp.route('/add/<int:lesson_id>/<content_code>',methods=['GET','POST'])
 def add(lesson_id,content_code):
     form = AddForm()
+
     if form.validate_on_submit():
-        flash('New Lesson Content Added')
+        content_type = MaterialType.query.get(content_code)
+        flash(f'New {content_type.name} Added')
         name = form.name.data
         content = form.content.data
-        type = form.type.data
+        type = content_code
 
         new_lesson_content = LessonMaterial(name,content,lesson_id,type)
         db.session.add(new_lesson_content)
         db.session.commit()
 
-        return redirect(url_for('lessons.edit',id=new_lesson.id))
+        return redirect(url_for('lessons.edit',id=lesson_id))
 
     return render_template(content_code + '_content.html',form=form, content_code=content_code)
 
@@ -57,47 +64,42 @@ def delete(id):
 #   those on this test.
 @lesson_contents_bp.route('/edit/<int:id>', methods=['GET','POST'])
 def edit(id):
-    lesson_to_edit = Lesson.query.get(id)
+    content_to_edit = LessonMaterial.query.get(id)
 
     #TODO: get a list of all questions and questions on this test for organizing
 
     form = AddForm()
-    kanji_form = MaterialForm()
 
     if form.submit.data and form.validate():
-        lesson_to_edit.name = form.name.data
-        lesson_to_edit.date = form.date.data
-        lesson_to_edit.grade = form.grade.data
-        lesson_to_edit.comments = form.comments.data
+        content_to_edit.name = form.name.data
+        content_to_edit.content = form.content.data
         db.session.commit()
-        return redirect(url_for('lessons.list'))
-
-    if kanji_form.mat_submit.data and kanji_form.validate():
-        lesson_to_edit.lesson_materials[0].name = kanji_form.mat_name.data
-        lesson_to_edit.lesson_materials[0].content = kanji_form.mat_content.data
-        db.session.commit()
-        return redirect(url_for('lessons.list'))
+        return redirect(url_for('lessons.edit',id=content_to_edit.lesson_id))
 
     # pre-populate for form for editing
     elif request.method == 'GET':
-        form.name.default = lesson_to_edit.name
-        form.date.default = lesson_to_edit.date
-        form.grade.default = lesson_to_edit.grade
-        form.comments.default = lesson_to_edit.comments
-        kanji_test = lesson_to_edit.lesson_materials[0]
-        kanji_form.mat_name.default = kanji_test.name
-        kanji_form.mat_type.default = kanji_test.material_code
-        kanji_form.mat_content.default = kanji_test.content
+        form.name.default = content_to_edit.name
+        form.content.default = content_to_edit.content
         form.process()
-        kanji_form.process()
 
-        test_content = RenderContentKJTS(kanji_test.content)
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form, test_content=kanji_test.content, lesson_id=lesson_to_edit.id)
+        test_content = RenderContentKJTS(content_to_edit.content)
+
+        return render_template(content_to_edit.material_code + '_content.html',form=form, content=content_to_edit.content, content_id=content_to_edit.id, content_type=content_to_edit.material_code)
 
 
-@lesson_contents_bp.route('/preview_factory/<string:content_type>/<string:content>', methods=['GET'])
-def preview_factory(content_type, content):
-    pass
+@lesson_contents_bp.route('/preview_factory/<string:content_code>/<string:content>', methods=['GET'])
+def preview_factory(content_code, content):
+    content_type = MaterialType.query.get(content_code)
+    lesson_content = RenderContentTRCP(content)
+    return render_template('preview_container.html',content_type=content_type,lesson_content=lesson_content)
+
+@lesson_contents_bp.route('/print_factory/<int:content_id>', methods=['GET'])
+def print_factory(content_id):
+    content = LessonMaterial.query.get(content_id)
+    lesson_content = RenderContentTRCP(content.content)
+    return render_template('print_container.html',content=content,lesson_content=lesson_content)
+
+
 
 
 

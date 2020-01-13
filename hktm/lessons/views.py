@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
-from hktm.models import Lesson, LessonMaterial, MeterialType
+from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lessons.forms import AddForm, MaterialForm
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
 
@@ -79,8 +79,10 @@ def edit(id):
     # pre-populate for form for editing
     elif request.method == 'GET':
         #get the different content types to pass to the form
-        content_list = MeterialType.query.all()
+        content_list = MaterialType.query.all()
 
+        #get all lesson content_type
+        lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
         form.name.default = lesson_to_edit.name
         form.date.default = lesson_to_edit.date
         form.grade.default = lesson_to_edit.grade
@@ -97,7 +99,9 @@ def edit(id):
     return render_template('edit_lesson.html',form=form, kanji_form=kanji_form,
                             test_content=kanji_test.content,
                             lesson_id=lesson_to_edit.id,
-                            content_types=content_list)
+                            content_types=content_list,
+                            lesson_content = lesson_content
+                            )
 
 
 @lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])

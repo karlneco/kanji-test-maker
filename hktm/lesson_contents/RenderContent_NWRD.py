@@ -1,10 +1,11 @@
 from hktm.lesson_contents.RenderContentBase import RenderContentBase
 from yattag import Doc
 
-class RenderContentKJPR(RenderContentBase):
+class RenderContentNWRD(RenderContentBase):
     """
-    This is the class for rednering kanji practice sheet.
+    This is the class for rendering new reading kanji sheet.
     """
+
 
 #################################################################### constructor
     def __init__(self,question_bundle):
@@ -14,13 +15,15 @@ class RenderContentKJPR(RenderContentBase):
             'preview':'60px'
             }
 
+
 ####################################################### render a single question
     def render_question(self, question, mode):
         '''
-        The renders a single question given the question content (or kanji
-        in this case)
+        The renders the a single question in whatever format its required for
+        the worksheet
         '''
         return tokens.get(question[0],'nothing')
+
 
 
 ################################################################ render the page
@@ -30,9 +33,8 @@ class RenderContentKJPR(RenderContentBase):
         '''
         doc, tag, text = Doc().tagtext()
 
-
-        # traverse the list of kanji and crete the corresponding kanji practice
-        # block
+        # go through the question in the list and produce the represrentation
+        # for each question
         with tag('div',('class','preview')):
             for question in self.question_list:
 

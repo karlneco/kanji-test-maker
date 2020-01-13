@@ -3,13 +3,13 @@
 
 <script >
 function preview(){
-  form = document.forms['kanji_test_form']
-  document.getElementById('kanji_preview').src='/lessons/kanji_test_preview/' + encodeURIComponent(form['mat_content'].value);
+  form = document.forms['content_form']
+  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
 }
 
 function print_preview(){
-  form = document.forms['kanji_test_form'];
-  window.open('/lessons/kanji_test_print/' + encodeURIComponent(form['mat_content'].value), '_blank', 'height=772,width=1000,scrollbars=yes');
+  form = document.forms['content_form'];
+  window.open('/lesson_contents/print_factory/{{content_id}}', '_blank', 'height=772,width=1000,scrollbars=yes');
 }
 </script>
 

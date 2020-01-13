@@ -1,9 +1,9 @@
 from hktm.lesson_contents.RenderContentBase import RenderContentBase
 from yattag import Doc
 
-class RenderContentWRKS(RenderContentBase):
+class RenderContentKJWR(RenderContentBase):
     """
-    This is the class for rednering kanji Worksheet - type 1.
+    This is the class for rendering writing kanji sheet.
     """
 
 
