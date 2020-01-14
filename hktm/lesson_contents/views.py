@@ -2,12 +2,20 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lesson_contents.forms import AddForm
+
 from hktm.lesson_contents.RenderContent_KJRD import RenderContentKJRD
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
 from hktm.lesson_contents.RenderContent_KJWR import RenderContentKJWR
 from hktm.lesson_contents.RenderContent_NWRD import RenderContentNWRD
 from hktm.lesson_contents.RenderContent_TRCP import RenderContentTRCP
 
+content_types = {
+    'KJRD' : RenderContentKJRD,
+    'KJTS' : RenderContentKJTS,
+    'KJWR' : RenderContentKJWR,
+    'NWRD' : RenderContentNWRD,
+    'TRCP' : RenderContentTRCP
+}
 
 '''
 The lesson contents are managed through these routes, except the intial kanji
@@ -90,13 +98,13 @@ def edit(id):
 @lesson_contents_bp.route('/preview_factory/<string:content_code>/<string:content>', methods=['GET'])
 def preview_factory(content_code, content):
     content_type = MaterialType.query.get(content_code)
-    lesson_content = RenderContentTRCP(content)
+    lesson_content = content_types.get(content_code,'N/A')(content)
     return render_template('preview_container.html',content_type=content_type,lesson_content=lesson_content)
 
 @lesson_contents_bp.route('/print_factory/<int:content_id>', methods=['GET'])
 def print_factory(content_id):
     content = LessonMaterial.query.get(content_id)
-    lesson_content = RenderContentTRCP(content.content)
+    lesson_content = content_types.get(content.material_code,'N/A')(content.content)
     return render_template('print_container.html',content=content,lesson_content=lesson_content)
 
 

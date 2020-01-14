@@ -1,6 +1,17 @@
 {% extends "chrome.html" %}
 
 {% block content %}
+<script >
+function preview(){
+  form = document.forms['content_form']
+  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
+}
+
+function print_preview(){
+  form = document.forms['content_form'];
+  window.open('/lesson_contents/print_factory/{{content_id}}', '_blank', 'height=772,width=1000,scrollbars=yes');
+}
+</script>
 <div class="container-sm">
 {% block head %} {% endblock head %}
 {% block form %}

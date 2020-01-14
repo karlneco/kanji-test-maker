@@ -1,17 +1,7 @@
 {% extends "add_lesson_contents.html" %}
 {% block head %}
 
-<script >
-function preview(){
-  form = document.forms['content_form']
-  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
-}
 
-function print_preview(){
-  form = document.forms['content_form'];
-  window.open('/lesson_contents/print_factory/{{content_id}}', '_blank', 'height=772,width=1000,scrollbars=yes');
-}
-</script>
 
   <div class="jumbotron">
     <h1 class="display-4">New Tracing Practice Content</h1>

@@ -31,6 +31,7 @@
   font-size: 40px;
   writing-mode: vertical-lr;
   --colwidth: 70px;
+  font-family: Kyokasho;
 }
 .preview .hiragana{
   padding-left: 7px;
@@ -149,4 +150,25 @@
 
 .trcp_empty{
   border-top: 1px solid black;
+}
+
+
+.kjwr_question{
+  width: 100px;
+  writing-mode: vertical-rl;
+  padding-top: 10px;
+}
+.kjwr_hiragana{
+  font-size: 24px;
+}
+.kjwr_boxes{
+  display: flex;
+  flex-direction: row;
+
+}
+.kjwr_empty{
+  border: 1px solid black;
+  height: 70px;
+  width: 70px;
+  margin-top: -1px;
 }
