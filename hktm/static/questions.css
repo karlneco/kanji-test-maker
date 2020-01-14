@@ -172,3 +172,16 @@
   width: 70px;
   margin-top: -1px;
 }
+
+.kjrd_layout{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  writing-mode: vertical-rl;
+}
+.kjrd_question{
+  display: flex;
+  flex-direction: row;
+  width: 120px;
+  writing-mode: vertical-lr;
+  padding-top: 10px;
+}

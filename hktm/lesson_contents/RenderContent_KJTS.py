@@ -106,12 +106,7 @@ class RenderContentKJTS(RenderContentBase):
             'pdf':'90px',
             'preview':'60px'
             }
-        self.ts_reading ='（'
-        self.te_reading ='）'
-        self.ts_writing ='「'
-        self.te_writing ='」'
-        self.ts_combo ='｛'
-        self.te_combo ='｝'
+
 
 
 
