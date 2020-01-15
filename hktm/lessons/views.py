@@ -20,19 +20,11 @@ def add():
     if form.validate_on_submit():
         flash('New Lesson Created')
         name = form.name.data
-        date = form.date.data
-        grade = form.grade.data
-        comments = form.comments.data
-        kanji_test = form.kanji_test.data
 
-
-        new_lesson = Lesson(name,date,grade,comments)
+        new_lesson = Lesson(name)
         db.session.add(new_lesson)
         db.session.flush()
         db.session.refresh(new_lesson)
-
-        new_material = LessonMaterial(name+' '+date, kanji_test,new_lesson.id,'KJTS')
-        db.session.add(new_material)
         db.session.commit()
 
         return redirect(url_for('lessons.edit',id=new_lesson.id))
@@ -60,19 +52,12 @@ def edit(id):
     #TODO: get a list of all questions and questions on this test for organizing
 
     form = AddForm()
-    kanji_form = MaterialForm()
 
-    if form.submit.data and form.validate():
+    if form.validate_on_submit():
         lesson_to_edit.name = form.name.data
-        lesson_to_edit.date = form.date.data
-        lesson_to_edit.grade = form.grade.data
-        lesson_to_edit.comments = form.comments.data
-        db.session.commit()
-        return redirect(url_for('lessons.list'))
-
-    if kanji_form.mat_submit.data and kanji_form.validate():
-        lesson_to_edit.lesson_materials[0].name = kanji_form.mat_name.data
-        lesson_to_edit.lesson_materials[0].content = kanji_form.mat_content.data
+        # lesson_to_edit.date = form.date.data
+        # lesson_to_edit.grade = form.grade.data
+        # lesson_to_edit.comments = form.comments.data
         db.session.commit()
         return redirect(url_for('lessons.list'))
 
@@ -80,27 +65,13 @@ def edit(id):
     elif request.method == 'GET':
         #get the different content types to pass to the form
         content_list = MaterialType.query.all()
-
-        #get all lesson content_type
         lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
         form.name.default = lesson_to_edit.name
-        form.date.default = lesson_to_edit.date
-        form.grade.default = lesson_to_edit.grade
-        form.comments.default = lesson_to_edit.comments
-        kanji_test = lesson_to_edit.lesson_materials[0]
-        kanji_form.mat_name.default = kanji_test.name
-#        kanji_form.mat_type.choices =[(c.code,c.name) for c in content_list]
-        kanji_form.mat_type.default = kanji_test.material_code
-        kanji_form.mat_content.default = kanji_test.content
         form.process()
-        kanji_form.process()
-
-        test_content = RenderContentKJTS(kanji_test.content)
-    return render_template('edit_lesson.html',form=form, kanji_form=kanji_form,
-                            test_content=kanji_test.content,
+    return render_template('edit_lesson.html',form=form,
                             lesson_id=lesson_to_edit.id,
-                            content_types=content_list,
-                            lesson_content = lesson_content
+                            lesson_content = lesson_content,
+                            content_types=content_list
                             )
 
 

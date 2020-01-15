@@ -1,0 +1,24 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">新規作成</h1>
+    <hr class="my-2">
+    <p>学期と単元名を入力してください。例）1学期　単元１．ふきのとう　の場合、1－1ふきのとう</p>
+  </div>
+  <form method="POST">
+    <div class="column">
+        {{form.hidden_tag()}}
+        <div class="form-group">
+          {{form.name.label}}
+          {{form.name(class='form-control')}}
+        </div>
+
+      <div class="form-group">
+        {{form.submit(class='btn btn-primary')}}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

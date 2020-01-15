@@ -59,7 +59,7 @@ def add(lesson_id,content_code):
 
 @lesson_contents_bp.route('/delete/<int:id>', methods=['GET'])
 def delete(id):
-    lesson_to_delete = Lesson.query.get(id)
+    content_to_delete = LessonMaterial.query.get(id)
 
     lesson_name = lesson_to_delete.name
     flash(f'Lesson {lesson_name} deleted.')

@@ -31,10 +31,9 @@ $('#myModal').on('shown.bs.modal', function () {
 
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">Lesson Editor</h1>
-    <p class="lead">Here you can edit a lesson and add materials to it.</p>
+    <h1 class="display-4">単元を編集する</h1>
     <hr class="my-2">
-    <p>Syntax explenation here</p>
+追加するボタンを押して、どのプリントを作るか選んでください。
   </div>
   <br>
   <form method="POST">
@@ -44,7 +43,6 @@ $('#myModal').on('shown.bs.modal', function () {
           {{form.hidden_tag()}}
           <div class="form-group col-xl">
             {{form.name.label}} {{form.name(class='form-control')}}
-            {{form.grade.label}} {{form.grade(class='form-control')}}
           </div>
         </div>
         <div class="row">
@@ -52,14 +50,14 @@ $('#myModal').on('shown.bs.modal', function () {
             {{form.submit(class='btn btn-primary')}}
           </div>
           <div class='col'>
-            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">Delete</button>
+            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">削除する</button>
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="row">
           <div class="form-group col-xl">
-            <label>Available Content</label>
+            <label>編集したいプリントを選べます</label>
             <ul class="list-group">
             {% for c in lesson_content %}
               <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -74,7 +72,7 @@ $('#myModal').on('shown.bs.modal', function () {
           <div class='col-md'>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Add Material
+                追加する
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for t in content_types %}
@@ -87,13 +85,6 @@ $('#myModal').on('shown.bs.modal', function () {
     </div>
   </div>
 </form>
-    <div class="row">
-      <div class="col-xl">
-        {% with kanji_form=kanji_form %}
-          {% include 'edit_kanji_test.html' %}
-        {% endwith %}
-      </div>
-    </div>
   </div>
 </div>
 
