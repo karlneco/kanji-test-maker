@@ -1,6 +1,7 @@
 {% extends "chrome.html" %}
 
 {% block content %}
+{% block scripts %}
 <script >
 function preview(){
   form = document.forms['content_form']
@@ -12,13 +13,14 @@ function print_preview(){
   window.open('/lesson_contents/print_factory/{{content_id}}', '_blank', 'height=772,width=1000,scrollbars=yes');
 }
 </script>
+{% endblock scripts %}
 <div class="container-sm">
 {% block head %} {% endblock head %}
 {% block form %}
   <form method="POST" id="content_form">
     {{form.hidden_tag()}}
     <div class="row">
-      <div class="col-sm-auto">
+      <div class="col-sm">
         <div class="form-group">
           {{form.name.label}}
           {{form.name(class='form-control')}}
