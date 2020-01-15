@@ -1,0 +1,51 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<script >
+function preview(){
+  form = document.forms['content_form']
+  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
+}
+
+function print_preview(){
+  form = document.forms['content_form'];
+  window.open('/lesson_contents/print_factory/{{content_id}}', '_blank', 'height=772,width=1000,scrollbars=yes');
+}
+</script>
+<div class="container-sm">
+{% block head %} {% endblock head %}
+{% block form %}
+  <form method="POST" id="content_form">
+    {{form.hidden_tag()}}
+    <div class="row">
+      <div class="col-sm-auto">
+        <div class="form-group">
+          {{form.name.label}}
+          {{form.name(class='form-control')}}
+        </div>
+      </div>
+
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-4">
+        {{form.content.label}}
+        {{form.content(class='form-control',rows='13')}}
+        <div class="row py-3">
+          <div class="col-sm-3 float-left">
+            {{form.submit(class='btn btn-primary')}}
+          </div>
+          <div class="col-xl-9">
+            <button type="button" class="btn btn-secondary float-right" onclick="print_preview();">Print View</button>
+            <button type="button" class="btn btn-secondary float-right mr-2" onclick="preview();">Preview</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl">
+        <iframe id='preview' height="600" class="preview-frame col-xl" src="{{ url_for('lesson_contents.preview_factory',content_code=content_type,content=content) }}" />
+      </div>
+    </div>
+  </form>
+
+{% endblock form%}
+</div>
+{% endblock content %}

@@ -53,23 +53,23 @@ class Lesson(db.Model):
     # one-to-many; one lesson may have many materials
     lesson_materials = db.relationship('LessonMaterial', backref='lesson_material', lazy='dynamic')
 
-    def __init__(self,name,date,grade,comments):
+    def __init__(self,name):
         self.name=name
-        self.date=date
-        self.grade=grade
-        self.comments=comments
+
 
     def __repr__(self):
         return f'{self.name} is a grade {self.grade} lesson with {lesson_materials.length}'
 
-class MeterialType(db.Model):
+class MaterialType(db.Model):
     __tablename__ = 'material_type'
     code = db.Column(db.Text,primary_key=True)
     name = db.Column(db.Text)
+    instructions = db.Column(db.Text)
 
-    def __init__(self,code,name):
+    def __init__(self,code,name,insturctions):
         self.code=code
         self.name=name
+        self.instructions=insturctions
 
     def __repr__(self):
         return f'{self.name} is a material identified by code {self.code}'
@@ -82,6 +82,9 @@ class LessonMaterial(db.Model):
     content = db.Column(db.Text)
     lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
     material_code = db.Column(db.Text, db.ForeignKey('material_type.code'))
+    material = db.relationship("MaterialType")
+
+
 
     def __init__(self,name,content,lesson_id,material_code):
         self.name=name
