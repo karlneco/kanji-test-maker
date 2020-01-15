@@ -8,7 +8,7 @@ lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
 @lessons_bp.route('/list')
 def list():
-    lessons = Lesson.query.all()
+    lessons = db.session.query(Lesson).order_by(Lesson.name)
     return render_template('list_lessons.html',lessons=lessons)
 
 

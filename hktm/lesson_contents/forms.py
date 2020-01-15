@@ -3,6 +3,6 @@ from wtforms import StringField, SubmitField, SelectField, TextAreaField, Intege
 
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
-    name = StringField(u'Enter the name of the sheet - this will be on the printerd document')
-    content = TextAreaField(u'Here are the questions for this material')
-    submit = SubmitField(u'Save')
+    name = StringField(u'ページタイトルを記載してください')
+    content = TextAreaField(u'問題を作成してください')
+    submit = SubmitField(u'保存')
