@@ -1,9 +1,9 @@
-from hktm.lessons.RenderContentBase import RenderContentBase
+from hktm.lesson_contents.RenderContentBase import RenderContentBase
 from yattag import Doc
 
 class RenderContentKJTS(RenderContentBase):
     """
-    This is the class for rednering kanji tests.
+    This is the class for rendering kanji tests.
     """
 
 ############################################################### reading question
@@ -106,12 +106,7 @@ class RenderContentKJTS(RenderContentBase):
             'pdf':'90px',
             'preview':'60px'
             }
-        self.ts_reading ='（'
-        self.te_reading ='）'
-        self.ts_writing ='「'
-        self.te_writing ='」'
-        self.ts_combo ='｛'
-        self.te_combo ='｝'
+
 
 
 

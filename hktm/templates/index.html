@@ -4,10 +4,9 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Hoshuko Kanji Lesson System</h1>
-    <p class="lead">Welcome to the Kanji Lesson System.</p>
+    <h1 class="display-5">補習校漢字テスト・宿題プリント生成ソフト</h1>
     <hr class="my-4">
-    <p>To get started, select a lesson to edit from the list  below, or create a new lesson using the "New Lesson..." button</p>
+    <p>新規作成または、既存のプリント名をクリックしてください。</p>
 
     <div class="list-group" role="tablist">
       {% for lesson in lessons %}
@@ -15,7 +14,7 @@
       {% endfor %}
     </div>
     <br>
-    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">New Lesson...</a>
+    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規作成</a>
   </div>
 </div>
 

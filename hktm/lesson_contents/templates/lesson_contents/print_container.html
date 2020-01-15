@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/questions.css"/>
+  </head>
+  <body>
+    <div class='page' style='float: right'>
+      <div class='header'>
+        <div class='header_frame'>
+          <div>
+            {{content.name}}
+          </div>
+          <div>
+            なまえ
+          </div>
+        </div>
+        <div class='header-instructions'>
+
+          {{content.material.instructions}}
+        </div>
+      </div>
+      <div class='content'>
+        {{ lesson_content.render()|safe }}
+      </div>
+  </body>

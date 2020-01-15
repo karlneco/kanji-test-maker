@@ -12,6 +12,7 @@
 }
 
 .page{
+  font-family: Kyokasho;
   display: flex;
   flex-direction: column-reverse;
   font-size: 35px;
@@ -30,6 +31,7 @@
   font-size: 40px;
   writing-mode: vertical-lr;
   --colwidth: 70px;
+  font-family: Kyokasho;
 }
 .preview .hiragana{
   padding-left: 7px;
@@ -102,13 +104,84 @@
   display:table-cell;
 }
 
-
-
-
 .hiragana{
   font-size: 90%;
   text-align: center;
   display: grid;
   grid-template-rows: var(--colwidth) 30px;
   white-space: nowrap;
+}
+
+.ghost {
+  color: #DDDDDD
+}
+
+.header{
+  writing-mode: tb;
+}
+
+
+.header_frame{
+  border: 3px black solid;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 400px auto;
+  width: 27px;
+  font-size: 20px;
+  padding: 12px;
+}
+
+.header-instructions{
+  font-size: 20px;
+  padding: 15px 10px 0px 20px;
+}
+.trcp_question{
+  color: black;
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px;
+  width: 80px;
+  border: 1px black solid
+}
+.trcp_char{
+  border-top: 1px solid black;
+  text-align: center;
+  padding-left: 17px;
+}
+
+.trcp_empty{
+  border-top: 1px solid black;
+}
+
+
+.kjwr_question{
+  width: 100px;
+  writing-mode: vertical-rl;
+  padding-top: 10px;
+}
+.kjwr_hiragana{
+  font-size: 24px;
+}
+.kjwr_boxes{
+  display: flex;
+  flex-direction: row;
+
+}
+.kjwr_empty{
+  border: 1px solid black;
+  height: 70px;
+  width: 70px;
+  margin-top: -1px;
+}
+
+.kjrd_layout{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  writing-mode: vertical-rl;
+}
+.kjrd_question{
+  display: flex;
+  flex-direction: row;
+  width: 120px;
+  writing-mode: vertical-lr;
+  padding-top: 10px;
 }

@@ -1,38 +1,24 @@
 {% extends "chrome.html" %}
 
 {% block content %}
-<div class="container-sm">
+<div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">New Lesson</h1>
-    <p class="lead">Please search and select the questions that will comprise this new lesson.</p>
+    <h1 class="display-4">新規作成</h1>
     <hr class="my-2">
-    More instructions here
+    <p>学期と単元名を入力してください。例）1学期　単元１．ふきのとう　の場合、1－1ふきのとう</p>
   </div>
   <form method="POST">
-    <div class="row">
-      <div class="col-sm-auto">
+    <div class="column">
         {{form.hidden_tag()}}
         <div class="form-group">
           {{form.name.label}}
           {{form.name(class='form-control')}}
-          {{form.date.label}}
-          {{form.date(class='form-control')}}
-          {{form.grade.label}} {{form.grade(class='form-control')}}
         </div>
-        <div class="form-group">
-          {{form.comments.label}}
-          {{form.comments(class='form-control')}}
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          {{form.kanji_test.label}}
-          {{form.kanji_test(class='form-control',rows='13')}}
-        </div>
+
+      <div class="form-group">
+        {{form.submit(class='btn btn-primary')}}
       </div>
     </div>
-    {{form.submit(class='btn btn-primary')}}
-
   </form>
 </div>
 {% endblock %}
