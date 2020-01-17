@@ -1,0 +1,29 @@
+{% extends "add_lesson_contents.html" %}
+{% block scripts %}
+<script >
+function preview(){
+  form = document.forms['content_form']
+  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
+}
+
+function print_preview(){
+  form = document.forms['content_form'];
+  window.open('/lessons/kanji_test_print/' + encodeURIComponent(form['content'].value), '_blank', 'height=772,width=1000,scrollbars=yes');
+}
+</script>
+{% endblock scripts %}
+
+{% block head %}
+
+  <div class="jumbotron">
+    <h1 class="display-4">漢字テスト編集 3-6</h1>
+
+    <hr class="my-2">
+    <p>
+    漢字穴埋め問題は、「」を使う。例）「みなみ」<br>
+    読み仮名問題は、（）を使う。例）（音読）　注意：括弧内はスペースで長さ調節可能<br>
+    漢字とふりがな混合問題は、｛｝を使う。例）｛かく｝注意：括弧内はスペースで長さ調節可能<br>
+    something about bonus questions using ＜＞ as in ＜letters＞<br>
+  </p>
+  </div>
+{% endblock head%}

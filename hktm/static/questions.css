@@ -1,3 +1,5 @@
+
+/* Fonts */
 @font-face{
   font-family: hoshuko_kanji;
   font-style: normal;
@@ -11,6 +13,7 @@
     font-style: normal;
 }
 
+/* Page and containers */
 .page{
   font-family: Kyokasho;
   display: flex;
@@ -19,7 +22,6 @@
   writing-mode: vertical-lr;
   --colwidth: 60px;
 }
-
 
 .preview-frame{
   border:none;
@@ -62,7 +64,7 @@
 
 
 
-
+/* Question container */
 .question{
   font-family: Kyokasho;
   display: flex;
@@ -70,6 +72,7 @@
   padding-left: 15px;
 }
 
+/* Reading part of a question */
 .kanji_reading{
   font-weight: bold;
   display: grid;
@@ -81,7 +84,7 @@
 }
 
 
-
+/* Writing part of a question */
 .kanji_writing{
   display: grid;
   grid-template-rows: var(--colwidth) 30px;
@@ -96,7 +99,7 @@
 }
 
 
-
+/* Combo question part (combining hiragana and kanji) */
 .combo_question{
   line-height: 1em;
   display: grid;
@@ -114,6 +117,15 @@
   display:table-cell;
 }
 
+
+/* Bonus question specific formating */
+.kanji_bonus{
+  border-right: 1px black dashed;
+  width: 50px;
+}
+
+
+/* Standard part of the question */
 .hiragana{
   font-size: 90%;
   text-align: center;
@@ -122,6 +134,9 @@
   white-space: nowrap;
 }
 
+
+
+/* for gray letters */
 .ghost {
   color: #DDDDDD
 }
