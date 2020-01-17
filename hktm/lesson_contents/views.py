@@ -56,7 +56,7 @@ def add(lesson_id,content_code):
 
         return redirect(url_for('lessons.edit',id=lesson_id))
 
-    return render_template(content_code + '_content.html',form=form, content_code=content_code)
+    return render_template(content_code + '_content.html',form=form, content_type=content_code)
 
 
 @lesson_contents_bp.route('/delete/<int:id>', methods=['GET'])
@@ -96,9 +96,11 @@ def edit(id):
 
         return render_template(content_to_edit.material_code + '_content.html',form=form, content=content_to_edit.content, content_id=content_to_edit.id, content_type=content_to_edit.material_code)
 
-
+@lesson_contents_bp.route('/preview_factory/<string:content_code>/', defaults={'content':None}, methods=['GET'])
 @lesson_contents_bp.route('/preview_factory/<string:content_code>/<string:content>', methods=['GET'])
 def preview_factory(content_code, content):
+    if content == None:
+        return render_template('no_content.html')
     content_type = MaterialType.query.get(content_code)
     lesson_content = content_types.get(content_code,'N/A')(content)
     return render_template('preview_container.html',content_type=content_type,lesson_content=lesson_content)
