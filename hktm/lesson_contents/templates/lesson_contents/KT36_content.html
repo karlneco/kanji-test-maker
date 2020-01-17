@@ -1,17 +1,5 @@
 {% extends "add_lesson_contents.html" %}
-{% block scripts %}
-<script >
-function preview(){
-  form = document.forms['content_form']
-  document.getElementById('preview').src='/lesson_contents/preview_factory/{{content_type}}/' + encodeURIComponent(form['content'].value);
-}
 
-function print_preview(){
-  form = document.forms['content_form'];
-  window.open('/lessons/kanji_test_print/' + encodeURIComponent(form['content'].value), '_blank', 'height=772,width=1000,scrollbars=yes');
-}
-</script>
-{% endblock scripts %}
 
 {% block head %}
 

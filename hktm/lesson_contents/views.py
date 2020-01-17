@@ -105,21 +105,18 @@ def preview_factory(content_code, content):
 
 @lesson_contents_bp.route('/print_factory/<int:content_id>', methods=['GET'])
 def print_factory(content_id):
+    '''
+    This will present a 'printable' page with the content rendered out as
+    intended.
+
+    Depending on the value of the material/contents 'custom_template' it will
+    either call the default print template or a custom template named
+    [material_code]_print_container.html in the templates directory
+    '''
+
     content = LessonMaterial.query.get(content_id)
     lesson_content = content_types.get(content.material_code,'N/A')(content.content)
-    return render_template('print_container.html',content=content,lesson_content=lesson_content)
-
-
-
-
-
-@lesson_contents_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
-def kanji_test_preview(content):
-    mat = ContentKJTS(content)
-    return render_template('kanji_test_preview.html',test=mat);
-
-
-@lesson_contents_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
-def kanji_test_pint(content):
-    mat = RenderContentKJTS(content)
-    return render_template('kanji_test_print.html',test=mat);
+    if content.material.custom_template:
+        return render_template(content.material_code+'_print_container.html',content=content,lesson_content=lesson_content)
+    else:
+        return render_template('print_container.html',content=content,lesson_content=lesson_content)
