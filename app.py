@@ -16,6 +16,9 @@ def index():
 
         if user.check_password(form.password.data) and user is not None:
             login_user(user)
+            if user.grades == 'none':
+                flash('This account is not activated yet, please wait for the activation email.')
+                return redirect(url_for('index'))
             flash('Login Successful')
 
             # if user was lookign for a specific page then take them tere now
@@ -25,7 +28,6 @@ def index():
                 next = url_for('home')
 
         return redirect(next)
-
     return render_template('index.html', form=form)
 
 
