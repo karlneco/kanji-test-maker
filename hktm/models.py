@@ -1,7 +1,11 @@
-from hktm import db
-# As a question can be on many tests and a test will have many questions
-#    we will set up a many-to-many relation ship here ab use a "helper table"
-#    as in the SQLAlchemy docs
+from hktm import db, login_manager
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 class Lesson(db.Model):
     __tablename__ = 'lesson'
@@ -56,3 +60,24 @@ class LessonMaterial(db.Model):
 
     def __repr__(self):
         return f'this is the worksheet {self.name} for the lesson'
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+
+    email = db.Column(db.String(64), unique=True, index=True)
+    grades = db.Column(db.String, nullable=False, default='none')
+    password_hash = db.Column(db.String(128))
+
+
+    def __init__(self,email,password):
+        self.email = email
+        self.password_hash = generate_password_hash(password)
+
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return self.email

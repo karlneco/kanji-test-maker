@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_user, login_required
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lessons.forms import AddForm, MaterialForm
@@ -7,6 +8,7 @@ from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
 @lessons_bp.route('/list')
+@login_required
 def list():
     lessons = db.session.query(Lesson).order_by(Lesson.name)
     return render_template('list_lessons.html',lessons=lessons)
@@ -15,6 +17,7 @@ def list():
 
 ## add route
 @lessons_bp.route('/add',methods=['GET','POST'])
+@login_required
 def add():
     form = AddForm()
     if form.validate_on_submit():
@@ -33,6 +36,7 @@ def add():
 
 
 @lessons_bp.route('/delete/<int:id>', methods=['GET'])
+@login_required
 def delete(id):
     lesson_to_delete = Lesson.query.get(id)
 
@@ -46,6 +50,7 @@ def delete(id):
 ### edit route, we need to provide a list of ALL questions as well as
 #   those on this test.
 @lessons_bp.route('/edit/<int:id>', methods=['GET','POST'])
+@login_required
 def edit(id):
     lesson_to_edit = Lesson.query.get(id)
 
@@ -76,12 +81,14 @@ def edit(id):
 
 
 @lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])
+@login_required
 def kanji_test_preview(content):
     mat = RenderContentKJTS(content)
     return render_template('kanji_test_preview.html',test=mat);
 
 
 @lessons_bp.route('/kanji_test_print/<string:content>', methods=['GET','POST'])
+@login_required
 def kanji_test_pint(content):
     mat = RenderContentKJTS(content)
     return render_template('kanji_test_print.html',test=mat);

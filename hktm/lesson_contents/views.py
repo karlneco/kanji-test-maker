@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_user, login_required
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lesson_contents.forms import AddForm
@@ -29,6 +30,7 @@ lesson_contents_bp = Blueprint('lesson_contents', __name__, template_folder='tem
 
 ## list route
 @lesson_contents_bp.route('/list/<int:lesson_id>')
+@login_required
 def list(lesson_id):
     '''
     List all the lesson content for a specifis lesson id
@@ -40,6 +42,7 @@ def list(lesson_id):
 
 ## add route
 @lesson_contents_bp.route('/add/<int:lesson_id>/<content_code>',methods=['GET','POST'])
+@login_required
 def add(lesson_id,content_code):
     form = AddForm()
 
@@ -60,6 +63,7 @@ def add(lesson_id,content_code):
 
 
 @lesson_contents_bp.route('/delete/<int:id>', methods=['GET'])
+@login_required
 def delete(id):
     content_to_delete = LessonMaterial.query.get(id)
 
@@ -73,6 +77,7 @@ def delete(id):
 ### edit route, we need to provide a list of ALL questions as well as
 #   those on this test.
 @lesson_contents_bp.route('/edit/<int:id>', methods=['GET','POST'])
+@login_required
 def edit(id):
     content_to_edit = LessonMaterial.query.get(id)
 
@@ -98,6 +103,7 @@ def edit(id):
 
 @lesson_contents_bp.route('/preview_factory/<string:content_code>/', defaults={'content':None}, methods=['GET'])
 @lesson_contents_bp.route('/preview_factory/<string:content_code>/<string:content>', methods=['GET'])
+@login_required
 def preview_factory(content_code, content):
     if content == None:
         return render_template('no_content.html')
@@ -106,6 +112,7 @@ def preview_factory(content_code, content):
     return render_template('preview_container.html',content_type=content_type,lesson_content=lesson_content)
 
 @lesson_contents_bp.route('/print_factory/<int:content_id>', methods=['GET'])
+@login_required
 def print_factory(content_id):
     '''
     This will present a 'printable' page with the content rendered out as

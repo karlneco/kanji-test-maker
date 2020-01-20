@@ -1,0 +1,31 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">今まで作成した単元</h1>
+    <hr class="my-2">
+    編集したい単元を選択してください。
+  </div>
+  <form method="POST" id="content_form">
+    {{form.hidden_tag()}}
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          {{form.email.label}}
+          {{form.email(class='form-control')}}
+          {{form.password.label}}
+          {{form.password(class='form-control')}}
+          {{form.password_confirm.label}}
+          {{form.password_confirm(class='form-control')}}
+        </div>
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-3 float-left">
+        {{form.submit(class='btn btn-primary')}}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

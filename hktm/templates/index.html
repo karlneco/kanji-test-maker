@@ -1,21 +1,40 @@
-{% extends "chrome.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/questions.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-{% block content %}
+  <title>Kanji Test Generator</title>
+  </head>
+  <body>
 
-<div class="container">
-  <div class="jumbotron">
-    <h1 class="display-5">補習校漢字テスト・宿題プリント生成ソフト</h1>
-    <hr class="my-4">
-    <p>新規作成または、既存のプリント名をクリックしてください。</p>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-5">補習校漢字テスト・宿題プリント生成ソフト</h1>
+        <hr class="my-4">
+      </div>
 
-    <div class="list-group" role="tablist">
-      {% for lesson in lessons %}
-          <a class="list-group-item list-group-item-action" id=list-{{lesson.id}} href="{{ url_for('lessons.edit',id=lesson.id) }}">{{ lesson.name }}</a>
-      {% endfor %}
+    <form method="POST" id="content_form">
+      {{form.hidden_tag()}}
+      <div class="row">
+        <div class="col-sm">
+          <div class="form-group">
+            {{form.email.label}}
+            {{form.email(class='form-control')}}
+            {{form.password.label}}
+            {{form.password(class='form-control')}}
+          </div>
+        </div>
+      </div>
+      <div class="row py-3">
+        <div class="col-sm-3 float-left">
+          {{form.submit(class='btn btn-primary')}}
+          <a href="{{url_for('users.register')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">Register</a>
+        </div>
+      </div>
+    </form>
     </div>
-    <br>
-    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規作成</a>
-  </div>
-</div>
-
-{% endblock %}
