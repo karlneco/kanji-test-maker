@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required,current_user
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lessons.forms import AddForm, MaterialForm
@@ -20,18 +20,27 @@ def list():
 @login_required
 def add():
     form = AddForm()
+
+    #get a list of the grades for the current user to populate the dropdown
+    if ',' in current_user.grades:
+        grades = current_user.grades.split(',')
+        form.grade.choices = [(g, g) for g in grades]
+    else:
+        form.grade.choices = [(current_user.grades, current_user.grades)]
+
     if form.validate_on_submit():
+        print('valid')
         flash('New Lesson Created')
         name = form.name.data
+        grade = form.grade.data
 
-        new_lesson = Lesson(name)
+        new_lesson = Lesson(name, grade)
         db.session.add(new_lesson)
-        db.session.flush()
-        db.session.refresh(new_lesson)
         db.session.commit()
-
+        print ('processing')
         return redirect(url_for('lessons.edit',id=new_lesson.id))
 
+    print('no validation')
     return render_template('add_lesson.html',form=form)
 
 
@@ -54,14 +63,21 @@ def delete(id):
 def edit(id):
     lesson_to_edit = Lesson.query.get(id)
 
-    #TODO: get a list of all questions and questions on this test for organizing
-
     form = AddForm()
+
+    #get a list of the active users grades for the grade drop down
+    if ',' in current_user.grades:
+        grades = current_user.grades.split(',')
+        form.grade.choices = [(g, g) for g in grades]
+    else:
+        form.grade.choices = [(current_user.grades, current_user.grades)]
+
+
 
     if form.validate_on_submit():
         lesson_to_edit.name = form.name.data
         # lesson_to_edit.date = form.date.data
-        # lesson_to_edit.grade = form.grade.data
+        lesson_to_edit.grade = form.grade.data
         # lesson_to_edit.comments = form.comments.data
         db.session.commit()
         return redirect(url_for('lessons.list'))

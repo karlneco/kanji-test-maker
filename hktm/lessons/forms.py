@@ -4,6 +4,7 @@ from wtforms import StringField, SubmitField, SelectField, TextAreaField, Intege
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
     name = StringField(u'学期と単元名')
+    grade = SelectField(u'Grade', choices=[])
     submit = SubmitField(u'保存する')
 
 class MaterialForm(FlaskForm):

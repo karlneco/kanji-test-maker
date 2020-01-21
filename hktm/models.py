@@ -18,8 +18,9 @@ class Lesson(db.Model):
     # one-to-many; one lesson may have many materials
     lesson_materials = db.relationship('LessonMaterial', backref='lesson_material', lazy='dynamic')
 
-    def __init__(self,name):
+    def __init__(self, name, grade):
         self.name=name
+        self.grade=grade
 
 
     def __repr__(self):

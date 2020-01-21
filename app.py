@@ -1,7 +1,7 @@
 from hktm import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import get_debug_queries
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from hktm.models import User
 from hktm.users.forms import LoginForm
 
@@ -35,8 +35,8 @@ def index():
 @login_required
 def home():
 
-    lessons = db.session.query(Lesson).order_by(Lesson.name)
-    return render_template('home.html', lessons=lessons)
+    lessons = Lesson.query.filter_by(grade=current_user.grades).order_by(Lesson.name)
+    return render_template('home.html', lessons=lessons, user=current_user)
 
 
 @app.route('/logout')
