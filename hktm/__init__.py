@@ -40,3 +40,5 @@ from hktm.users.views import users_bp
 app.register_blueprint(lessons_bp, url_prefix='/lessons')
 app.register_blueprint(lesson_contents_bp, url_prefix='/lesson_contents')
 app.register_blueprint(users_bp, url_prefix='/users')
+
+from hktm import views
