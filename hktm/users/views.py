@@ -11,18 +11,25 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    password=form.password.data)
 
-        db.session.add(user)
-        db.session.commit()
+        check_user = User.query.filter_by(email=form.email.data).first()
+        if isinstance(check_user, User):
+            flash('This email is already registered')
+            return redirect(url_for('root.index'))
 
-        flash('Account created, please wait for a confirmation email before loging in.')
-        return redirect(url_for('hktm.index'))
+        else:
+            user = User(email=form.email.data,
+                        password=form.password.data)
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash('Account created, please wait for a confirmation email before loging in.')
+            return redirect(url_for('root.index'))
     return render_template('register.html',form=form)
 
 
 @users_bp.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('hktm.index'))
+    return redirect(url_for('root.index'))
