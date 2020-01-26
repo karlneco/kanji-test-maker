@@ -43,6 +43,13 @@ $('#myModal').on('shown.bs.modal', function () {
           {{form.hidden_tag()}}
           <div class="form-group col-xl">
             {{form.name.label}} {{form.name(class='form-control')}}
+            {% if form.name.errors %}
+              <ul class="errors">
+                {% for error in form.name.errors %}
+                  <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
             {{form.grade.label}} {{form.grade(class='form-control')}}
 
           </div>

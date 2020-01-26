@@ -1,4 +1,6 @@
 from flask import url_for
+import requests
+
 from hktm import db
 from hktm.models import User
 
@@ -83,21 +85,15 @@ def test_user_login(test_client, init_database):
     assert response.status_code == 200
     assert b'Login Successful' in response.data
 
-def test_user_home(test_client, init_database, existing_user):
+def test_user_home(client,auth_user,init_database,authenticated_request):
     """
     GIVEN a Flask application
     WHEN the '/users/login or / (index) page is posted to (POST) with valid creds
     THEN login the user
     """
-
-    from flask_login import login_user,current_user
-
-    # log in the user
-    login(test_client,'testuser@gmail.com','password')
-    login_user(User('testuser@gmail.com','password'))
-    assert current_user.email == 'testuser@gmail.com'
+    response = client.post(url_for('root.index'),data=dict(username='testuser@gmail.com',password='password'))
     # try to get home
-    response = c.get('/home',follow_redirects=True)
+    response = client.get(url_for('root.home'))
     assert response.status_code == 200
     #assert 0
     assert '新規作成または、'.encode('utf-8') in response.data

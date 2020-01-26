@@ -10,7 +10,13 @@ lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 @lessons_bp.route('/list')
 @login_required
 def list():
-    lessons = db.session.query(Lesson).order_by(Lesson.name)
+    # if ',' in current_user.grades:
+    #     grades = current_user.grades.split(',')
+    #     form.grade.choices = [(g, g) for g in grades]
+    # else:
+    #     form.grade.choices = [(current_user.grades, current_user.grades)]
+    lessons = db.session.query(Lesson).filter(Lesson.grade.in_(current_user.grades)).order_by(Lesson.name)
+    #assert 0
     return render_template('list_lessons.html',lessons=lessons)
 
 
@@ -72,7 +78,10 @@ def edit(id):
     else:
         form.grade.choices = [(current_user.grades, current_user.grades)]
 
-
+    content_list = MaterialType.query.all()
+    lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
+    form.name.default = lesson_to_edit.name
+    form.process()
 
     if form.validate_on_submit():
         lesson_to_edit.name = form.name.data
@@ -81,14 +90,6 @@ def edit(id):
         # lesson_to_edit.comments = form.comments.data
         db.session.commit()
         return redirect(url_for('lessons.list'))
-
-    # pre-populate for form for editing
-    elif request.method == 'GET':
-        #get the different content types to pass to the form
-        content_list = MaterialType.query.all()
-        lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
-        form.name.default = lesson_to_edit.name
-        form.process()
     return render_template('edit_lesson.html',form=form,
                             lesson_id=lesson_to_edit.id,
                             lesson_content = lesson_content,

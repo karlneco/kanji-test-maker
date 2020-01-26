@@ -15,6 +15,7 @@ def index():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
+
         if user.check_password(form.password.data) and user is not None:
             login_user(user)
             if user.grades == 'none':
@@ -36,7 +37,7 @@ def index():
 @login_required
 def home():
 
-    lessons = Lesson.query.filter_by(grade=current_user.grades).order_by(Lesson.name)
+    lessons = db.session.query(Lesson).filter(Lesson.grade.in_(current_user.grades)).order_by(Lesson.name)
     return render_template('home.html', lessons=lessons, user=current_user)
 
 
