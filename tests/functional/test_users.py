@@ -5,13 +5,13 @@ from hktm import db
 from hktm.models import User
 
 def login(client,username,password):
-    return client.post('/',data=dict(username=username,password=password), follow_redirects=True)
+    return client.post('/',data=dict(email=username,password=password), follow_redirects=True)
 
 def logout(client):
     return client.get('/users/logout',follow_redirects=True)
 
 
-def test_index_page(test_client):
+def test_index_page(test_client,init_database): #needs init other wise it will die in a test chain
     """
     GIVEN a Flask application
     WHEN the '/' page is requested (GET)
