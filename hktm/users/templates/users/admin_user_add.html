@@ -1,0 +1,55 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">Admin Add User</h1>
+    <hr class="my-2">
+    Adding a new user
+  </div>
+  <form method="POST" id="content_form">
+    {{form.hidden_tag()}}
+    <div class="row">
+      <div class="col-sm">
+
+        <div class="form-group">
+          {{form.name.label}}
+          {{form.name(class='form-control')}}
+          {{form.email.label}}
+          {{form.email(class='form-control')}}
+          {% if form.email.errors %}
+            <ul class="errors">
+              {% for error in form.email.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {{form.password.label}}
+          {{form.password(class='form-control')}}
+          {% if form.password.errors %}
+            <ul class="errors">
+              {% for error in form.password.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {{form.grades.label}}
+          {{form.grades(class='form-control')}}
+          {% if form.grades.errors %}
+            <ul class="errors">
+              {% for error in form.grades.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-3 float-left">
+        {{form.submit(class='btn btn-primary')}}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

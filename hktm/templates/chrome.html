@@ -25,6 +25,11 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('lessons.list') }}">単元</a>
           </li>
+          {% if 'A' in current_user.grades %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('users.admin_list_users') }}">User Admin</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link disabled" href="#">構成</a>
           </li>
