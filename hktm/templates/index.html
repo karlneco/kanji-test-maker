@@ -17,26 +17,27 @@
       &nbsp;
     </div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="container">
-          {% for message in messages %}
-          <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class=" close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          {%endfor%}
-        </div>
-      {% endif %}
-    {%endwith%}
 
     <div class="container">
       <div class="jumbotron">
         <h1 class="display-5">補習校漢字テスト・宿題プリント生成ソフト</h1>
         <hr class="my-4">
       </div>
+
+      {% with messages = get_flashed_messages(with_categories=True)%}
+        {% if messages %}
+          <div class="container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message[0] }} alert-dismissible fade show" role="alert">
+              {{ message[1] }}
+              <button type="button" class=" close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {%endfor%}
+          </div>
+        {% endif %}
+      {%endwith%}
 
     <form method="POST" id="content_form">
       {{form.hidden_tag()}}

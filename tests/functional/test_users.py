@@ -26,7 +26,7 @@ def test_index_page(test_client,init_database): #needs init other wise it will d
 def test_valid_registration(test_client, init_database):
     """
     GIVEN a Flask application
-    WHEN the '/register' page is posted to (POST)
+    WHEN the '/register' page is posted with valid data
     THEN check the response is valid and the user is logged in
     """
     response = test_client.post('/users/register',
@@ -72,11 +72,13 @@ def test_user_login(test_client, init_database):
     THEN login the user
     """
 
+    #add a test user
     user = User('testuser@gmail.com','password')
     user.grades = '1'  # a valid user needs a grade(s)
     db.session.add(user)
     db.session.commit()
 
+    #try to login
     response = test_client.post('/',
                                 data=dict(email='testuser@gmail.com',
                                           password='password'),
@@ -84,6 +86,39 @@ def test_user_login(test_client, init_database):
 
     assert response.status_code == 200
     assert b'Login Successful' in response.data
+
+
+def test_user_login_fail(test_client, init_database):
+    """
+    GIVEN a Flask application
+    WHEN the '/users/login or / (index) page is posted to (POST) with INVALID creds
+    THEN login the user
+    """
+
+    #add a test user
+    user = User('testuser@gmail.com','password')
+    user.grades = '1'  # a valid user needs a grade(s)
+    db.session.add(user)
+    db.session.commit()
+
+    #try to login wtih bad password
+    response = test_client.post('/',
+                                data=dict(email='testuser@gmail.com',
+                                          password='wrong pass'),
+                                follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b'User name or password is incorrect.' in response.data
+
+    #try to login wtih bad username
+    response = test_client.post('/',
+                                data=dict(email='nosuchuser@gmail.com',
+                                          password='wrong pass'),
+                                follow_redirects=True)
+
+    assert response.status_code == 200
+    assert b'User name or password is incorrect.' in response.data
+
 
 def test_user_home(client,auth_user,init_database,authenticated_request):
     """

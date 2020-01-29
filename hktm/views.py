@@ -16,20 +16,21 @@ def index():
         user = User.query.filter_by(email=form.email.data).first()
 
 
-        if user.check_password(form.password.data) and user is not None:
-            login_user(user)
-            if user.grades == 'none':
-                flash('This account is not activated yet, please wait for the activation email.')
-                return redirect(url_for('root.index'))
-            flash('Login Successful')
+        if user is not None:
+            if user.check_password(form.password.data):
+                login_user(user)
+                if user.grades == 'none':
+                    flash('This account is not activated yet, please wait for the activation email.')
+                    return redirect(url_for('root.index'))
+                flash('Login Successful')
+                # if user was lookign for a specific page then take them tere now
+                next = request.args.get('next')
 
-            # if user was lookign for a specific page then take them tere now
-            next = request.args.get('next')
+                if next == None or not next[0]=='/':
+                    next = url_for('root.home')
 
-            if next == None or not next[0]=='/':
-                next = url_for('root.home')
-
-        return redirect(next)
+                return redirect(next)
+        flash('User name or password is incorrect.', category="danger")
     return render_template('index.html', form=form)
 
 
