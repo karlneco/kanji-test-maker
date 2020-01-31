@@ -23,6 +23,20 @@ def test_index_page(test_client,init_database): #needs init other wise it will d
     assert b'Log In' in response.data
     assert b'Register' in response.data
 
+def test_user_home(client,auth_user,init_database,authenticated_request):
+    """
+    GIVEN a Flask application
+    WHEN the '/users/login or / (index) page is posted to (POST) with valid creds
+    THEN login the user
+    """
+    response = client.post(url_for('root.index'),data=dict(username='testuser@gmail.com',password='password'))
+    # try to get home
+    response = client.get(url_for('root.home'))
+    assert response.status_code == 200
+    #assert 0
+    assert '新規作成または、'.encode('utf-8') in response.data
+
+
 def test_valid_registration(test_client, init_database):
     """
     GIVEN a Flask application
@@ -65,6 +79,7 @@ def test_duplicate_registration(test_client, init_database):
     assert response.status_code == 200
     assert b'This email is already registered' in response.data
 
+
 def test_user_login(test_client, init_database):
     """
     GIVEN a Flask application
@@ -86,7 +101,6 @@ def test_user_login(test_client, init_database):
 
     assert response.status_code == 200
     assert b'Login Successful' in response.data
-
 
 def test_user_login_fail(test_client, init_database):
     """
@@ -120,18 +134,6 @@ def test_user_login_fail(test_client, init_database):
     assert b'User name or password is incorrect.' in response.data
 
 
-def test_user_home(client,auth_user,init_database,authenticated_request):
-    """
-    GIVEN a Flask application
-    WHEN the '/users/login or / (index) page is posted to (POST) with valid creds
-    THEN login the user
-    """
-    response = client.post(url_for('root.index'),data=dict(username='testuser@gmail.com',password='password'))
-    # try to get home
-    response = client.get(url_for('root.home'))
-    assert response.status_code == 200
-    #assert 0
-    assert '新規作成または、'.encode('utf-8') in response.data
 
 
 

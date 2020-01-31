@@ -63,7 +63,7 @@ def add_data(init_database):
 
 
     userAdmin = User('admin@hoshuko.com','password')
-    userAdmin.grades = '123456789'
+    userAdmin.grades = 'A123456789'
 
     lesson11 = Lesson('Grade 1 - Lesson 1','1')
     lesson12 = Lesson('Grade 1 - Lesson 2','1')
