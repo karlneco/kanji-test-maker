@@ -3,9 +3,13 @@
 {% block content %}
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">Admin Add User</h1>
+    <h1 class="display-4">アカウント新規追加ページ</h1>
     <hr class="my-2">
-    Adding a new user
+    学年と担任が一致するように入力してください。1人が複数学年のページを管理することも可能です。その場合は、学年番号を複数入力してください。管理ページを閲覧できる先生にはAを入力します。<br>
+    <br/>
+    例）小二の場合、学年の枠に半角数字で　2<br>
+    例）小五と小三を管理する場合、学年の枠に半角英数字で　35<br>
+    例）小四と管理画面を管理する場合、　A4<br>
   </div>
   <form method="POST" id="content_form">
     {{form.hidden_tag()}}

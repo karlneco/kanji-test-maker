@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
+from werkzeug.security import generate_password_hash, check_password_hash
 from hktm import db
 from hktm.models import User
 from hktm.users.forms import LoginForm, RegistrationForm, AdminEditForm, AdminAddForm
@@ -11,7 +12,7 @@ users_bp = Blueprint('users', __name__, template_folder='templates/users')
 @login_required
 def admin_list_users():
     if 'A' not in current_user.grades:
-        flash('You do not have the Administrator access required to modify users.')
+        flash('ここは管理者のみがアクセスできます。', category='danger')
         return redirect(url_for('root.home'))
 
     all_users = db.session.query(User).all()
@@ -21,7 +22,7 @@ def admin_list_users():
 @login_required
 def admin_user_edit(id):
     if 'A' not in current_user.grades:
-        flash('You do not have the Administrator access required to modify users.')
+        flash('ここは管理者のみがアクセスできます。', category='danger')
         return redirect(url_for('root.home'))
 
     user = User.query.get(id)
@@ -45,7 +46,7 @@ def admin_user_edit(id):
         form.name.default = user.name
         form.email.default = user.email
         form.grades.default = user.grades
-        form.process()        
+        form.process()
 
     return render_template('admin_user_edit.html',form=form,user_id=user.id)
 
@@ -55,7 +56,7 @@ def admin_user_edit(id):
 @login_required
 def add():
     if 'A' not in current_user.grades:
-        flash('You do not have the Administrator access required to modify users.')
+        flash('ここは管理者のみがアクセスできます。', category='danger')
         return redirect(url_for('root.home'))
 
     form = AdminAddForm()
@@ -75,14 +76,14 @@ def add():
 @login_required
 def delete(id):
     if 'A' not in current_user.grades:
-        flash('You do not have the Administrator access required to modify users.')
+        flash('ここは管理者のみがアクセスできます。', category='danger')
         return redirect(url_for('root.home'))
 
     user_to_delete = User.query.get(id)
 
     user_email = user_to_delete.email
     user_name = user_to_delete.name
-    flash(f'User {user_email} ({user_name}) deleted.')
+    flash(f'このアカウントの先生： {user_email} ({user_name}) 消去されました.', category='info')
     db.session.delete(user_to_delete)
     db.session.commit()
     return redirect(url_for('users.admin_list_users'))
@@ -95,7 +96,7 @@ def register():
 
         check_user = User.query.filter_by(email=form.email.data).first()
         if isinstance(check_user, User):
-            flash('This email is already registered')
+            flash('このメールアドレスは既に登録済みです。', category='danger')
             return redirect(url_for('root.index'))
 
         else:
@@ -105,7 +106,7 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-            flash('Account created, please wait for a confirmation email before loging in.')
+            flash('新しくアカウントが作成されました。承認メールが送信されるのをお待ちください。', category='warning')
             return redirect(url_for('root.index'))
     return render_template('register.html',form=form)
 

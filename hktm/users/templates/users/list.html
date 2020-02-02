@@ -3,9 +3,9 @@
 {% block content %}
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">User List</h1>
+    <h1 class="display-4">アカウントリスト</h1>
     <hr class="my-2">
-    User list and editor
+    アカウントリストを編集することができます。編集したいアカウントを選択してください。
   </div>
   <div class="list-group" role="tablist">
     {% for user in users %}
@@ -13,6 +13,6 @@
     {% endfor %}
   </div>
   <br>
-  <a href="{{url_for('users.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規作成</a>
+  <a href="{{url_for('users.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規アカウントを作成する。</a>
 </div>
 {% endblock %}

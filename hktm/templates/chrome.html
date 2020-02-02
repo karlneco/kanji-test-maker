@@ -27,7 +27,7 @@
           </li>
           {% if 'A' in current_user.grades %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('users.admin_list_users') }}">User Admin</a>
+            <a class="nav-link" href="{{ url_for('users.admin_list_users') }}">管理者ページ</a>
           </li>
           {% endif %}
           <li class="nav-item">
@@ -43,20 +43,24 @@
 
     <br>
 
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=True)%}
       {% if messages %}
         <div class="container">
           {% for message in messages %}
-          <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ message }}
+          {% if message[0]!=NoneType %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+          {% else %}
+            <div class="alert alert-{{ message[0] }} alert-dismissible fade show" role="alert">
+          {% endif %}
+            {{ message[1] }}
             <button type="button" class=" close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          {%endfor%}
+          {% endfor %}
         </div>
       {% endif %}
-    {%endwith%}
+    {% endwith %}
 
     {% block content %}
 

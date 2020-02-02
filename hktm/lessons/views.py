@@ -27,12 +27,9 @@ def list():
 def add():
     form = AddForm()
 
-    #get a list of the grades for the current user to populate the dropdown
-    if ',' in current_user.grades:
-        grades = current_user.grades.split(',')
-        form.grade.choices = [(g, g) for g in grades]
-    else:
-        form.grade.choices = [(current_user.grades, current_user.grades)]
+    #get a list of the active users grades for the grade drop down
+    grades = current_user.grades.replace('A','')
+    form.grade.choices = [(g, g) for g in grades]
 
     if form.validate_on_submit():
         print('valid')
@@ -72,12 +69,10 @@ def edit(id):
     form = AddForm()
 
     #get a list of the active users grades for the grade drop down
-    if ',' in current_user.grades:
-        grades = current_user.grades.split(',')
-        form.grade.choices = [(g, g) for g in grades]
-    else:
-        form.grade.choices = [(current_user.grades, current_user.grades)]
+    grades = current_user.grades.replace('A','')
+    form.grade.choices = [(g, g) for g in grades]
 
+    form.grade.default = lesson_to_edit.grade
     content_list = MaterialType.query.all()
     lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
     form.name.default = lesson_to_edit.name

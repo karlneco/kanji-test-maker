@@ -4,8 +4,8 @@ from wtforms.validators import InputRequired
 
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
-    name = StringField(u'学期と単元名',validators=[InputRequired(message='This field is required!!!!!')])
-    grade = SelectField(u'Grade', choices=[])
+    name = StringField(u'学期と単元名',validators=[InputRequired(message='この項目は必須です')])
+    grade = SelectField(u'学年', choices=[])
     submit = SubmitField(u'保存する')
 
 class MaterialForm(FlaskForm):
