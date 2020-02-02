@@ -12,17 +12,17 @@ $('#myModal').on('shown.bs.modal', function () {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteLabel">Are you sure</h5>
+        <h5 class="modal-title" id="confirmDeleteLabel">削除してもよろしいですか</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Deleting this lesson will also delete the associated materials like tests and worksheets.
+        この単元を削除すると、関連するテストやプリントが削除されます。
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        <a href="{{url_for('lessons.delete', id=lesson_id)}}" class="btn btn-danger">Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">削除しない</button>
+        <a href="{{url_for('lessons.delete', id=lesson_id)}}" class="btn btn-danger">削除する</a>
       </div>
     </div>
   </div>
@@ -43,6 +43,13 @@ $('#myModal').on('shown.bs.modal', function () {
           {{form.hidden_tag()}}
           <div class="form-group col-xl">
             {{form.name.label}} {{form.name(class='form-control')}}
+            {% if form.name.errors %}
+              <ul class="errors">
+                {% for error in form.name.errors %}
+                  <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
             {{form.grade.label}} {{form.grade(class='form-control')}}
 
           </div>

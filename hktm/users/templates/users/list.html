@@ -1,0 +1,18 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">アカウントリスト</h1>
+    <hr class="my-2">
+    アカウントリストを編集することができます。編集したいアカウントを選択してください。
+  </div>
+  <div class="list-group" role="tablist">
+    {% for user in users %}
+        <a class="list-group-item list-group-item-action" id=list-{{user.id}} href="{{ url_for('users.admin_user_edit',id=user.id) }}">{{ user.email }}</a>
+    {% endfor %}
+  </div>
+  <br>
+  <a href="{{url_for('users.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規アカウントを作成する。</a>
+</div>
+{% endblock %}

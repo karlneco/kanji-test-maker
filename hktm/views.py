@@ -1,53 +1,56 @@
-from hktm import app, db
-from flask import render_template, request, redirect, url_for, flash
+from hktm import db, login_manager
+from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_sqlalchemy import get_debug_queries
 from flask_login import login_user, login_required, logout_user, current_user
 from hktm.models import User
 from hktm.users.forms import LoginForm
-
 from hktm.models import Lesson
 
-@app.route('/',methods=['GET','POST'])
+root_bp = Blueprint('root',__name__, template_folder='templates')
+
+@root_bp.route('/',methods=['GET','POST'])
 def index():
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
-        if user.check_password(form.password.data) and user is not None:
-            login_user(user)
-            if user.grades == 'none':
-                flash('This account is not activated yet, please wait for the activation email.')
-                return redirect(url_for('index'))
-            flash('Login Successful')
 
-            # if user was lookign for a specific page then take them tere now
-            next = request.args.get('next')
+        if user is not None:
+            if user.check_password(form.password.data):
+                login_user(user)
+                if user.grades == 'none':
+                    flash('このアカウントはまだ登録されていません。管理者からの承認メールをお待ちください。', category="warning")
+                    return redirect(url_for('root.index'))
+                flash('Login Successful')
+                # if user was lookign for a specific page then take them tere now
+                next = request.args.get('next')
 
-            if next == None or not next[0]=='/':
-                next = url_for('home')
+                if next == None or not next[0]=='/':
+                    next = url_for('root.home')
 
-        return redirect(next)
+                return redirect(next)
+        flash('メールアドレスまたはパスワードが一致しません。', category="danger")
     return render_template('index.html', form=form)
 
 
-@app.route('/home')
+@root_bp.route('/home')
 @login_required
 def home():
 
-    lessons = Lesson.query.filter_by(grade=current_user.grades).order_by(Lesson.name)
+    lessons = db.session.query(Lesson).filter(Lesson.grade.in_(current_user.grades)).order_by(Lesson.name)
     return render_template('home.html', lessons=lessons, user=current_user)
 
 
-@app.route('/logout')
+@root_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash("You have been logged out")
-    return redirect(url_for('index'))
+    return redirect(url_for('root.index'))
 
 
-@app.errorhandler(404)
+@root_bp.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
@@ -67,6 +70,3 @@ def sql_debug(response):
     return response
 
 #app.after_request(sql_debug)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)

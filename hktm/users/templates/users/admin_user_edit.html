@@ -1,0 +1,84 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<script >
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
+}
+</script>
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">本当に削除しますか。</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        このアカウントを削除してもよろしいですか。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">削除しない</button>
+        <a href="{{url_for('users.delete', id=user_id)}}" class="btn btn-danger">削除する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">アカウント編集ページ</h1>
+    <hr class="my-2">
+    学年と担任が一致するように入力してください。1人が複数学年のページを管理することも可能です。その場合は、学年番号を複数入力してください。管理ページを閲覧できる先生にはAを入力します。<br>
+    <br/>
+    例）小二の場合、学年の枠に半角数字で　2<br>
+    例）小五と小三を管理する場合、学年の枠に半角英数字で　35<br>
+    例）小四と管理画面を管理する場合、　A4<br>
+  </div>
+  <form method="POST" id="content_form">
+    {{form.hidden_tag()}}
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          {{form.name.label}}
+          {{form.name(class='form-control')}}
+          {{form.email.label}}
+          {{form.email(class='form-control')}}
+          {% if form.email.errors %}
+            <ul class="errors">
+              {% for error in form.email.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          {{form.password.label}}
+          {{form.password(class='form-control')}}
+          {{form.grades.label}}
+          {{form.grades(class='form-control')}}
+          {% if form.grades.errors %}
+            <ul class="errors">
+              {% for error in form.grades.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-3 float-left">
+        {{form.submit(class='btn btn-primary')}}
+      </div>
+      <div class='col'>
+        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">アカウントを削除する</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
