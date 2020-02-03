@@ -45,7 +45,7 @@ class RenderContentKT36(RenderContentKJTS):
         self.tokens = '（「｛＜'
         self.render_mode = {
             'pdf':'90px',
-            'preview':'40px'
+            'preview':'60px'
             }
 
 

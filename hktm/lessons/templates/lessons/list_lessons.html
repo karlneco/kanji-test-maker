@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">今まで作成した単元</h1>
+    <h1 class="display-4">あなたの管理学年と単元</h1>
     <hr class="my-2">
-    編集したい単元を選択してください。
+    編集したい学年を選択してください
   </div>
-  Available Grades:<br>
+  あなたの管理学年:<br>
   <div class="list-group list-group-horizontal-md" id="gradeList" role="tablist">
     {% for g in grades %}
       <a class="list-group-item list-group-item-action" data-toggle="list" href="#grade-{{g}}" role="tab" style="text-align: center">{{g}}</a>
