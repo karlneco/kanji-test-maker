@@ -20,8 +20,8 @@ def test_index_page(test_client,init_database): #needs init other wise it will d
     response = test_client.get('/')
     assert response.status_code == 200
     assert '補習校漢字テスト'.encode('utf-8') in response.data
-    assert b'Log In' in response.data
-    assert b'Register' in response.data
+    assert 'value="ログイン"'.encode('utf-8') in response.data
+    assert b'<a href="/users/register"' in response.data
 
 def test_user_home(client,auth_user,init_database,authenticated_request):
     """
@@ -50,7 +50,7 @@ def test_valid_registration(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'Account created, please wait for a confirmation' in response.data
+    assert '新しくアカウントが作成されました。'.encode('utf-8') in response.data
     user = User.query.filter_by(email='testuser@gmail.com').first()
     assert isinstance(user, User)
     assert user.grades == 'none'
@@ -68,7 +68,7 @@ def test_duplicate_registration(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'Account created, please wait for a confirmation' in response.data
+    assert '新しくアカウントが作成されました。'.encode('utf-8') in response.data
 
     response = test_client.post('/users/register',
                                 data=dict(email='testuser@gmail.com',
@@ -77,7 +77,7 @@ def test_duplicate_registration(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'This email is already registered' in response.data
+    assert 'このメールアドレスは既に登録済みです。'.encode('utf-8') in response.data
 
 
 def test_user_login(test_client, init_database):
@@ -122,7 +122,7 @@ def test_user_login_fail(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'User name or password is incorrect.' in response.data
+    assert 'メールアドレスまたはパスワードが一致しません。'.encode('utf-8') in response.data
 
     #try to login wtih bad username
     response = test_client.post('/',
@@ -131,7 +131,7 @@ def test_user_login_fail(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'User name or password is incorrect.' in response.data
+    assert 'メールアドレスまたはパスワードが一致しません。'.encode('utf-8') in response.data
 
 
 

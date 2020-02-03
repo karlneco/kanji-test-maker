@@ -27,7 +27,7 @@ def test_new_lesson_no_name(client,auth_user,init_database,authenticated_request
     # try to get home
     response = client.post(url_for('lessons.add'),data=dict(name='',grade='1'),follow_redirects=True)
     assert response.status_code == 200
-    assert b'required' in response.data #part of error message
+    assert 'この項目は必須です'.encode('utf-8') in response.data #part of error message
 
 def test_lesson_list_empty(client, auth_user, init_database, add_data):
     """
@@ -39,8 +39,7 @@ def test_lesson_list_empty(client, auth_user, init_database, add_data):
     # try to get home
     response = client.get(url_for('lessons.list'))
     assert response.status_code == 200
-    #assert 0
-    assert b'<a class="list-group-item ' not in response.data #part of the table with lessons
+    assert b'list-group-item-action disabled' in response.data #part of the table with lessons
 
 def test_lesson_list_1grade(client, auth_user, init_database, add_data):
     """
