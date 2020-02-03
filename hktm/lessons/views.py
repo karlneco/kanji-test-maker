@@ -10,14 +10,13 @@ lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 @lessons_bp.route('/list')
 @login_required
 def list():
-    # if ',' in current_user.grades:
-    #     grades = current_user.grades.split(',')
-    #     form.grade.choices = [(g, g) for g in grades]
-    # else:
-    #     form.grade.choices = [(current_user.grades, current_user.grades)]
+    #get a list of the active users grades for the grade drop down
+    grades = current_user.grades.replace('A','')
+
+    #get a list of all lessons - the template will tabetise them
     lessons = db.session.query(Lesson).filter(Lesson.grade.in_(current_user.grades)).order_by(Lesson.name)
     #assert 0
-    return render_template('list_lessons.html',lessons=lessons)
+    return render_template('list_lessons.html',lessons=lessons, grades=grades)
 
 
 

@@ -7,9 +7,32 @@
     <hr class="my-2">
     編集したい単元を選択してください。
   </div>
-  <div class="list-group" role="tablist">
-    {% for lesson in lessons %}
-        <a class="list-group-item list-group-item-action" id=list-{{lesson.id}} href="{{ url_for('lessons.edit',id=lesson.id) }}">{{ lesson.name }}</a>
+  Available Grades:<br>
+  <div class="list-group list-group-horizontal-md" id="gradeList" role="tablist">
+    {% for g in grades %}
+      <a class="list-group-item list-group-item-action" data-toggle="list" href="#grade-{{g}}" role="tab" style="text-align: center">{{g}}</a>
+    {% endfor %}
+  </div>
+
+  <script>
+    //open the first tab
+    $(function () {
+      $('#gradeList a:first-child').tab('show')
+    })
+  </script>
+
+  <div class="tab-content">
+    {% for g in grades %}
+    <div class="tab-pane" id="grade-{{g}}" role="tabpanel">
+      {% if lessons|selectattr('grade','==',g|int)|list|length>0 %}
+        {% for l in lessons|selectattr('grade','==',g|int) %}
+            <a class="list-group-item list-group-item-action" id=lesson-{{l.id}}
+            href="{{ url_for('lessons.edit',id=l.id) }}">{{ l.name }}</a>
+        {% endfor %}
+      {% else %}
+      <button class="list-group-item list-group-item-action disabled">No lessons</button>
+      {% endif %}
+    </div>
     {% endfor %}
   </div>
   <br>
