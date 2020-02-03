@@ -12,7 +12,7 @@ users_bp = Blueprint('users', __name__, template_folder='templates/users')
 @login_required
 def admin_list_users():
     if 'A' not in current_user.grades:
-        flash('ここは管理者のみがアクセスできます。', category='danger')
+        flash(_('This functionality is only available to Administrators'), category='danger')
         return redirect(url_for('root.home'))
 
     all_users = db.session.query(User).all()
@@ -22,7 +22,7 @@ def admin_list_users():
 @login_required
 def admin_user_edit(id):
     if 'A' not in current_user.grades:
-        flash('ここは管理者のみがアクセスできます。', category='danger')
+        flash(_('This functionality is only available to Administrators'), category='danger')
         return redirect(url_for('root.home'))
 
     user = User.query.get(id)
@@ -56,7 +56,7 @@ def admin_user_edit(id):
 @login_required
 def add():
     if 'A' not in current_user.grades:
-        flash('ここは管理者のみがアクセスできます。', category='danger')
+        flash(_('This functionality is only available to Administrators'), category='danger')
         return redirect(url_for('root.home'))
 
     form = AdminAddForm()
@@ -76,14 +76,14 @@ def add():
 @login_required
 def delete(id):
     if 'A' not in current_user.grades:
-        flash('ここは管理者のみがアクセスできます。', category='danger')
+        flash(_('This functionality is only available to Administrators'), category='danger')
         return redirect(url_for('root.home'))
 
     user_to_delete = User.query.get(id)
 
     user_email = user_to_delete.email
     user_name = user_to_delete.name
-    flash(f'このアカウントの先生： {user_email} ({user_name}) 消去されました.', category='info')
+    flash(_('The teacher ') + user_name +'('+ {user_email} + ')' + _(' has been deleted'), category='info')
     db.session.delete(user_to_delete)
     db.session.commit()
     return redirect(url_for('users.admin_list_users'))
@@ -96,7 +96,7 @@ def register():
 
         check_user = User.query.filter_by(email=form.email.data).first()
         if isinstance(check_user, User):
-            flash('このメールアドレスは既に登録済みです。', category='danger')
+            flash(_('This email address is already registered'), category='danger')
             return redirect(url_for('root.index'))
 
         else:
@@ -106,7 +106,7 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-            flash('新しくアカウントが作成されました。承認メールが送信されるのをお待ちください。', category='warning')
+            flash(_('Your account have been created.  You will recieve an email once it has been validated and activated. Thank you.'), category='warning')
             return redirect(url_for('root.index'))
     return render_template('register.html',form=form)
 

@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_babel import Babel, gettext
 
 ####################################################
 ### Config
@@ -10,7 +11,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'root.index'
-
+babel = Babel()
 
 ####################################################
 ### App Factory
@@ -21,7 +22,7 @@ def create_app(cf=None):
     app.config.from_pyfile(cf)
     initialize_extensions(app)
     register_blueprints(app)
-
+    babel.init_app(app)
     #migration support
     Migrate(app,db)
 

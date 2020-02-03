@@ -4,9 +4,9 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-5">補習校漢字テスト・宿題プリント生成ソフト</h1>
+    <h1 class="display-5">{{_('Kanji Lesson System')}}</h1>
     <hr class="my-4">
-    <p>新規作成または、既存のプリント名をクリックしてください。</p>
+    <p>{{_('Please select a lesson from the list below or create a new one with the "Add Lesson" button')}}</p>
 
     <div class="list-group" role="tablist">
       {% for lesson in lessons %}
@@ -14,7 +14,7 @@
       {% endfor %}
     </div>
     <br>
-    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規作成</a>
+    <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">{{_('New Lesson...')}}</a>
   </div>
 </div>
 

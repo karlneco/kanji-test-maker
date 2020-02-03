@@ -1,4 +1,4 @@
-from hktm import db, login_manager
+from hktm import db, login_manager,babel
 from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_sqlalchemy import get_debug_queries
 from flask_login import login_user, login_required, logout_user, current_user
@@ -7,6 +7,10 @@ from hktm.users.forms import LoginForm
 from hktm.models import Lesson
 
 root_bp = Blueprint('root',__name__, template_folder='templates')
+
+@babel.localeselector
+def get_locale():
+    return 'ja' #request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
 @root_bp.route('/',methods=['GET','POST'])
 def index():
@@ -20,9 +24,9 @@ def index():
             if user.check_password(form.password.data):
                 login_user(user)
                 if user.grades == 'none':
-                    flash('このアカウントはまだ登録されていません。管理者からの承認メールをお待ちください。', category="warning")
+                    flash(_('Your account has not been activated. You will receive an email once it has been activated'), category="warning")
                     return redirect(url_for('root.index'))
-                flash('Login Successful')
+                flash(_('Login Successful'))
                 # if user was lookign for a specific page then take them tere now
                 next = request.args.get('next')
 
@@ -30,7 +34,7 @@ def index():
                     next = url_for('root.home')
 
                 return redirect(next)
-        flash('メールアドレスまたはパスワードが一致しません。', category="danger")
+        flash(_('The email address or password is incorrect'), category="danger")
     return render_template('index.html', form=form)
 
 
@@ -46,7 +50,7 @@ def home():
 @login_required
 def logout():
     logout_user()
-    flash("You have been logged out")
+    flash(_("You have been logged out"))
     return redirect(url_for('root.index'))
 
 
