@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 14:45-0700\n"
+"POT-Creation-Date: 2020-02-03 17:51-0700\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -36,6 +36,89 @@ msgstr "メールアドレスまたはパスワードが一致しません。"
 msgid "You have been logged out"
 msgstr ""
 
+#: lessons/forms.py:7
+msgid "Lesson Name"
+msgstr "学期と単元名"
+
+#: lessons/forms.py:7
+msgid "The lesson name is required"
+msgstr "この項目は必須です"
+
+#: lessons/forms.py:8
+msgid "Grade"
+msgstr "学年"
+
+#: lessons/forms.py:9 users/forms.py:16 users/forms.py:23
+msgid "Save"
+msgstr "保存する"
+
+#: lessons/templates/lessons/add_lesson.html:6
+msgid "Add Lesson"
+msgstr "新規作成"
+
+#: lessons/templates/lessons/add_lesson.html:8
+msgid ""
+"This is where you can add lessons.  A lesson is a collection of "
+"worksheets.  Please use the format #-# for the naming"
+msgstr "学期と単元名を入力してください。例）1学期　単元１．ふきのとう　の場合、1－1ふきのとう"
+
+#: lessons/templates/lessons/edit_lesson.html:15
+msgid "Are you sure"
+msgstr "削除してもよろしいですか"
+
+#: lessons/templates/lessons/edit_lesson.html:21
+msgid "Deleting this lesson will delete the associated worksheets. Are you sure?"
+msgstr "この単元を削除すると、関連するテストやプリントが削除されます。"
+
+#: lessons/templates/lessons/edit_lesson.html:24
+msgid "Don't Delete"
+msgstr "削除しない"
+
+#: lessons/templates/lessons/edit_lesson.html:25
+#: lessons/templates/lessons/edit_lesson.html:62
+msgid "Delete"
+msgstr "削除する"
+
+#: lessons/templates/lessons/edit_lesson.html:34
+msgid "Edit Lesson"
+msgstr "単元を編集する"
+
+#: lessons/templates/lessons/edit_lesson.html:36
+msgid ""
+"Here you can edit the lesson information and edit the worksheets for the "
+"lesson."
+msgstr "追加するボタンを押して、どのプリントを作るか選んでください。"
+
+#: lessons/templates/lessons/edit_lesson.html:69
+msgid "Available Worksheets and Prints"
+msgstr "編集したいプリントを選べます"
+
+#: lessons/templates/lessons/edit_lesson.html:84
+msgid "Add Worksheet"
+msgstr "追加する"
+
+#: lessons/templates/lessons/list_lessons.html:6
+msgid "Lesson List"
+msgstr "あなたの管理学年と単元"
+
+#: lessons/templates/lessons/list_lessons.html:8
+msgid ""
+"Here are the classes and lessons you can edit. Click on a grade and then "
+"select the lesson you want to edit."
+msgstr "編集したい学年を選択して"
+
+#: lessons/templates/lessons/list_lessons.html:10
+msgid "Available Grades"
+msgstr "あなたの管理学年:"
+
+#: lessons/templates/lessons/list_lessons.html:33
+msgid "No lessons"
+msgstr ""
+
+#: lessons/templates/lessons/list_lessons.html:39 templates/home.html:17
+msgid "New Lesson..."
+msgstr "新規作成"
+
 #: templates/chrome.html:26
 msgid "Lessons"
 msgstr "単元"
@@ -57,10 +140,6 @@ msgid ""
 "Please select a lesson from the list below or create a new one with the "
 "\"Add Lesson\" button"
 msgstr "新規作成または、既存のプリント名をクリックしてください。"
-
-#: templates/home.html:17
-msgid "New Lesson..."
-msgstr "新規作成"
 
 #: templates/index.html:23
 msgid "Hoshuko Kanji Materials"
@@ -105,10 +184,6 @@ msgstr "学年"
 #: users/forms.py:15 users/forms.py:22
 msgid "Please provide a grade or grades for this teacher."
 msgstr "この項目は必須です。"
-
-#: users/forms.py:16 users/forms.py:23
-msgid "Save"
-msgstr "保存"
 
 #: users/forms.py:28
 msgid "Password does not match"
