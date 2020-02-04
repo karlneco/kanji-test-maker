@@ -7,7 +7,27 @@
   <body>
     <div class='page' style='float: right'>
       <div class='header'>
-        <img src='/static/header.png' width='140px'>
+        <div class='header_graphics'>
+          <div style="font-size:50%">
+            <div style="text-align: right; padding-bottom: 10px;">{{content.date}}</div>
+            <div class='header_frame'>
+              <div>
+                {{content.name}}
+              </div>
+              <div style="padding-bottom: 100px;">
+                なまえ
+              </div>
+            </div>
+          </div>
+
+          <div class='header_score_box'>
+            1*10
+          </div>
+        </div>
+        <div class='header-instructions' style="margin-right: -18px">
+          <img src='/static/kanji-box.png' width="30px"/> に　かん字を　かきましょう。　[　　　　]は　かんじとひらがなで　
+          (　　　　　)には　読み　を　かきましょう。
+        </div>
       </div>
       <div class='content'>
         {{ lesson_content.render()|safe }}

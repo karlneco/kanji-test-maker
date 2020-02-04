@@ -148,6 +148,9 @@
   writing-mode: tb;
 }
 
+.header_graphics{
+  display: flex;
+}
 
 .header_frame{
   border: 3px black solid;
@@ -159,10 +162,22 @@
   padding: 12px;
 }
 
+.header_score_box{
+  border: 3px black solid;
+  width: 75px;
+  height: 75px;
+  writing-mode: horizontal-tb;
+  font-size: 50%;
+  margin-top: 10px;
+  padding: 5px;
+}
+
 .header-instructions{
   font-size: 20px;
   padding: 15px 10px 0px 20px;
+  height: 570px;
 }
+
 .trcp_question{
   color: black;
   display: grid;
