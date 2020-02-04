@@ -3,6 +3,7 @@ from flask_login import login_user, login_required
 from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lesson_contents.forms import AddForm
+from flask_babel import _
 
 from hktm.lesson_contents.RenderContent_KJRD import RenderContentKJRD
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
@@ -48,7 +49,8 @@ def add(lesson_id,content_code):
 
     if form.validate_on_submit():
         content_type = MaterialType.query.get(content_code)
-        flash(f'New {content_type.name} Added')
+        s = _('New {0} added').format(content_type.name)
+        flash(s)
         name = form.name.data
         content = form.content.data
         type = content_code

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, InputRequired
 from wtforms import ValidationError
-from flask_babel import _
+from flask_babel import lazy_gettext as _
 
 class LoginForm(FlaskForm):
     email = StringField(_('Email Address'), validators=[DataRequired(),Email()])

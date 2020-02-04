@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 18:03-0700\n"
+"POT-Creation-Date: 2020-02-03 18:48-0700\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,36 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: views.py:27
+#: views.py:28
 msgid ""
 "Your account has not been activated. You will receive an email once it "
 "has been activated"
 msgstr "このアカウントはまだ登録されていません。管理者からの承認メールをお待ちください。"
 
-#: views.py:29
+#: views.py:30
 msgid "Login Successful"
 msgstr ""
 
-#: views.py:37
+#: views.py:38
 msgid "The email address or password is incorrect"
 msgstr "メールアドレスまたはパスワードが一致しません。"
 
-#: views.py:53
+#: views.py:54
 msgid "You have been logged out"
 msgstr ""
 
-#: lesson_contents/forms.py:7
+#: lesson_contents/forms.py:8
 msgid "Worksheet Title"
 msgstr "ページタイトルを記載してください"
 
-#: lesson_contents/forms.py:8
+#: lesson_contents/forms.py:9
 msgid "Worksheet Content"
 msgstr "問題を作成してください"
 
-#: lesson_contents/forms.py:9 lessons/forms.py:9 users/forms.py:16
-#: users/forms.py:23
+#: lesson_contents/forms.py:10 lessons/forms.py:10 users/forms.py:17
+#: users/forms.py:24
 msgid "Save"
 msgstr "保存する"
+
+#: lesson_contents/views.py:52
+msgid "New {0} added"
+msgstr ""
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:5
 msgid "Kanji Reading Worksheet"
@@ -55,8 +59,47 @@ msgstr "漢字読みプリント編集"
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:8
 msgid "Instructions for Kanji Reading Worksheet"
-msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>
-注意：括弧内はスペースで長さ調節可能"
+msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>注意：括弧内はスペースで長さ調節可能"
+
+#: lesson_contents/templates/lesson_contents/KJTS_content.html:19
+msgid "Kanji Test Worksheet - Grades 2 and 3"
+msgstr "漢字テスト編集"
+
+#: lesson_contents/templates/lesson_contents/KJTS_content.html:23
+msgid "Instructions for Kanji Test Worksheet for grades 2 and 3"
+msgstr "漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｝注意：括弧内はスペースで長さ調節可能"
+
+#: lesson_contents/templates/lesson_contents/KJWR_content.html:5
+msgid "Kanji Writing Worksheet"
+msgstr "漢字文章プリント編集"
+
+#: lesson_contents/templates/lesson_contents/KJWR_content.html:8
+msgid "Instructions for Kanji Writing Worksheet"
+msgstr "文章を書いたら、必要なマス目の数を入力してください。<br>例）いけんをいう。｜７"
+
+#: lesson_contents/templates/lesson_contents/KT36_content.html:7
+msgid "Kanji Test Worksheet - Grades 3-6"
+msgstr "漢字テスト編集 3-6"
+
+#: lesson_contents/templates/lesson_contents/KT36_content.html:11
+msgid "Instructions for Kanji Test Worksheet for grades 3-6"
+msgstr "漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｝注意：括弧内はスペースで長さ調節可能<br>ボーナス問題は、 ＜＞を使う。例）  ＜こまかい＞<br>"
+
+#: lesson_contents/templates/lesson_contents/NWRD_content.html:5
+msgid "Kanji New Reading Worksheet"
+msgstr "漢字読みプリント編集"
+
+#: lesson_contents/templates/lesson_contents/NWRD_content.html:8
+msgid "Instructions for Kanji New Reading Worksheet"
+msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ注意：括弧内はスペースで長さ調節可能"
+
+#: lesson_contents/templates/lesson_contents/TRCP_content.html:5
+msgid "Kanji Tracing Worksheet"
+msgstr "漢字なぞりプリント編集"
+
+#: lesson_contents/templates/lesson_contents/TRCP_content.html:7
+msgid "Instructions for Kanji Tracing Worksheet"
+msgstr "なぞり書きさせる漢字をスペースなしで記載してください。"
 
 #: lesson_contents/templates/lesson_contents/add_lesson_contents.html:40
 msgid "Preview"
@@ -66,15 +109,19 @@ msgstr "プレントビュー"
 msgid "Page Preview"
 msgstr "プリビュー"
 
-#: lessons/forms.py:7
+#: lesson_contents/templates/lesson_contents/no_content.html:1
+msgid "No content to preview"
+msgstr "左のフレームに入力がないと、プレビューは表示されません。"
+
+#: lessons/forms.py:8
 msgid "Lesson Name"
 msgstr "学期と単元名"
 
-#: lessons/forms.py:7
+#: lessons/forms.py:8
 msgid "The lesson name is required"
 msgstr "この項目は必須です"
 
-#: lessons/forms.py:8
+#: lessons/forms.py:9
 msgid "Grade"
 msgstr "学年"
 
@@ -175,71 +222,71 @@ msgstr "補習校漢字テスト・宿題プリント生成ソフト"
 msgid "New Teacher Account..."
 msgstr "新規アカウントを作成する。"
 
-#: users/forms.py:7 users/forms.py:27
+#: users/forms.py:8 users/forms.py:28
 msgid "Email Address"
 msgstr "Emailアドレスを入力してください。"
 
-#: users/forms.py:8 users/forms.py:14 users/forms.py:21 users/forms.py:28
+#: users/forms.py:9 users/forms.py:15 users/forms.py:22 users/forms.py:29
 msgid "Password"
 msgstr "パスワード"
 
-#: users/forms.py:9
+#: users/forms.py:10
 msgid "Login"
 msgstr "ログイン"
 
-#: users/forms.py:12 users/forms.py:19
+#: users/forms.py:13 users/forms.py:20
 msgid "Teachers Name"
 msgstr "担任名"
 
-#: users/forms.py:13 users/forms.py:20
+#: users/forms.py:14 users/forms.py:21
 msgid "Teachers Email Address"
 msgstr "Emailアドレス"
 
-#: users/forms.py:13 users/forms.py:20
+#: users/forms.py:14 users/forms.py:21
 msgid "The Email address is required."
 msgstr "このメールアドレスは正しくありません。"
 
-#: users/forms.py:14
+#: users/forms.py:15
 msgid "A password is required to create a new user."
 msgstr "この項目は必須です。"
 
-#: users/forms.py:15 users/forms.py:22
+#: users/forms.py:16 users/forms.py:23
 msgid "Grade(s)"
 msgstr "学年"
 
-#: users/forms.py:15 users/forms.py:22
+#: users/forms.py:16 users/forms.py:23
 msgid "Please provide a grade or grades for this teacher."
 msgstr "この項目は必須です。"
 
-#: users/forms.py:28
+#: users/forms.py:29
 msgid "Password does not match"
 msgstr "パスワードが一致しません。"
 
-#: users/forms.py:29
+#: users/forms.py:30
 msgid "Re-Enter Password"
 msgstr "確認のため、もう一度パスワードを入力してください。"
 
-#: users/forms.py:30
+#: users/forms.py:31
 msgid "Register..."
 msgstr "登録する"
 
-#: users/forms.py:34 users/views.py:99
+#: users/forms.py:35 users/views.py:100
 msgid "This email address is already registered"
 msgstr "このメールアドレスは既に登録済みです。"
 
-#: users/views.py:15 users/views.py:25 users/views.py:59 users/views.py:79
+#: users/views.py:16 users/views.py:26 users/views.py:60 users/views.py:80
 msgid "This functionality is only available to Administrators"
 msgstr "ここは管理者のみがアクセスできます。"
 
-#: users/views.py:86
+#: users/views.py:87
 msgid "The teacher "
 msgstr "このアカウントの先生："
 
-#: users/views.py:86
+#: users/views.py:87
 msgid " has been deleted"
 msgstr "消去されました."
 
-#: users/views.py:109
+#: users/views.py:110
 msgid ""
 "Your account have been created.  You will recieve an email once it has "
 "been validated and activated. Thank you."

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired
-from flask_babel import _
+from flask_babel import lazy_gettext as _
 
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
