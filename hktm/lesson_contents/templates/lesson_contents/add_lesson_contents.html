@@ -14,6 +14,37 @@ function print_preview(){
 }
 </script>
 {% endblock scripts %}
+
+{% if content_id != NoneType %}
+<script >
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
+}
+</script>
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">{{_('Are you sure')}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{_('Deleting this content can not be undone')}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_("Don't Delete")}}</button>
+        <a href="{{url_for('lesson_contents.delete', id=content_id)}}" class="btn btn-danger">{{_('Delete')}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
 <div class="container-sm">
 {% block head %} {% endblock head %}
 {% block form %}
@@ -26,8 +57,14 @@ function print_preview(){
           {{form.name(class='form-control')}}
         </div>
       </div>
-
     </div>
+{% if content_id != NoneType %}
+    <div class="row">
+      <div class="col-sm">
+        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">{{_('Delete')}}</button>
+      </div>
+    </div>
+{% endif %}
     <div class="row py-3">
       <div class="col-sm-4">
         {{form.content.label}}

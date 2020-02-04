@@ -60,8 +60,9 @@ class RenderContentKT36(RenderContentKJTS):
            '（': self.reading(question[1:], mode),
            '「': self.writing(question[1:], mode),
            '｛': self.combo(question[1:], mode),
-           '＜': self.bonus(question[1:],mode)
+           '＜': self.bonus(question[1:], mode)
            }
+        
         return tokens.get(question[0],'nothing')
 
 

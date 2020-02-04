@@ -40,6 +40,7 @@ class RenderContentKJTS(RenderContentBase):
                 doc.stag('img', src='/static/btm_bracket.png', width=self.render_mode[mode])
         return (doc.getvalue(), rise_next)
 
+
 ############################################################### writing question
     def writing(self,question,mode):
         '''
@@ -65,7 +66,6 @@ class RenderContentKJTS(RenderContentBase):
         return (doc.getvalue(), 0)
 
 
-
 ########################################################### combination question
     def combo(self,question,mode):
         '''
@@ -79,20 +79,24 @@ class RenderContentKJTS(RenderContentBase):
             - this should be a negative number and will be used as a partameter
             to css margin-left attribute
         '''
+
+
         doc, tag, text = Doc().tagtext()
         token = question[0:question.find(self.te_combo)]
+        token_parts = token.split('｜')
+        if '｜' not in token:
+            return ('Syntax Error',0)
         with tag('div',('class','combo_question')):
             with tag('div'):
                 doc.stag('img', src='/static/top_brace.png', height='20px')
-                for c in token:
+                for c in range(int(token_parts[1])):
                     doc.stag('img', src='/static/empty.png', height=self.render_mode[mode])
                 doc.stag('img', src='/static/btm_brace.png', height='20px')
             # now eat the block nom nom nom
             with tag('div',('class','furigana-combo')):
                 # extract the kanji characters and out put them in the div
-                for c in token:
-                    with tag('div',('class','furigana-combo-row')):
-                        text(c)
+                # with tag('div',('class','furigana-combo-row')):
+                text(token_parts[0])
         return (doc.getvalue(), 0)
 
 

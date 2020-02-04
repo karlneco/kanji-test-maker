@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 18:48-0700\n"
+"POT-Creation-Date: 2020-02-03 22:17-0700\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -26,7 +26,7 @@ msgstr "このアカウントはまだ登録されていません。管理者か
 
 #: views.py:30
 msgid "Login Successful"
-msgstr ""
+msgstr "ログインに成功しました。"
 
 #: views.py:38
 msgid "The email address or password is incorrect"
@@ -34,7 +34,7 @@ msgstr "メールアドレスまたはパスワードが一致しません。"
 
 #: views.py:54
 msgid "You have been logged out"
-msgstr ""
+msgstr "ログアウトしました。"
 
 #: lesson_contents/forms.py:8
 msgid "Worksheet Title"
@@ -51,15 +51,19 @@ msgstr "保存する"
 
 #: lesson_contents/views.py:52
 msgid "New {0} added"
-msgstr ""
+msgstr "新しく｛０｝が追加されました。"
+
+#: lesson_contents/views.py:74
+msgid "Lesson content {0} deleted."
+msgstr "｛０｝が削除されました。"
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:5
 msgid "Kanji Reading Worksheet"
-msgstr "漢字読みプリント編集"
+msgstr "読み方練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:8
 msgid "Instructions for Kanji Reading Worksheet"
-msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>注意：括弧内はスペースで長さ調節可能"
+msgstr "記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>注意：括弧内はスペースで長さ調節可能"
 
 #: lesson_contents/templates/lesson_contents/KJTS_content.html:19
 msgid "Kanji Test Worksheet - Grades 2 and 3"
@@ -67,45 +71,71 @@ msgstr "漢字テスト編集"
 
 #: lesson_contents/templates/lesson_contents/KJTS_content.html:23
 msgid "Instructions for Kanji Test Worksheet for grades 2 and 3"
-msgstr "漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｝注意：括弧内はスペースで長さ調節可能"
+msgstr ""
+"記号類はすべて全角入力してください。<br>漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　"
+"注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｜１｝または｛あつくるしい｜３｝注意：括弧内はスペースで長さ調節可能。数字は必要なスペース数。"
 
 #: lesson_contents/templates/lesson_contents/KJWR_content.html:5
 msgid "Kanji Writing Worksheet"
-msgstr "漢字文章プリント編集"
+msgstr "文例練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/KJWR_content.html:8
 msgid "Instructions for Kanji Writing Worksheet"
-msgstr "文章を書いたら、必要なマス目の数を入力してください。<br>例）いけんをいう。｜７"
+msgstr "記号類はすべて全角入力してください。<br>文章を書いたら、必要なマス目の数を入力してください。<br>例）いけんをいう。｜７"
 
 #: lesson_contents/templates/lesson_contents/KT36_content.html:7
 msgid "Kanji Test Worksheet - Grades 3-6"
-msgstr "漢字テスト編集 3-6"
+msgstr "小三以上漢字テストボーナス付編集"
 
 #: lesson_contents/templates/lesson_contents/KT36_content.html:11
 msgid "Instructions for Kanji Test Worksheet for grades 3-6"
-msgstr "漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｝注意：括弧内はスペースで長さ調節可能<br>ボーナス問題は、 ＜＞を使う。例）  ＜こまかい＞<br>"
+msgstr ""
+"記号類はすべて全角入力してください。<br>漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　"
+"注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｜１｝または｛あつくるしい｜３｝注意：括弧内はスペースで長さ調節可能。数字は必要なスペース数。<br>ボーナス問題は、"
+" ＜＞を使う。例）  ＜こまかい＞<br>"
 
 #: lesson_contents/templates/lesson_contents/NWRD_content.html:5
 msgid "Kanji New Reading Worksheet"
-msgstr "漢字読みプリント編集"
+msgstr "読み方練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/NWRD_content.html:8
 msgid "Instructions for Kanji New Reading Worksheet"
-msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ注意：括弧内はスペースで長さ調節可能"
+msgstr "記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ注意：括弧内はスペースで長さ調節可能"
 
 #: lesson_contents/templates/lesson_contents/TRCP_content.html:5
 msgid "Kanji Tracing Worksheet"
-msgstr "漢字なぞりプリント編集"
+msgstr "反復練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/TRCP_content.html:7
 msgid "Instructions for Kanji Tracing Worksheet"
-msgstr "なぞり書きさせる漢字をスペースなしで記載してください。"
+msgstr "なぞり書きさせる漢字をスペースなしで記載してください。　例）古寺来"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:30
+#: lessons/templates/lessons/edit_lesson.html:15
+msgid "Are you sure"
+msgstr "削除してもよろしいですか"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:36
+msgid "Deleting this content can not be undone"
+msgstr "削除したものは元に戻りません。"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:39
+#: lessons/templates/lessons/edit_lesson.html:24
+msgid "Don't Delete"
+msgstr "削除しない"
 
 #: lesson_contents/templates/lesson_contents/add_lesson_contents.html:40
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:64
+#: lessons/templates/lessons/edit_lesson.html:25
+#: lessons/templates/lessons/edit_lesson.html:62
+msgid "Delete"
+msgstr "削除する"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:77
 msgid "Preview"
 msgstr "プレントビュー"
 
-#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:41
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:78
 msgid "Page Preview"
 msgstr "プリビュー"
 
@@ -135,22 +165,9 @@ msgid ""
 "worksheets.  Please use the format #-# for the naming"
 msgstr "学期と単元名を入力してください。例）1学期　単元１．ふきのとう　の場合、1－1ふきのとう"
 
-#: lessons/templates/lessons/edit_lesson.html:15
-msgid "Are you sure"
-msgstr "削除してもよろしいですか"
-
 #: lessons/templates/lessons/edit_lesson.html:21
 msgid "Deleting this lesson will delete the associated worksheets. Are you sure?"
 msgstr "この単元を削除すると、関連するテストやプリントが削除されます。"
-
-#: lessons/templates/lessons/edit_lesson.html:24
-msgid "Don't Delete"
-msgstr "削除しない"
-
-#: lessons/templates/lessons/edit_lesson.html:25
-#: lessons/templates/lessons/edit_lesson.html:62
-msgid "Delete"
-msgstr "削除する"
 
 #: lessons/templates/lessons/edit_lesson.html:34
 msgid "Edit Lesson"
@@ -186,9 +203,9 @@ msgstr "あなたの管理学年:"
 
 #: lessons/templates/lessons/list_lessons.html:33
 msgid "No lessons"
-msgstr ""
+msgstr "何もありません。"
 
-#: lessons/templates/lessons/list_lessons.html:39 templates/home.html:17
+#: lessons/templates/lessons/list_lessons.html:39 templates/home.html:16
 msgid "New Lesson..."
 msgstr "新規作成"
 

@@ -69,11 +69,12 @@ def add(lesson_id,content_code):
 def delete(id):
     content_to_delete = LessonMaterial.query.get(id)
 
-    lesson_name = lesson_to_delete.name
-    flash(f'Lesson {lesson_name} deleted.')
-    db.session.delete(lesson_to_delete)
+    lesson_id = content_to_delete.lesson_id
+    content_name = content_to_delete.name
+    flash(_('Lesson content {0} deleted.').format(content_name),category="warning")
+    db.session.delete(content_to_delete)
     db.session.commit()
-    return redirect(url_for('lessons.list'))
+    return redirect(url_for('lessons.edit',id=lesson_id))
 
 
 ### edit route, we need to provide a list of ALL questions as well as

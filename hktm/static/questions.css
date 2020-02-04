@@ -123,6 +123,8 @@
 .kanji_bonus{
   border-right: 1px black dashed;
   width: 50px;
+  margin-left: 6px;
+  font-size: 90%;
 }
 
 
