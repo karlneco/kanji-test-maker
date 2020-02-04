@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">あなたの管理学年と単元</h1>
+    <h1 class="display-4">{{_('Lesson List')}}</h1>
     <hr class="my-2">
-    編集したい学年を選択してください
+    {{_('Here are the classes and lessons you can edit. Click on a grade and then select the lesson you want to edit.')}}ください
   </div>
-  あなたの管理学年:<br>
+  {{_('Available Grades')}}<br>
   <div class="list-group list-group-horizontal-md" id="gradeList" role="tablist">
     {% for g in grades %}
       <a class="list-group-item list-group-item-action" data-toggle="list" href="#grade-{{g}}" role="tab" style="text-align: center">{{g}}</a>
@@ -30,12 +30,12 @@
             href="{{ url_for('lessons.edit',id=l.id) }}">{{ l.name }}</a>
         {% endfor %}
       {% else %}
-      <button class="list-group-item list-group-item-action disabled">No lessons</button>
+      <button class="list-group-item list-group-item-action disabled">{{_('No lessons')}}</button>
       {% endif %}
     </div>
     {% endfor %}
   </div>
   <br>
-  <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">新規作成</a>
+  <a href="{{url_for('lessons.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">{{_('New Lesson...')}}</a>
 </div>
 {% endblock %}

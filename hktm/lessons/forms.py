@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired
+from flask_babel import lazy_gettext as _
 
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
-    name = StringField(u'学期と単元名',validators=[InputRequired(message='この項目は必須です')])
-    grade = SelectField(u'学年', choices=[])
-    submit = SubmitField(u'保存する')
+    name = StringField(_('Lesson Name'),validators=[InputRequired(message=_('The lesson name is required'))])
+    grade = SelectField(_('Grade'), choices=[])
+    submit = SubmitField(_('Save'))
 
 class MaterialForm(FlaskForm):
     mat_name = StringField(u'Enter the name of the sheet - this will be on the printerd document',validators=[InputRequired(message='This field is required!!!!!')])

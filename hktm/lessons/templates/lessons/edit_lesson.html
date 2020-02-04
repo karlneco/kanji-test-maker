@@ -12,17 +12,17 @@ $('#myModal').on('shown.bs.modal', function () {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteLabel">削除してもよろしいですか</h5>
+        <h5 class="modal-title" id="confirmDeleteLabel">{{_('Are you sure')}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        この単元を削除すると、関連するテストやプリントが削除されます。
+        {{_('Deleting this lesson will delete the associated worksheets. Are you sure?')}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">削除しない</button>
-        <a href="{{url_for('lessons.delete', id=lesson_id)}}" class="btn btn-danger">削除する</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_("Don't Delete")}}</button>
+        <a href="{{url_for('lessons.delete', id=lesson_id)}}" class="btn btn-danger">{{_('Delete')}}</a>
       </div>
     </div>
   </div>
@@ -31,9 +31,9 @@ $('#myModal').on('shown.bs.modal', function () {
 
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">単元を編集する</h1>
+    <h1 class="display-4">{{_('Edit Lesson')}}</h1>
     <hr class="my-2">
-追加するボタンを押して、どのプリントを作るか選んでください。
+    {{_('Here you can edit the lesson information and edit the worksheets for the lesson.')}}
   </div>
   <br>
   <form method="POST">
@@ -59,14 +59,14 @@ $('#myModal').on('shown.bs.modal', function () {
             {{form.submit(class='btn btn-primary')}}
           </div>
           <div class='col'>
-            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">削除する</button>
+            <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">{{_('Delete')}}</button>
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="row">
           <div class="form-group col-xl">
-            <label>編集したいプリントを選べます</label>
+            <label>{{_('Available Worksheets and Prints')}}</label>
             <ul class="list-group">
             {% for c in lesson_content %}
               <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -81,7 +81,7 @@ $('#myModal').on('shown.bs.modal', function () {
           <div class='col-md'>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                追加する
+                {{_("Add Worksheet")}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for t in content_types %}
