@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, InputRequired
 from wtforms import ValidationError
+from flask_babel import _
 
 class LoginForm(FlaskForm):
     email = StringField(_('Email Address'), validators=[DataRequired(),Email()])
@@ -26,7 +27,7 @@ class AdminEditForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     email = StringField(_('Email Address'), validators=[InputRequired(message='正しく入力してください。'),Email()])
     password = PasswordField(_('Password'),validators=[DataRequired(),EqualTo('password_confirm', message=_('Password does not match'))])
-    password_confirm = PasswordField(_('Re-Enter Password')'',validators=[DataRequired()])
+    password_confirm = PasswordField(_('Re-Enter Password'),validators=[DataRequired()])
     submit = SubmitField(_('Register...'))
 
     def check_email(self, email):

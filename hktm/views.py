@@ -5,6 +5,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from hktm.models import User
 from hktm.users.forms import LoginForm
 from hktm.models import Lesson
+from flask_babel import _
 
 root_bp = Blueprint('root',__name__, template_folder='templates')
 

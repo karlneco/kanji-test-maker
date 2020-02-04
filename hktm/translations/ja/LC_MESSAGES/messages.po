@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 17:51-0700\n"
+"POT-Creation-Date: 2020-02-03 18:03-0700\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -36,6 +36,36 @@ msgstr "メールアドレスまたはパスワードが一致しません。"
 msgid "You have been logged out"
 msgstr ""
 
+#: lesson_contents/forms.py:7
+msgid "Worksheet Title"
+msgstr "ページタイトルを記載してください"
+
+#: lesson_contents/forms.py:8
+msgid "Worksheet Content"
+msgstr "問題を作成してください"
+
+#: lesson_contents/forms.py:9 lessons/forms.py:9 users/forms.py:16
+#: users/forms.py:23
+msgid "Save"
+msgstr "保存する"
+
+#: lesson_contents/templates/lesson_contents/KJRD_content.html:5
+msgid "Kanji Reading Worksheet"
+msgstr "漢字読みプリント編集"
+
+#: lesson_contents/templates/lesson_contents/KJRD_content.html:8
+msgid "Instructions for Kanji Reading Worksheet"
+msgstr "番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>
+注意：括弧内はスペースで長さ調節可能"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:40
+msgid "Preview"
+msgstr "プレントビュー"
+
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:41
+msgid "Page Preview"
+msgstr "プリビュー"
+
 #: lessons/forms.py:7
 msgid "Lesson Name"
 msgstr "学期と単元名"
@@ -47,10 +77,6 @@ msgstr "この項目は必須です"
 #: lessons/forms.py:8
 msgid "Grade"
 msgstr "学年"
-
-#: lessons/forms.py:9 users/forms.py:16 users/forms.py:23
-msgid "Save"
-msgstr "保存する"
 
 #: lessons/templates/lessons/add_lesson.html:6
 msgid "Add Lesson"

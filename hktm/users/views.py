@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from hktm import db
 from hktm.models import User
 from hktm.users.forms import LoginForm, RegistrationForm, AdminEditForm, AdminAddForm
+from flask_babel import _
 
 users_bp = Blueprint('users', __name__, template_folder='templates/users')
 

@@ -4,6 +4,7 @@ from hktm import db
 from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lessons.forms import AddForm, MaterialForm
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
+from flask_babel import _
 
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
