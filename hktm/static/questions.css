@@ -7,8 +7,9 @@
 }
 @font-face {
     font-family: 'Kyokasho';
-    src: url('/static/UDDigiKyokashoNP-R.woff2') format('woff2'),
-        url('/static/UDDigiKyokashoNP-R.woff') format('woff');
+    src:local('UD Digi Kyokasho NK-R'),
+        url('https://hoshuko-data.s3-us-west-2.amazonaws.com/fonts/UDDigiKyokashoNP-R.woff2') format('woff2'),
+        url('https://hoshuko-data.s3-us-west-2.amazonaws.com/fonts/UDDigiKyokashoNP-R.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

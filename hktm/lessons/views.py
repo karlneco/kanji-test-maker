@@ -72,11 +72,8 @@ def edit(id):
     grades = current_user.grades.replace('A','')
     form.grade.choices = [(g, g) for g in grades]
 
-    form.grade.default = lesson_to_edit.grade
     content_list = MaterialType.query.all()
     lesson_content = LessonMaterial.query.filter_by(lesson_id=id)
-    form.name.default = lesson_to_edit.name
-    form.process()
 
     if form.validate_on_submit():
         lesson_to_edit.name = form.name.data
@@ -85,6 +82,11 @@ def edit(id):
         # lesson_to_edit.comments = form.comments.data
         db.session.commit()
         return redirect(url_for('lessons.list'))
+    else:
+        form.grade.default = lesson_to_edit.grade
+        form.name.default = lesson_to_edit.name
+
+    form.process()
     return render_template('edit_lesson.html',form=form,
                             lesson_id=lesson_to_edit.id,
                             lesson_content = lesson_content,
