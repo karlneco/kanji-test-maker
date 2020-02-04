@@ -47,8 +47,11 @@ def list(lesson_id):
 def add(lesson_id,content_code):
     form = AddForm()
 
+    content_type = MaterialType.query.get(content_code)
+    if content_type.custom_template!=True:
+        del form.date
+
     if form.validate_on_submit():
-        content_type = MaterialType.query.get(content_code)
         s = _('New {0} added').format(content_type.name)
         flash(s)
         name = form.name.data
@@ -56,6 +59,8 @@ def add(lesson_id,content_code):
         type = content_code
 
         new_lesson_content = LessonMaterial(name,content,lesson_id,type)
+        if content_type.custom_template:
+            new_lesson_content.date = form.date.data
         db.session.add(new_lesson_content)
         db.session.commit()
 
@@ -83,14 +88,18 @@ def delete(id):
 @login_required
 def edit(id):
     content_to_edit = LessonMaterial.query.get(id)
-
+    content_type = MaterialType.query.get(content_to_edit.material_code)
     #TODO: get a list of all questions and questions on this test for organizing
 
     form = AddForm()
+    if content_type.custom_template!=True:
+        del form.date
 
     if form.submit.data and form.validate():
         content_to_edit.name = form.name.data
         content_to_edit.content = form.content.data
+        if content_type.custom_template:
+            content_to_edit.date = form.date.data
         db.session.commit()
         return redirect(url_for('lessons.edit',id=content_to_edit.lesson_id))
 
@@ -98,6 +107,8 @@ def edit(id):
     elif request.method == 'GET':
         form.name.default = content_to_edit.name
         form.content.default = content_to_edit.content
+        if content_type.custom_template:
+            form.date.default = content_to_edit.date
         form.process()
 
         test_content = RenderContentKJTS(content_to_edit.content)

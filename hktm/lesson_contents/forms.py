@@ -6,5 +6,6 @@ from flask_babel import lazy_gettext as _
 ## this form witll b e used for adding and editing
 class AddForm(FlaskForm):
     name = StringField(_('Worksheet Title'),validators=[DataRequired()])
+    date = StringField(_('Date'))
     content = TextAreaField(_('Worksheet Content'))
     submit = SubmitField(_('Save'))

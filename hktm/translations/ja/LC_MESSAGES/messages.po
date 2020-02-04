@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 22:17-0700\n"
+"POT-Creation-Date: 2020-02-03 23:10-0700\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -41,21 +41,25 @@ msgid "Worksheet Title"
 msgstr "ページタイトルを記載してください"
 
 #: lesson_contents/forms.py:9
+msgid "Date"
+msgstr ""
+
+#: lesson_contents/forms.py:10
 msgid "Worksheet Content"
 msgstr "問題を作成してください"
 
-#: lesson_contents/forms.py:10 lessons/forms.py:10 users/forms.py:17
+#: lesson_contents/forms.py:11 lessons/forms.py:10 users/forms.py:17
 #: users/forms.py:24
 msgid "Save"
 msgstr "保存する"
 
-#: lesson_contents/views.py:52
+#: lesson_contents/views.py:55
 msgid "New {0} added"
-msgstr "新しく｛０｝が追加されました。"
+msgstr "新しく{0}が追加されました。"
 
-#: lesson_contents/views.py:74
+#: lesson_contents/views.py:79
 msgid "Lesson content {0} deleted."
-msgstr "｛０｝が削除されました。"
+msgstr "{0} が削除されました。"
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:5
 msgid "Kanji Reading Worksheet"
@@ -63,7 +67,9 @@ msgstr "読み方練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/KJRD_content.html:8
 msgid "Instructions for Kanji Reading Worksheet"
-msgstr "記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ <br>注意：括弧内はスペースで長さ調節可能"
+msgstr ""
+"記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ "
+"<br>注意：括弧内はスペースで長さ調節可能"
 
 #: lesson_contents/templates/lesson_contents/KJTS_content.html:19
 msgid "Kanji Test Worksheet - Grades 2 and 3"
@@ -100,7 +106,9 @@ msgstr "読み方練習プリント編集"
 
 #: lesson_contents/templates/lesson_contents/NWRD_content.html:8
 msgid "Instructions for Kanji New Reading Worksheet"
-msgstr "記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　）やぶ注意：括弧内はスペースで長さ調節可能"
+msgstr ""
+"記号類はすべて全角入力してください。<br>番号を振って、読みの問題を作成します。括弧内に漢字を入れてください。例）①　（竹　"
+"）やぶ注意：括弧内はスペースで長さ調節可能"
 
 #: lesson_contents/templates/lesson_contents/TRCP_content.html:5
 msgid "Kanji Tracing Worksheet"
@@ -125,19 +133,19 @@ msgid "Don't Delete"
 msgstr "削除しない"
 
 #: lesson_contents/templates/lesson_contents/add_lesson_contents.html:40
-#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:64
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:68
 #: lessons/templates/lessons/edit_lesson.html:25
 #: lessons/templates/lessons/edit_lesson.html:62
 msgid "Delete"
 msgstr "削除する"
 
-#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:77
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:81
 msgid "Preview"
-msgstr "プレントビュー"
+msgstr "プリントビュー"
 
-#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:78
+#: lesson_contents/templates/lesson_contents/add_lesson_contents.html:82
 msgid "Page Preview"
-msgstr "プリビュー"
+msgstr "プレビュー"
 
 #: lesson_contents/templates/lesson_contents/no_content.html:1
 msgid "No content to preview"
