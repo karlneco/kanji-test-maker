@@ -29,7 +29,6 @@ class RenderContentKJWR(RenderContentBase):
                 i=0
                 question_text = question_data[0]
                 while question_text[i:] != '':
-                    print(question_text[i:] + "|  ---   |")
                     if question_text[i] != self.ts_bonus:
                         text(question_text[i])
                         i+=1
