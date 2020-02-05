@@ -1,0 +1,18 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">{{_('Worksheet Editor')}}</h1>
+    <hr class="my-2">
+    {{_('Select a worksheet type from the list below or add a new one.')}}
+  </div>
+  <div class="list-group" role="tablist">
+    {% for w in worksheets %}
+        <a class="list-group-item list-group-item-action" id=ws-{{w.code}} href="{{ url_for('worksheets.edit',code=w.code) }}">{{w.name}}</a>
+    {% endfor %}
+  </div>
+  <br>
+  <a href="{{url_for('worksheets.add')}}" class="btn btn-primary btn active" role="button" aria-pressed="true">{{_('New Worksheet...')}}</a>
+</div>
+{% endblock %}

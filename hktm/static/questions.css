@@ -200,9 +200,14 @@
   width: 100px;
   writing-mode: vertical-rl;
   padding-top: 10px;
+  padding-right: 15px;
 }
 .kjwr_hiragana{
   font-size: 24px;
+}
+.kjwr_hiragana_hint{
+  font-size: 24px;
+  border-right: 1px black dashed;
 }
 .kjwr_boxes{
   display: flex;

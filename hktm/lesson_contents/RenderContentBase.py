@@ -11,4 +11,6 @@ class RenderContentBase():
         self.te_writing ='」'
         self.ts_combo ='｛'
         self.te_combo ='｝'
+        self.ts_bonus ='＜'
+        self.te_bonus ='＞'
         self.split = '｜'

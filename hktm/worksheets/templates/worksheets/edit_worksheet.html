@@ -18,11 +18,11 @@ $('#myModal').on('shown.bs.modal', function () {
         </button>
       </div>
       <div class="modal-body">
-        {{_('Are you sure you want to delete this account?')}}
+        {{_('Are you sure you want to delete this worksheet type?')}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_("Don't Delete")}}</button>
-        <a href="{{url_for('users.delete', id=user_id)}}" class="btn btn-danger">{{_('Delete')}}</a>
+        <a href="{{url_for('worksheets.delete', code=code)}}" class="btn btn-danger">{{_('Delete')}}</a>
       </div>
     </div>
   </div>
@@ -31,9 +31,9 @@ $('#myModal').on('shown.bs.modal', function () {
 
 <div class="container-sm">
   <div class="jumbotron">
-    <h1 class="display-4">{{_('Account Editor')}}</h1>
+    <h1 class="display-4">{{_('Worksheet Type Editor')}}</h1>
     <hr class="my-2">
-    {{_('Instructions for editing accounts.')}}
+    {{_('Instructions for editing Worksheets Types.')}}
 
   </div>
   <form method="POST" id="content_form">
@@ -43,28 +43,12 @@ $('#myModal').on('shown.bs.modal', function () {
         <div class="form-group">
           {{form.name.label}}
           {{form.name(class='form-control')}}
-          {{form.email.label}}
-          {{form.email(class='form-control')}}
-          {% if form.email.errors %}
-            <ul class="errors">
-              {% for error in form.email.errors %}
-                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-
-          {{form.password.label}}
-          {{form.password(class='form-control')}}
-          {{form.grades.label}}
-          {{form.grades(class='form-control')}}
-          {% if form.grades.errors %}
-            <ul class="errors">
-              {% for error in form.grades.errors %}
-                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-
+          {{form.code.label}}
+          {{form.code(class='form-control')}}
+          {{form.instructions.label}}
+          {{form.instructions(class='form-control')}}
+          {{form.custom.label}}
+          {{form.custom(class='form-control')}}
         </div>
       </div>
     </div>

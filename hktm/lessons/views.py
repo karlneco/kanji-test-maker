@@ -32,18 +32,15 @@ def add():
     form.grade.choices = [(g, g) for g in grades]
 
     if form.validate_on_submit():
-        print('valid')
-        flash('New Lesson Created')
+        flash(_('New Lesson Created'))
         name = form.name.data
         grade = form.grade.data
 
         new_lesson = Lesson(name, grade)
         db.session.add(new_lesson)
         db.session.commit()
-        print ('processing')
         return redirect(url_for('lessons.edit',id=new_lesson.id))
 
-    print('no validation')
     return render_template('add_lesson.html',form=form)
 
 
@@ -53,7 +50,7 @@ def delete(id):
     lesson_to_delete = Lesson.query.get(id)
 
     lesson_name = lesson_to_delete.name
-    flash(f'Lesson {lesson_name} deleted.')
+    flash(_('Lesson {0} deleted.'.format(lesson_name)))
     db.session.delete(lesson_to_delete)
     db.session.commit()
     return redirect(url_for('lessons.list'))

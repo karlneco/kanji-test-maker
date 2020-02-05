@@ -40,10 +40,12 @@ def register_blueprints(app):
     from hktm.lessons.views import lessons_bp
     from hktm.lesson_contents.views import lesson_contents_bp
     from hktm.users.views import users_bp
+    from hktm.worksheets.views import worksheets_bp
     from hktm.views import root_bp
 
     app.register_blueprint(lessons_bp, url_prefix='/lessons')
     app.register_blueprint(lesson_contents_bp, url_prefix='/lesson_contents')
     app.register_blueprint(users_bp, url_prefix='/users')
+    app.register_blueprint(worksheets_bp, users_bp='/worksheets/')
     app.register_blueprint(root_bp,url_prefix='/')
     from hktm import views

@@ -29,10 +29,11 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('users.admin_list_users') }}">{{ gettext('Accounts')}}</a>
           </li>
-          {% endif %}
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">{{ gettext('Configuration')}}</a>
+            <a class="nav-link" href="{{ url_for('worksheets.list') }}">{{ gettext('Worksheets')}}</a>
           </li>
+          {% endif %}
+
         </ul>
         {# <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

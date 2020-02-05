@@ -26,9 +26,20 @@ class RenderContentKJWR(RenderContentBase):
         question_data = question.split('｜')
         with tag('div', ('class','kjwr_question')):
             with tag('div',('class','kjwr_hiragana')):
-                text(question_data[0])
+                i=0
+                question_text = question_data[0]
+                while question_text[i:] != '':
+                    print(question_text[i:] + "|  ---   |")
+                    if question_text[i] != self.ts_bonus:
+                        text(question_text[i])
+                        i+=1
+                    else:
+                        i+=1 #eat the starting symbol
+                        token = question_text[i:question_text.find(self.te_bonus,i)]
+                        with tag('span',('class','kjwr_hiragana_hint')):
+                            text(token)
+                        i+=len(token)+1
             with tag('div',('class','kjwr_boxes')):
-                print(question_data[1])
                 for n in range(int(question_data[1])):
                     with tag('div',('class','kjwr_empty')):
                         text(' ')
