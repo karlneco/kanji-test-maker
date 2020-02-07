@@ -6,7 +6,7 @@ class RenderContentKT36(RenderContentKJTS):
     This is the class for rendering kanji tests.
     """
 
-############################################################### reading question
+################################################################　bonus question
     def bonus(self,question,mode):
         '''
         This renders a bonus part of a question
@@ -39,13 +39,11 @@ class RenderContentKT36(RenderContentKJTS):
 #################################################################### constructor
     def __init__(self,question_bundle):
         super().__init__(question_bundle)
-        self.ts_bonus ='＜'
-        self.te_bonus ='＞'
         self.close_tokens = '）」｝＞'
         self.tokens = '（「｛＜'
         self.render_mode = {
             'pdf':'90px',
-            'preview':'60px'
+            'preview':'60'
             }
 
 
@@ -62,7 +60,7 @@ class RenderContentKT36(RenderContentKJTS):
            '｛': self.combo(question[1:], mode),
            '＜': self.bonus(question[1:], mode)
            }
-        
+
         return tokens.get(question[0],'nothing')
 
 

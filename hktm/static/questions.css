@@ -59,36 +59,54 @@
 .preview .kanji_reading_brackets{
     margin-left: -20px;
 }
-.preview img {
-   width: 80%;
-}
-
-
 
 /* Question container */
 .question{
   font-family: Kyokasho;
   display: flex;
   flex-direction: row;
-  padding-left: 15px;
+  padding-left: 3px;
 }
 
 /* Reading part of a question */
-.kanji_reading{
+.kanji_reading-60{
   font-weight: bold;
   display: grid;
   grid-template-rows: var(--colwidth) 30px;
 }
-.kanji_reading_brackets{
+.kanji_reading-60{
+  font-weight: bold;
+  display: grid;
+  grid-template-rows: 50px 30px;
+  margin-left: 5px;
+}
+.kanji_reading_brackets-60{
   display: grid;
   grid-template-columns: 20px auto 20px
 }
-
+.kanji_reading-90{
+  font-weight: bold;
+  display: grid;
+  grid-template-rows: 50px 30px;
+  margin-left: 18px;
+}
+.kanji_reading_brackets-90{
+  display: grid;
+  grid-template-columns: 20px auto 20px
+}
+.kanji-reading-spacer{
+  height: 25px;
+  float: left;
+}
 
 /* Writing part of a question */
 .kanji_writing{
   display: grid;
   grid-template-rows: var(--colwidth) 30px;
+}
+.kanji_writing-90{
+  display: grid;
+  grid-template-rows: 90px 30px;
 }
 .kanji_box{
   text-align: center;
@@ -101,10 +119,16 @@
 
 
 /* Combo question part (combining hiragana and kanji) */
-.combo_question{
+.combo_question-60{
   line-height: 1em;
   display: grid;
-  grid-template-rows: var(--colwidth) 30px;
+  grid-template-rows: 70px 30px;
+  white-space: nowrap;
+}
+.combo_question-90{
+  line-height: 1em;
+  display: grid;
+  grid-template-rows: 85px 30px;
   white-space: nowrap;
 }
 .furigana-combo{
@@ -137,7 +161,17 @@
   white-space: nowrap;
 }
 
-
+.hiragana-90{
+  font-size: 90%;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 90px 25px;
+  white-space: nowrap;
+}
+.hiragana-content{
+  display: grid;
+  grid-template-rows: auto 40px auto;
+}
 
 /* for gray letters */
 .ghost {
