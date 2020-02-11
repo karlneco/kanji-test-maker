@@ -39,30 +39,11 @@ class RenderContentKT36(RenderContentKJTS):
 #################################################################### constructor
     def __init__(self,question_bundle):
         super().__init__(question_bundle)
-        self.close_tokens = '）」｝＞'
-        self.tokens = '（「｛＜'
+
         self.render_mode = {
             'pdf':'90px',
             'preview':'60'
             }
-
-
-
-
-################################################################ render question
-    def render_question(self, question, mode):
-        '''
-        The renders the question token in whatever mode is passed in
-        '''
-        tokens = {
-           '（': self.reading(question[1:], mode),
-           '「': self.writing(question[1:], mode),
-           '｛': self.combo(question[1:], mode),
-           '＜': self.bonus(question[1:], mode)
-           }
-
-        return tokens.get(question[0],'nothing')
-
 
 
 ############################################################### render a preview
@@ -85,7 +66,17 @@ class RenderContentKT36(RenderContentKJTS):
 
                         #if we are dealing with a token marker, start token processing
                         if question[si] in self.tokens:
-                            renderd_question = self.render_question(question[si:],'preview')
+                            if question[si] == self.ts_reading:
+                                renderd_question = self.reading(question[si+1:],'preview')
+                            elif question[si] == self.ts_writing:
+                                renderd_question = self.writing(question[si+1:],'preview')
+                            elif question[si] == self.ts_furi:
+                                renderd_question = self.furigana(question[si+1:],'preview')
+                            elif question[si] == self.ts_combo:
+                                renderd_question = self.combo(question[si+1:],'preview')
+                            elif question[si] == self.ts_bonus:
+                                renderd_question = self.bonus(question[si+1:],'preview')
+
                             doc.asis(renderd_question[0])
                             raise_next = renderd_question[1]
                             #eat the token untill we find its closure

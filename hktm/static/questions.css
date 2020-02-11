@@ -173,6 +173,31 @@
   grid-template-rows: auto 40px auto;
 }
 
+
+/* furigana */
+.kanji-w-furi-60{
+  font-size: 90%;
+  margin-left: 6px;
+}
+
+.kanji-w-furi-furi-60{
+  font-size: 20px;
+  line-height: 1em;
+  text-align: center;
+}
+
+.kanji-w-furi-90{
+  font-size: 90%;
+  margin-left: 25px;
+}
+
+.kanji-w-furi-furi-90{
+  font-size: 20px;
+  line-height: 1em;
+  text-align: center;
+}
+
+
 /* for gray letters */
 .ghost {
   color: #DDDDDD

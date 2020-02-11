@@ -87,6 +87,7 @@ class RenderContentKJTS(RenderContentBase):
         token_parts = token.split('｜')
         if '｜' not in token:
             return ('Syntax Error',0)
+
         with tag('div',('class','combo_question-'+self.render_mode[mode])):
             with tag('div'):
                 doc.stag('img', src='/static/top_brace.png', height='20px')
@@ -113,6 +114,7 @@ class RenderContentKJTS(RenderContentBase):
         token_parts = token.split('｜')
         if '｜' not in token:
             return ('Syntax Error',0)
+
         #create the tags
         with tag('div',('class','kanji-w-furi-'+self.render_mode[mode])):
             #output the kanji
@@ -121,7 +123,7 @@ class RenderContentKJTS(RenderContentBase):
                 text(token_parts[0])
 
             #now the furigana
-            with tag('div',('class','kanji-w-furi-furi'+self.render_mode[mode])):
+            with tag('div',('class','kanji-w-furi-furi-'+self.render_mode[mode])):
                 with tag('div'):
                     text(token_parts[1])
         return (doc.getvalue(), 0)
@@ -134,20 +136,6 @@ class RenderContentKJTS(RenderContentBase):
             'pdf':'90px',
             'preview':'90'
             }
-
-
-################################################################ render question
-    def render_question(self, question, mode):
-        '''
-        The renders the question token in whatever mode is passed in
-        '''
-        tokens = {
-           '（': self.reading(question[1:], mode),
-           '「': self.writing(question[1:], mode),
-           '｛': self.combo(question[1:], mode),
-           '『': self.furigana(question[1:], mode)
-           }
-        return tokens.get(question[0],'nothing')
 
 
 ############################################################### render a preview
@@ -170,7 +158,17 @@ class RenderContentKJTS(RenderContentBase):
 
                         #if we are dealing with a token marker, start token processing
                         if question[si] in self.tokens:
-                            renderd_question = self.render_question(question[si:],'preview')
+
+                            if question[si] == self.ts_reading:
+                                renderd_question = self.reading(question[si+1:],'preview')
+                            elif question[si] == self.ts_writing:
+                                renderd_question = self.writing(question[si+1:],'preview')
+                            elif question[si] == self.ts_furi:
+                                renderd_question = self.furigana(question[si+1:],'preview')
+                            elif question[si] == self.ts_combo:
+                                renderd_question = self.combo(question[si+1:],'preview')
+
+
                             doc.asis(renderd_question[0])
                             raise_next = renderd_question[1]
                             #eat the token untill we find its closure
