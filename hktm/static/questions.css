@@ -226,9 +226,17 @@
   width: 75px;
   height: 75px;
   writing-mode: horizontal-tb;
-  font-size: 50%;
+  font-size: 40%;
   margin-top: 10px;
   padding: 5px;
+}
+.slash{
+  font-size: 52px;
+  margin-left: 20px;
+  transform: rotate(45deg);
+  margin-top: 14px;
+  margin-bottom: -43px;
+  margin-right: 2px;
 }
 
 .header-instructions{
