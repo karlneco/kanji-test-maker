@@ -82,7 +82,6 @@ class RenderContentKJTS(RenderContentBase):
             to css margin-left attribute
         '''
 
-
         doc, tag, text = Doc().tagtext()
         token = question[0:question.find(self.te_combo)]
         token_parts = token.split('｜')
@@ -102,6 +101,31 @@ class RenderContentKJTS(RenderContentBase):
         return (doc.getvalue(), 0)
 
 
+########################################################## furigana helping text
+    def furigana(self,question,mode):
+        '''
+        This renders furigana ext to some kanji
+        '''
+        doc, tag, text = Doc().tagtext()
+
+        # seperate the kanji from the furigana
+        token = question[0:question.find(self.te_furi)]
+        token_parts = token.split('｜')
+        if '｜' not in token:
+            return ('Syntax Error',0)
+        #create the tags
+        with tag('div',('class','kanji-w-furi-'+self.render_mode[mode])):
+            #output the kanji
+            with tag('div'):
+                # extract the kanji characters and out put them in the div
+                text(token_parts[0])
+
+            #now the furigana
+            with tag('div',('class','kanji-w-furi-furi'+self.render_mode[mode])):
+                with tag('div'):
+                    text(token_parts[1])
+        return (doc.getvalue(), 0)
+
 
 #################################################################### constructor
     def __init__(self,question_bundle):
@@ -112,7 +136,6 @@ class RenderContentKJTS(RenderContentBase):
             }
 
 
-
 ################################################################ render question
     def render_question(self, question, mode):
         '''
@@ -121,10 +144,10 @@ class RenderContentKJTS(RenderContentBase):
         tokens = {
            '（': self.reading(question[1:], mode),
            '「': self.writing(question[1:], mode),
-           '｛': self.combo(question[1:], mode)
+           '｛': self.combo(question[1:], mode),
+           '『': self.furigana(question[1:], mode)
            }
         return tokens.get(question[0],'nothing')
-
 
 
 ############################################################### render a preview
@@ -164,7 +187,6 @@ class RenderContentKJTS(RenderContentBase):
                                     div_style = f'margin-top: {raise_next}px'
                             with tag('div',('class','hiragana-90'), style=div_style):
                                 with tag('div',('class','hiragana-content')):
-
                                     with tag('div'):
                                         text(' ')
                                     with tag('div'):
