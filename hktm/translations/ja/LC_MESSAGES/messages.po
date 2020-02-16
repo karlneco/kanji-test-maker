@@ -79,7 +79,7 @@ msgstr "漢字テスト編集"
 msgid "Instructions for Kanji Test Worksheet for grades 2 and 3"
 msgstr ""
 "記号類はすべて全角入力してください。<br>漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　"
-"注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｜１｝または｛あつくるしい｜３｝注意：括弧内はスペースで長さ調節可能。数字は必要なスペース数。<br>既習漢字のふりがなは、『』を使う。　例）『本｜ほん』"
+"注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｜１｝または｛あつくるしい｜３｝注意：括弧内はスペースで長さ調節可能。数字は必要なスペース数。<br>未習漢字のふりがなは、『』を使う。　例）『本｜ほん』"
 
 #: lesson_contents/templates/lesson_contents/KJWR_content.html:5
 msgid "Kanji Writing Worksheet"
@@ -98,7 +98,7 @@ msgid "Instructions for Kanji Test Worksheet for grades 3-6"
 msgstr ""
 "記号類はすべて全角入力してください。<br>漢字穴埋め問題は、「」を使う。例）「みなみ」<br>読み仮名問題は、（）を使う。例）（音読）　"
 "注意：括弧内はスペースで長さ調節可能<br>漢字とふりがな混合問題は、｛｝を使う。例）｛かく｜１｝または｛あつくるしい｜３｝注意：括弧内はスペースで長さ調節可能。数字は必要なスペース数。<br>ボーナス問題は、"
-" ＜＞を使う。例）  ＜こまかい＞<br>既習漢字のふりがなは、『』を使う。　例）『本｜ほん』"
+" ＜＞を使う。例）  ＜こまかい＞<br>未習漢字のふりがなは、『』を使う。　例）『本｜ほん』"
 
 #: lesson_contents/templates/lesson_contents/NWRD_content.html:5
 msgid "Kanji New Reading Worksheet"
