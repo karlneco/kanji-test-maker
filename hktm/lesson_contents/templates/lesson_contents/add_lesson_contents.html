@@ -55,6 +55,13 @@ $('#myModal').on('shown.bs.modal', function () {
         <div class="form-group">
           {{form.name.label}}
           {{form.name(class='form-control')}}
+          {% if form.name.errors %}
+            <ul class="errors">
+              {% for error in form.name.errors %}
+                <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
           {% if form.date != None %}
           {{form.date.label}}
           {{form.date(class='form-control')}}

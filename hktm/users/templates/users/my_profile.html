@@ -1,0 +1,61 @@
+{% extends "chrome.html" %}
+
+{% block content %}
+<div class="container-sm">
+  <div class="jumbotron">
+    <h1 class="display-4">{{_('My Profile')}}</h1>
+    <hr class="my-2">
+    {{_('Instructions for editing my profile.')}}
+
+  </div>
+
+  {% if form.errors %}
+    <ul class="errors">
+      {% for error in form.errors %}
+        <li class="alert alert-danger" style="margin: 3px">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+
+  <form method="POST" id="content_form">
+    {{form.hidden_tag()}}
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          {{form.name.label}}
+          {{form.name(class='form-control')}}
+          <div class="row">
+            <div class="col-sm">
+              {{_('My Email')}}:
+            </div>
+          </div>
+          <div class="row py-3">
+            <div class="col-sm">
+              {{current_user.email}}
+            </div>
+          </div>
+
+          {{form.password.label}}
+          {{form.password(class='form-control')}}
+          <div class="row">
+            <div class="col-sm">
+              {{_('My Grades')}}
+            </div>
+          </div>
+          <div class="row py-3">
+            <div class="col-sm">
+              {{current_user.grades}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-sm-3 float-left">
+        {{form.submit(class='btn btn-primary')}}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

@@ -8,7 +8,6 @@ from flask_babel import _
 
 users_bp = Blueprint('users', __name__, template_folder='templates/users')
 
-
 @users_bp.route('/list')
 @login_required
 def admin_list_users():
@@ -18,6 +17,29 @@ def admin_list_users():
 
     all_users = db.session.query(User).all()
     return render_template('list.html', users=all_users)
+
+@users_bp.route('/profile', methods=['GET','POST'])
+@login_required
+def profile():
+
+    user = User.query.get(current_user.id)
+    form = AdminEditForm()
+    del form.email
+    del form.grades
+
+    if form.validate_on_submit():
+        user.name = form.name.data
+        if form.password.data != "":
+            user.password = generate_password_hash(form.password.data)
+
+        db.session.commit()
+        return redirect(url_for('users.profile'))
+    else:
+        form.name.default = user.name
+        form.process()
+
+    return render_template('my_profile.html',form=form,user_id=user.id)
+
 
 @users_bp.route('/edit/<int:id>', methods=['GET','POST'])
 @login_required

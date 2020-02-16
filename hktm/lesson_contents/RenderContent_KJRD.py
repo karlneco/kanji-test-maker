@@ -12,7 +12,7 @@ class RenderContentKJRD(RenderContentBase):
         super().__init__(question_bundle)
         self.render_mode = {
             'pdf':'90px',
-            'preview':'60px'
+            'preview':'90'
             }
 
 ############################################################### reading question
@@ -32,21 +32,23 @@ class RenderContentKJRD(RenderContentBase):
         doc, tag, text = Doc().tagtext()
         rise_next = 0
         #create the tags
-        with tag('div',('class','kanji_reading')):
+        with tag('div',('class','kanji_reading-'+self.render_mode[mode])):
             with tag('div'):
                 # extract the kanji characters and out put them in the div
                 text(question[0:question.find(self.te_reading)])
             # check if the question needs more space for the hiragaana te_writing
             # this is requested by adding 'japanse spaces' to the kanji characeter
             if ('　' in question[0:question.find(self.te_reading)]):
-                rise_next = -60 #if so then tell the main rendere to raise the next hiragana block
+                rise_next = -40 #if so then tell the main rendere to raise the next hiragana block
 
             # now eat the block nom nom nom
-            with tag('div',('class','kanji_reading_brackets')):
-                doc.stag('img', src='/static/top_bracket.png', width=self.render_mode[mode])
+            with tag('div',('class','kanji_reading_brackets-'+self.render_mode[mode])):
+                doc.stag('img', src='/static/top_bracket.png', width="100%")
                 with tag('div'):
-                    text(' ')
-                doc.stag('img', src='/static/btm_bracket.png', width=self.render_mode[mode])
+                    for i in range(len(question[0:question.find(self.te_reading)])):
+                        with tag('span',('class','kanji-reading-spacer')):
+                            text(' ')
+                doc.stag('img', src='/static/btm_bracket.png', width="100%")
         return (doc.getvalue(), rise_next)
 
 ####################################################### render a single question
@@ -75,15 +77,21 @@ class RenderContentKJRD(RenderContentBase):
                     div_style = ''
                     if raise_next != 0:
                             div_style = f'margin-top: {raise_next}px'
-                    with tag('div',('class','hiragana'), style=div_style):
+                    with tag('div',('class','hiragana-90'), style=div_style):
+                        with tag('div',('class','hiragana-content')):
+                            with tag('div'):
+                                text(' ')
+                            with tag('div'):
+                                h = ""
+                                while (question[si-1:]!='') and (question[si:si+1] not in self.tokens) :
+                                    h=h+question[si]
+                                    si+=1
+                                text(h)
+                            with tag('div'):
+                                text(' ')
                         with tag('div'):
-                            h = ""
-                            while (question[si-1:]!='') and (question[si:si+1] not in self.ts_reading) :
-                                h=h+question[si]
-                                si+=1
-                            text(h)
-                        with tag('div', width='30px'):
                             text(' ')
+                        text(' ')
         return doc.getvalue()
 
 
@@ -107,4 +115,7 @@ class RenderContentKJRD(RenderContentBase):
                     for q in self.question_list[1::2]:
                         renderd_question = self.render_question(q,'preview')
                         doc.asis(renderd_question)
+
+
+
         return doc.getvalue()

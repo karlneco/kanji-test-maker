@@ -44,7 +44,7 @@
   -o-transform: scale(0.8);
   -ms-transform: scale(0.8);
   margin-left: -40px;
-  margin-top: -30px;
+  margin-top: 0px;
 }
 .preview .hiragana{
   padding-left: 7px;
@@ -88,7 +88,7 @@
   font-weight: bold;
   display: grid;
   grid-template-rows: 50px 30px;
-  margin-left: 18px;
+  margin-left: 23px;
 }
 .kanji_reading_brackets-90{
   display: grid;
@@ -291,7 +291,8 @@
 .kjrd_layout{
   display: grid;
   grid-template-columns: 50% 50%;
-  writing-mode: vertical-rl;
+  height: 600px;
+  /* writing-mode: vertical-rl; */
 }
 .kjrd_question{
   display: flex;
