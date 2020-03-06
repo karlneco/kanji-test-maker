@@ -2,12 +2,12 @@ from hktm.lesson_contents.RenderContentBase import RenderContentBase
 from yattag import Doc
 
 class RenderContentNWRD(RenderContentBase):
-    """
+    '''
     This is the class for rendering new reading kanji sheet.
     We'll use the same syntax as for furigana as the content is almost the same
-    The major changes will be in the style sheet. Refer to \design\NWRD.pdf for
+    The major changes will be in the style sheet. Refer to \\design\\NWRD.pdf for
     presentation.
-    """
+    '''
 
 
 #################################################################### constructor

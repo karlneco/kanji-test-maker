@@ -42,7 +42,7 @@ class RenderContentKT36(RenderContentKJTS):
 
         self.render_mode = {
             'pdf':'90px',
-            'preview':'60'
+            'preview':'70'
             }
 
 
@@ -54,7 +54,7 @@ class RenderContentKT36(RenderContentKJTS):
         doc, tag, text = Doc().tagtext()
 
 
-        with tag('div',('class','preview')):
+        with tag('div',('class','preview'),style="--colwidth:55px;"):
             for question in self.question_list:
 
                 #initialize string indexer
