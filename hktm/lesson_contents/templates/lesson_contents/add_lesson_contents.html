@@ -62,9 +62,23 @@ $('#myModal').on('shown.bs.modal', function () {
               {% endfor %}
             </ul>
           {% endif %}
-          {% if form.date != None %}
-          {{form.date.label}}
-          {{form.date(class='form-control')}}
+          <div class="row">
+            <div class="col-sm">
+              {% if form.date != None %}
+              {{form.date.label}}
+              {{form.date(class='form-control')}}
+              {% endif %}
+            </div>
+            <div class="col-sm">
+              {% if form.bonus != None %}
+              {{form.bonus.label}}
+              {{form.bonus(class='form-control')}}
+              {% endif %}
+            </div>
+          </div>
+          {% if form.scoring_comment != None %}
+          {{form.scoring_comment.label}}
+          {{form.scoring_comment(class='form-control')}}
           {% endif %}
         </div>
       </div>

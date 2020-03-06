@@ -14,7 +14,7 @@
     font-style: normal;
 }
 :root{
-  --hiragana-s-margin: 20px;
+  --hiragana-s-margin: 25px;
 }
 /* Page and containers */
 .page{
@@ -67,19 +67,14 @@
 }
 
 /* Reading part of a question */
-.kanji_reading-70{
-  font-weight: bold;
-  display: grid;
-  grid-template-rows: var(--colwidth) 30px;
-}
-.kanji_reading-70{
-  font-weight: bold;
+
+.kanji_reading-80{
   display: grid;
   grid-template-rows: 50px 30px;
-  margin-left: 11px;
+  margin-left: 16px;
   font-size: 30pt;
 }
-.kanji_reading_brackets-70{
+.kanji_reading_brackets-80{
   display: grid;
   grid-template-columns: 20px auto 20px
 }
@@ -118,7 +113,7 @@
 
 
 /* Combo question part (combining hiragana and kanji) */
-.combo_question-70{
+.combo_question-80{
   line-height: 1em;
   display: grid;
   grid-template-rows: 70px 30px;
@@ -173,11 +168,11 @@
 
 
 /* furigana */
-.kanji-w-furi-70{
+.kanji-w-furi-80{
   font-size: 18pt;
   margin-left: var(--hiragana-s-margin);
 }
-.kanji-w-furi-furi-70{
+.kanji-w-furi-furi-80{
   font-size: 10pt;
   line-height: 1em;
   text-align: center;
@@ -224,13 +219,23 @@
 }
 .header_score_box{
   border: 3px black solid;
-  width: 75px;
-  height: 75px;
+  width: 75px;/*130px*/
+  height: 75px;/*100px*/
   writing-mode: horizontal-tb;
   font-size: 40%;
   margin-top: 10px;
   padding: 5px;
 }
+.header_bonus_score_box{
+  border: 3px black solid;
+  width: 125px;/*130px*/
+  height: 85px;/*100px*/
+  writing-mode: horizontal-tb;
+  font-size: 40%;
+  margin-top        : 10px;
+  padding: 5px;
+}
+
 .slash{
   font-size: 52px;
   margin-left: 20px;

@@ -48,6 +48,8 @@ class LessonMaterial(db.Model):
     name = db.Column(db.Text) # this can indicate the worksheet name and number
     date = db.Column(db.Text) # this will be the date - user wanted as a string so they can say 'week 3' if they wante
     content = db.Column(db.Text)
+    bonus_available = db.Column(db.Integer)
+    scoring_comment = db.Column(db.Text)
     lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
     material_code = db.Column(db.Text, db.ForeignKey('material_type.code'))
     material = db.relationship("MaterialType")

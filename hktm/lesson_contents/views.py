@@ -50,6 +50,8 @@ def add(lesson_id,content_code):
     content_type = MaterialType.query.get(content_code)
     if content_type.custom_template!=True:
         del form.date
+        del form.bonus
+        del form.scoring_comment
 
     if form.validate_on_submit():
         s = _('New {0} added').format(content_type.name)
@@ -61,6 +63,8 @@ def add(lesson_id,content_code):
         new_lesson_content = LessonMaterial(name,content,lesson_id,type)
         if content_type.custom_template:
             new_lesson_content.date = form.date.data
+            new_lesson_content.bonus_available = form.bonus.data
+            new_lesson_content.scoring_comment = form.scoring_comment.data
         db.session.add(new_lesson_content)
         db.session.commit()
 
@@ -89,17 +93,20 @@ def delete(id):
 def edit(id):
     content_to_edit = LessonMaterial.query.get(id)
     content_type = MaterialType.query.get(content_to_edit.material_code)
-    #TODO: get a list of all questions and questions on this test for organizing
 
     form = AddForm()
     if content_type.custom_template!=True:
         del form.date
+        del form.bonus
+        del form.scoring_comment
 
     if form.submit.data and form.validate():
         content_to_edit.name = form.name.data
         content_to_edit.content = form.content.data
         if content_type.custom_template:
             content_to_edit.date = form.date.data
+            content_to_edit.bonus_available = form.bonus.data
+            content_to_edit.scoring_comment = form.scoring_comment.data
         db.session.commit()
         return redirect(url_for('lessons.edit',id=content_to_edit.lesson_id))
 
@@ -109,6 +116,9 @@ def edit(id):
         form.content.default = content_to_edit.content
         if content_type.custom_template:
             form.date.default = content_to_edit.date
+            form.bonus.default = content_to_edit.bonus_available
+            form.scoring_comment.default = content_to_edit.scoring_comment
+#            pass
         form.process()
 
         test_content = RenderContentKJTS(content_to_edit.content)

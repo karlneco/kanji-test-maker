@@ -42,7 +42,7 @@ class RenderContentKT36(RenderContentKJTS):
 
         self.render_mode = {
             'pdf':'90px',
-            'preview':'70'
+            'preview':'80'
             }
 
 
