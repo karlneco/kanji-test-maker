@@ -8,29 +8,42 @@
     <div class='page' style='float: right'>
       <div class='header'>
         <div class='header_graphics'>
-          <div style="font-size:50%">
-            <div style="text-align: right; padding-bottom: 10px;">{{content.date}}</div>
-            <div class='header_frame'>
-              <div>
+          <div>
+            <div style="text-align: right; padding-bottom: 10px; font-size: 10pt;">{{content.date}}</div>
+            <div class='header_no_frame'>
+              <div style="font-size:20pt; font-weight: bold;">
                 {{content.name}}
               </div>
-              <div style="padding-bottom: 100px;">
-                なまえ
+              <div style="font-size:18pt;text-align: right;margin-bottom: -10px;">
+                なまえ (　　　　　　　　　　　　　　　　)
               </div>
             </div>
+            {% if content.scoring_comment==None %}
+            <div class='scoring_comment'>
+              &nbsp;
+            </div>
+            {% else %}
+            <div class='scoring_comment'>
+              {{content.scoring_comment}}
+            </div>
+            {% endif %}
           </div>
 
-          <div class='header_score_box'>
-            １つ10てん<br/>
-            <div class='slash'>/</div><br/>
-
-            <span style="float: right">100てん</span>
-
+          <div class='header_score_box' style="position:absolute;left:730px;top:590px;width:130px;height:100px;">
+            <br>
+            <div class='slash' style="position:relative;left: 45px;top: 40px;">/</div><br/>
+            <span style="position: relative;top: 25px;left: 0px;float: right;font-size:14pt; font-weight:bold;">100</span>
           </div>
+          {% if content.bonus_available|int != 0 %}
+            <div class='header_score_box' style="position:absolute;left:592px;top:605px;width:125px;height:85px;font-size: 14pt">
+              おまけ<br>
+              <div class='slash' style="position:relative;left: 55px;top: 15px;">/</div><br/>
+              <span style="position: relative;top: -8px;left: 0px;float: right;font-size:14pt;">{{content.bonus_available}}</span>
+            </div>
+          {% endif %}
         </div>
         <div class='header-instructions' style="margin-right: -18px">
-          <img src='/static/kanji-box.png' width="30px"/> に　かん字を　かきましょう。　[　　　　]は　かんじとひらがなで　
-          (　　　　　)には　読み　を　かきましょう。
+          （　）に読みを書きましょう。<br> □に漢字を、［　］には漢字とひらがなを書きましょう。
         </div>
       </div>
       <div class='content'>

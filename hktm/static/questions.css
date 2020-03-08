@@ -15,6 +15,7 @@
 }
 :root{
   --hiragana-s-margin: 25px;
+  --hiragana-l-margin: 13px;
 }
 /* Page and containers */
 .page{
@@ -79,10 +80,10 @@
   grid-template-columns: 20px auto 20px
 }
 .kanji_reading-90{
-  font-weight: bold;
   display: grid;
   grid-template-rows: 50px 30px;
-  margin-left: 23px;
+  margin-left: 14px;
+  font-size: 34pt;
 }
 .kanji_reading_brackets-90{
   display: grid;
@@ -155,10 +156,11 @@
   white-space: nowrap;
 }
 .hiragana-90{
-  font-size: 90%;
+  font-size: 22pt;
+  padding-left: var(--hiragana-l-margin);
   text-align: center;
   display: grid;
-  grid-template-rows: 90px 25px;
+  grid-template-rows: 70px 25px;
   white-space: nowrap;
 }
 .hiragana-content{
@@ -212,10 +214,9 @@
 .header_no_frame{
   display: grid;
   grid-template-columns: 400px auto;
-  width: 27px;
+  height: 680px;
   font-size: 18pt;
   padding: 12px;
-  font-weight: bold;
 }
 .scoring_comment{
   text-align: right;
@@ -245,13 +246,13 @@
 .slash{
   font-size: 52px;
   margin-left: 20px;
-  transform: rotate(45deg);
+  transform: rotate(30deg);
   margin-top: 14px;
   margin-bottom: -43px;
   margin-right: 2px;
 }
 .header-instructions{
-  font-size: 20px;
+  font-size: 16pt;
   padding: 15px 10px 0px 20px;
   height: 570px;
 }
