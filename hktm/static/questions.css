@@ -81,8 +81,8 @@
 }
 .kanji_reading-90{
   display: grid;
-  grid-template-rows: 50px 30px;
-  margin-left: 14px;
+  grid-template-rows: 53px 27px;
+  margin-left: 19px;
   font-size: 34pt;
 }
 .kanji_reading_brackets-90{

@@ -128,6 +128,34 @@ class RenderContentKJTS(RenderContentBase):
                     text(token_parts[1])
         return (doc.getvalue(), 0)
 
+################################################################　bonus question
+    def bonus(self,question,mode):
+        '''
+        This renders a bonus part of a question
+
+        Returns
+        -------
+        tuple (str,int)
+            the string is the doc tree to send to the output, the int is the
+            required number of pixels to rais the subsequent hiragana block
+            - this should be a negative number and will be used as a partameter
+            to css margin-left attribute
+        '''
+
+        doc, tag, text = Doc().tagtext()
+        rise_next = 0
+        #create the tags
+        with tag('div',('class','kanji_bonus')):
+            with tag('div'):
+                # extract the kanji characters and out put them in the div
+                text(question[0:question.find(self.te_bonus)])
+            # check if the question needs more space for the hiragaana te_writing
+            # this is requested by adding 'japanse spaces' to the kanji characeter
+            if ('　' in question[0:question.find(self.te_bonus)]):
+                rise_next = -60 #if so then tell the main rendere to raise the next hiragana block
+
+        return (doc.getvalue(), rise_next)
+
 
 #################################################################### constructor
     def __init__(self,question_bundle):
@@ -136,65 +164,3 @@ class RenderContentKJTS(RenderContentBase):
             'pdf':'90px',
             'preview':'90'
             }
-
-
-############################################################### render a preview
-    def render(self):
-        '''
-        This renders an in-line preview of a question set
-        '''
-        doc, tag, text = Doc().tagtext()
-
-
-        with tag('div',('class','preview')):
-            for question in self.question_list:
-
-                #initialize string indexer
-                si = 0
-                raise_next = 0
-                #render a question in its own div
-                with tag('div',('class','question')):
-                    while question[si:] != '':
-
-                        #if we are dealing with a token marker, start token processing
-                        if question[si] in self.tokens:
-
-                            if question[si] == self.ts_reading:
-                                renderd_question = self.reading(question[si+1:],'preview')
-                            elif question[si] == self.ts_writing:
-                                renderd_question = self.writing(question[si+1:],'preview')
-                            elif question[si] == self.ts_furi:
-                                renderd_question = self.furigana(question[si+1:],'preview')
-                            elif question[si] == self.ts_combo:
-                                renderd_question = self.combo(question[si+1:],'preview')
-
-
-                            doc.asis(renderd_question[0])
-                            raise_next = renderd_question[1]
-                            #eat the token untill we find its closure
-                            while question[si] not in self.close_tokens:
-                                si+=1
-
-                            si+=1 # eat the closing marker of this token
-                        else: #this is just "normal" output
-
-                            # if we got a raise parameter from the render_question call
-                            # this is where we'll use it
-                            div_style = ''
-                            if raise_next != 0:
-                                    div_style = f'margin-top: {raise_next}px'
-                            with tag('div',('class','hiragana-90'), style=div_style):
-                                with tag('div',('class','hiragana-content')):
-                                    with tag('div'):
-                                        text(' ')
-                                    with tag('div'):
-                                        h = ""
-                                        while (question[si-1:]!='') and (question[si:si+1] not in self.tokens) :
-                                            h=h+question[si]
-                                            si+=1
-                                        text(h)
-                                    with tag('div'):
-                                        text(' ')
-                                with tag('div'):
-                                    text(' ')
-        return doc.getvalue()

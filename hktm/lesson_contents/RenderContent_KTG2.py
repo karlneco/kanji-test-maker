@@ -1,24 +1,18 @@
 from hktm.lesson_contents.RenderContent_KJTS import RenderContentKJTS
 from yattag import Doc
 
-class RenderContentKT36(RenderContentKJTS):
+class RenderContentKTG2(RenderContentKJTS):
     """
     This is the class for rendering kanji tests.
     """
-
-
-
-
-
 #################################################################### constructor
     def __init__(self,question_bundle):
         super().__init__(question_bundle)
 
         self.render_mode = {
             'pdf':'90px',
-            'preview':'80'
+            'preview':'90'
             }
-
 
 ############################################################### render a preview
     def render(self):
@@ -28,7 +22,7 @@ class RenderContentKT36(RenderContentKJTS):
         doc, tag, text = Doc().tagtext()
 
 
-        with tag('div',('class','preview'),style="--colwidth:55px;"):
+        with tag('div',('class','preview')):
             for question in self.question_list:
 
                 #initialize string indexer
@@ -40,6 +34,7 @@ class RenderContentKT36(RenderContentKJTS):
 
                         #if we are dealing with a token marker, start token processing
                         if question[si] in self.tokens:
+
                             if question[si] == self.ts_reading:
                                 renderd_question = self.reading(question[si+1:],'preview')
                             elif question[si] == self.ts_writing:
@@ -48,8 +43,7 @@ class RenderContentKT36(RenderContentKJTS):
                                 renderd_question = self.furigana(question[si+1:],'preview')
                             elif question[si] == self.ts_combo:
                                 renderd_question = self.combo(question[si+1:],'preview')
-                            elif question[si] == self.ts_bonus:
-                                renderd_question = self.bonus(question[si+1:],'preview')
+
 
                             doc.asis(renderd_question[0])
                             raise_next = renderd_question[1]
@@ -65,13 +59,18 @@ class RenderContentKT36(RenderContentKJTS):
                             div_style = ''
                             if raise_next != 0:
                                     div_style = f'margin-top: {raise_next}px'
-                            with tag('div',('class','hiragana'), style=div_style):
+                            with tag('div',('class','hiragana-90'), style=div_style):
+                                with tag('div',('class','hiragana-content')):
+                                    with tag('div'):
+                                        text(' ')
+                                    with tag('div'):
+                                        h = ""
+                                        while (question[si-1:]!='') and (question[si:si+1] not in self.tokens) :
+                                            h=h+question[si]
+                                            si+=1
+                                        text(h)
+                                    with tag('div'):
+                                        text(' ')
                                 with tag('div'):
-                                    h = ""
-                                    while (question[si-1:]!='') and (question[si:si+1] not in self.tokens) :
-                                        h=h+question[si]
-                                        si+=1
-                                    text(h)
-                                with tag('div', width='30px'):
                                     text(' ')
         return doc.getvalue()
