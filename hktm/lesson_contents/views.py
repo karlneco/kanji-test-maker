@@ -11,6 +11,7 @@ from hktm.lesson_contents.RenderContent_KJWR import RenderContentKJWR
 from hktm.lesson_contents.RenderContent_NWRD import RenderContentNWRD
 from hktm.lesson_contents.RenderContent_TRCP import RenderContentTRCP
 from hktm.lesson_contents.RenderContent_KT36 import RenderContentKT36
+from hktm.lesson_contents.RenderContent_K362 import RenderContentK362
 
 content_types = {
     'KJRD' : RenderContentKJRD,
@@ -18,7 +19,8 @@ content_types = {
     'KJWR' : RenderContentKJWR,
     'NWRD' : RenderContentNWRD,
     'TRCP' : RenderContentTRCP,
-    'KT36' : RenderContentKT36
+    'KT36' : RenderContentKT36,
+    'K362' : RenderContentK362
 }
 
 '''

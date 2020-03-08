@@ -38,15 +38,16 @@ def add():
     form = AddForm()
 
     if form.validate_on_submit():
-        new_ws = MaterialType(code, name, instructions)
-        db.session.add(new_ws)
-        db.session.commit()
-        flash(_('New Worksheet Type created'))
-        return redirect(url_for('worksheets.edit',id=new_ws.code))
-    else:
         code = form.code.data
         name = form.name.data
         instructions = form.instructions.data
+        new_ws = MaterialType(code, name, instructions)
+        new_ws.custom_template = form.custom.data
+        db.session.add(new_ws)
+        db.session.commit()
+        flash(_('New Worksheet Type created'))
+        return redirect(url_for('worksheets.edit',code=new_ws.code))
+
 
     return render_template('add_worksheet.html',form=form)
 
