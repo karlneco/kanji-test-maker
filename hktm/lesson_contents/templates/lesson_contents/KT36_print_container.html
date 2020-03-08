@@ -14,19 +14,27 @@
               <div>
                 {{content.name}}
               </div>
-              <div style="padding-bottom: 100px;">
-                なまえ
+              <div style="position: relative; top: 5px;">
+                なまえ (　　　　　　　　　　　　　　　　)
               </div>
+            </div>
+            <div class='scoring_comment'>
+              {{content.scoring_comment}}
             </div>
           </div>
 
-          <div class='header_score_box'>
-            １つ10てん<br/>
+          <div class='header_score_box' style="position:absolute;left:760px;top:590px;width:130px;height:100px;">
+            <br>
             <div class='slash'>/</div><br/>
-
-            <span style="float: right">100てん</span>
-
+            <span style="position: relative;top: 25px;left: 0px;float: right;font-size:14pt; font-weight:bold;">100</span>
           </div>
+          {% if content.bonus_available|int != 0 %}
+            <div class='header_score_box' style="position:absolute;left:622px;top:605px;width:125px;height:85px;">
+              おまけ<br>
+              <div class='slash' style="left:100px">/</div><br/>
+              <span style="position: relative;top: 10px;left: 0px;float: right;font-size:14pt;">{{content.bonus_available}}</span>
+            </div>
+          {% endif %}
         </div>
         <div class='header-instructions' style="margin-right: -18px">
           <img src='/static/kanji-box.png' width="30px"/> に　かん字を　かきましょう。　[　　　　]は　かんじとひらがなで　

@@ -217,6 +217,12 @@
   padding: 12px;
   font-weight: bold;
 }
+.scoring_comment{
+  text-align: right;
+  font-size: 14pt;
+  margin-right: -7px;
+  padding-left: 10px;
+}
 .header_score_box{
   border: 3px black solid;
   width: 75px;/*130px*/
