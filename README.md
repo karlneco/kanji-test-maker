@@ -17,6 +17,6 @@ This project uses PyBabel for translation. If you add any new strings please mak
     pybabel update -i messages.pot -d translations -l ja
 
 and
-    pybabel compile -d translations
+    pybabel compile -d translation
 
 top implement the translations
