@@ -60,7 +60,7 @@ def delete(code):
     if not(is_admin):
         return redirect(url_for('root.home'))
 
-    ws_to_delete = MaterialType.query.get(id)
+    ws_to_delete = MaterialType.query.get(code)
 
     name = ws_to_delete.name
     flash(_('Worksheet {0} has been deleted'.format(name)))

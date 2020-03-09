@@ -46,6 +46,6 @@ def register_blueprints(app):
     app.register_blueprint(lessons_bp, url_prefix='/lessons')
     app.register_blueprint(lesson_contents_bp, url_prefix='/lesson_contents')
     app.register_blueprint(users_bp, url_prefix='/users')
-    app.register_blueprint(worksheets_bp, users_bp='/worksheets/')
+    app.register_blueprint(worksheets_bp, url_prefix='/worksheets/')
     app.register_blueprint(root_bp,url_prefix='/')
     from hktm import views

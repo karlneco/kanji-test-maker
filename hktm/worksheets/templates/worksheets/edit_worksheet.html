@@ -22,7 +22,7 @@ $('#myModal').on('shown.bs.modal', function () {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{_("Don't Delete")}}</button>
-        <a href="{{url_for('worksheets.delete', code=code)}}" class="btn btn-danger">{{_('Delete')}}</a>
+        <a href="{{url_for('worksheets.delete', code=worksheet_id)}}" class="btn btn-danger">{{_('Delete')}}</a>
       </div>
     </div>
   </div>
