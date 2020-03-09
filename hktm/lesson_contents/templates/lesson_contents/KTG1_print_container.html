@@ -9,7 +9,13 @@
       <div class='header'>
         <div class='header_graphics'>
           <div>
-            <div style="text-align: right; padding-bottom: 10px; font-size: 10pt;">{{content.date}}</div>
+            <div style="text-align: right; padding-bottom: 10px; font-size: 10pt;">
+              {% if content.date==None %}
+                &nbsp;
+              {% else %}
+                {{content.date}}
+              {% endif %}
+            </div>
             <div class='header_no_frame'>
               <div style="font-size:20pt; font-weight: bold;">
                 {{content.name}}
