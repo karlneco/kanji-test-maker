@@ -1,7 +1,7 @@
-from hktm.lesson_contents.KanjiBaseTest import KanjiBaseTest
+from hktm.lesson_contents.KanjiTestBase import KanjiTestBase
 from yattag import Doc
 
-class RenderContentKT36(KanjiBaseTest):
+class RenderContentKT36(KanjiTestBase):
     """
     This is the class for rendering kanji tests.
     """

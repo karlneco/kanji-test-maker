@@ -14,7 +14,7 @@ def test_new_good_lesson(client,auth_user,init_database,authenticated_request):
     # try to get home
     response = client.post(url_for('lessons.add'),data=dict(name='test lesson 1',grade='1'),follow_redirects=True)
     assert response.status_code == 200
-    assert b'New Lesson Created' in response.data #user informed
+    assert '新しい単元が追加されました。'.encode('utf-8') in response.data #user informed
     assert '編集したいプリントを選べます'.encode('utf-8') in response.data #at the edit screen
 
 def test_new_lesson_no_name(client,auth_user,init_database,authenticated_request):

@@ -5,7 +5,7 @@ from hktm.models import Lesson, LessonMaterial, MaterialType
 from hktm.lesson_contents.forms import AddForm
 from flask_babel import _
 
-from hktm.lesson_contents.KanjiBaseTest import KanjiBaseTest
+from hktm.lesson_contents.KanjiTestBase import KanjiTestBase
 from hktm.lesson_contents.RenderContent_KJRD import RenderContentKJRD
 from hktm.lesson_contents.RenderContent_KJWR import RenderContentKJWR
 from hktm.lesson_contents.RenderContent_NWRD import RenderContentNWRD
@@ -126,7 +126,7 @@ def edit(id):
 #            pass
         form.process()
 
-        test_content = KanjiBaseTest(content_to_edit.content)
+        test_content = KanjiTestBase(content_to_edit.content)
 
         return render_template(content_to_edit.material_code + '_content.html',form=form, content=content_to_edit.content, content_id=content_to_edit.id, content_type=content_to_edit.material_code)
 

@@ -100,7 +100,7 @@ def test_user_login(test_client, init_database):
                                 follow_redirects=True)
 
     assert response.status_code == 200
-    assert b'Login Successful' in response.data
+    assert 'ログインに成功しました。'.encode('utf-8') in response.data
 
 def test_user_login_fail(test_client, init_database):
     """
