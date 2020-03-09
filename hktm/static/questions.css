@@ -206,14 +206,14 @@
   border: 3px black solid;
   border-radius: 15px;
   display: grid;
-  grid-template-columns: 390px auto;
+  grid-template-columns: 380px auto;
   width: 27px;
   font-size: 20px;
   padding: 12px;
 }
 .header_no_frame{
   display: grid;
-  grid-template-columns: 390px auto;
+  grid-template-columns: 380px auto;
   height: 680px;
   font-size: 18pt;
   padding: 12px;
