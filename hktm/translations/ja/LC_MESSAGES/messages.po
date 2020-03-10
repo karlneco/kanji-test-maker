@@ -232,7 +232,7 @@ msgstr ""
 
 #: lessons/templates/lessons/edit_lesson.html:21
 msgid "Deleting this lesson will delete the associated worksheets. Are you sure?"
-msgstr "この単元を削除すると、関連するテストやプリントが削除されます。"
+msgstr "このフォルダを削除すると、関連するテストやプリントが削除されます。"
 
 #: lessons/templates/lessons/edit_lesson.html:34
 msgid "Edit Lesson"
