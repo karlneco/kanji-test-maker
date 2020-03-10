@@ -8,15 +8,16 @@ from flask_babel import _
 lessons_bp = Blueprint('lessons', __name__, template_folder='templates/lessons')
 ## list route
 @lessons_bp.route('/list')
+@lessons_bp.route('/list/<int:jump>', methods=['GET'])
 @login_required
-def list():
+def list(jump=0):
     #get a list of the active users grades for the grade drop down
     grades = current_user.grades.replace('A','')
 
     #get a list of all lessons - the template will tabetise them
     lessons = db.session.query(Lesson).filter(Lesson.grade.in_(current_user.grades)).order_by(Lesson.name)
     #assert 0
-    return render_template('list_lessons.html',lessons=lessons, grades=grades)
+    return render_template('list_lessons.html',lessons=lessons, grades=grades, jump=jump)
 
 
 
@@ -48,11 +49,15 @@ def add():
 def delete(id):
     lesson_to_delete = Lesson.query.get(id)
 
+    for m in lesson_to_delete.lesson_materials:
+        db.session.delete(m)
+
     lesson_name = lesson_to_delete.name
-    flash(_('Lesson {0} deleted.'.format(lesson_name)))
+    grade = lesson_to_delete.grade
+    flash(_('Lesson {0} deleted.').format(lesson_name))
     db.session.delete(lesson_to_delete)
     db.session.commit()
-    return redirect(url_for('lessons.list'))
+    return redirect(url_for('lessons.list', jump=grade))
 
 
 ### edit route, we need to provide a list of ALL questions as well as
@@ -88,6 +93,38 @@ def edit(id):
                             lesson_content = lesson_content,
                             content_types=content_list
                             )
+
+
+### edit route, we need to provide a list of ALL questions as well as
+#   those on this test.
+@lessons_bp.route('/duplicate/<int:id>', methods=['GET','POST'])
+@login_required
+def duplicate(id):
+    lesson_to_duplicate = Lesson.query.get(id)
+    if lesson_to_duplicate==None:
+        flash(_('Lesson {0} does not exist.'.format(lesson_name)))
+        return redirect(url_for('lesson_list'))
+
+    # first duplicate the lesson
+    new_lesson = Lesson(lesson_to_duplicate.name + _(' - Copy'), lesson_to_duplicate.grade)
+    db.session.add(new_lesson)
+    # db.session.commit()
+
+    for material in lesson_to_duplicate.lesson_materials:
+        dup_material = LessonMaterial(material.name,material.content,material.lesson_id,material.material_code)
+        dup_material.bonus_available = material.bonus_available
+        dup_material.date = material.date
+        dup_material.scoring_comment = material.scoring_comment
+
+        dup_material.lesson_id = new_lesson.id
+
+        db.session.add(dup_material)
+
+    db.session.commit()
+
+    s = _('Lesson {0} duplicated.').format(lesson_to_duplicate.name)
+    flash(s,category='success')
+    return redirect(url_for('lessons.list',jump=new_lesson.grade))
 
 
 @lessons_bp.route('/kanji_test_preview/<string:content>', methods=['GET','POST'])

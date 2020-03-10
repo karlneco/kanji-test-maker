@@ -57,6 +57,8 @@ $('#myModal').on('shown.bs.modal', function () {
         <div class="row">
           <div class='col'>
             {{form.submit(class='btn btn-primary')}}
+            &nbsp;
+            <a class='btn btn-success' href="{{url_for('lessons.duplicate',id=lesson_id)}}">{{_('Duplicate')}}</a>
           </div>
           <div class='col'>
             <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#confirmDelete">{{_('Delete')}}</button>

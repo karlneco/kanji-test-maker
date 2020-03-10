@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-08 18:17-0600\n"
+"POT-Creation-Date: 2020-03-09 23:19-0600\n"
 "PO-Revision-Date: 2020-02-03 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -164,7 +164,7 @@ msgstr "削除しない"
 #: lesson_contents/templates/lesson_contents/add_lesson_contents.html:40
 #: lesson_contents/templates/lesson_contents/add_lesson_contents.html:89
 #: lessons/templates/lessons/edit_lesson.html:25
-#: lessons/templates/lessons/edit_lesson.html:62
+#: lessons/templates/lessons/edit_lesson.html:64
 #: users/templates/users/admin_user_edit.html:25
 #: users/templates/users/admin_user_edit.html:76
 #: worksheets/templates/worksheets/edit_worksheet.html:25
@@ -186,7 +186,7 @@ msgstr "左のフレームに入力がないと、プレビューは表示され
 
 #: lessons/forms.py:8
 msgid "Lesson Name"
-msgstr "学期と単元名"
+msgstr "フォルダ名"
 
 #: lessons/forms.py:8
 msgid "The lesson name is required"
@@ -196,13 +196,25 @@ msgstr "この項目は必須です"
 msgid "Grade"
 msgstr "学年"
 
-#: lessons/views.py:34
+#: lessons/views.py:35
 msgid "New Lesson Created"
 msgstr "新しい単元が追加されました。"
 
-#: lessons/views.py:52
+#: lessons/views.py:56
 msgid "Lesson {0} deleted."
-msgstr "{0}削除されました。"
+msgstr "{0} 削除されました。"
+
+#: lessons/views.py:104
+msgid "Lesson {0} does not exist."
+msgstr ""
+
+#: lessons/views.py:108
+msgid " - Copy"
+msgstr " - コピー"
+
+#: lessons/views.py:124
+msgid "Lesson {0} duplicated."
+msgstr "{0} フォルダが複製されました。"
 
 #: lessons/templates/lessons/add_lesson.html:6
 msgid "Add Lesson"
@@ -212,7 +224,11 @@ msgstr "新規作成"
 msgid ""
 "This is where you can add lessons.  A lesson is a collection of "
 "worksheets.  Please use the format #-# for the naming"
-msgstr "学期と単元名を入力してください。例）1学期　単元１．ふきのとう　の場合、1－1ふきのとう"
+msgstr ""
+"フォルダは数字順にソートされますので、全学年必ず最初に「学期-週（低学年は単元番号）」を半角数字で書いてください。フォルダは週単位で管理してください。<br><br>＜低学年＞<br>例）1学期"
+"　単元１．ふきのとう　の場合、　「1-1　ふきのとう」<br><br>＜小三以上＞<br>例）漢字を番号順で管理したい先生<br>1学期１週目　"
+"漢字１‐10　の場合、　　「1-1　漢字1-10」<br><br>例）漢字をそのまま表示したい先生<br>１学期１週目の場合、　　「1-1　"
+"辞典訓類順愛夫昨灯司管議」<br>"
 
 #: lessons/templates/lessons/edit_lesson.html:21
 msgid "Deleting this lesson will delete the associated worksheets. Are you sure?"
@@ -220,25 +236,29 @@ msgstr "この単元を削除すると、関連するテストやプリントが
 
 #: lessons/templates/lessons/edit_lesson.html:34
 msgid "Edit Lesson"
-msgstr "単元を編集する"
+msgstr "フォルダを編集する"
 
 #: lessons/templates/lessons/edit_lesson.html:36
 msgid ""
 "Here you can edit the lesson information and edit the worksheets for the "
 "lesson."
-msgstr "追加するボタンを押して、どのプリントを作るか選んでください。"
+msgstr "このページでは、「上書き保存」は出来ますが、「名前を付けて保存」は出来ません。このページのデータを利用して新しいフォルダを作成したい場合は、「複製する」ボタンを使って、このフォルダのコピーを作成してください。<br><br>・<b>既存のフォルダ名を変更する場合</b>：フォルダ名を変更し、保存ボタンを押してください。<br>・<b>テストやプリント作成の場合</b>：追加するボタンを押して、どのプリントを作るか選んでください。<br>・<b>このフォルダを複製する場合</b>：データは何も変更せずに複製ボタンを押してください。コピーされたフォルダはフォルダ一覧に生成されます。<br><br><b>＜フォルダ名のルール＞</b><br>フォルダ名は週単位で管理し、「学期」-「週（低学年は単元番号）」を最初につけてください。<br>例）１学期第1週なら、1-1<br>"
 
-#: lessons/templates/lessons/edit_lesson.html:69
+#: lessons/templates/lessons/edit_lesson.html:61
+msgid "Duplicate"
+msgstr "複製する"
+
+#: lessons/templates/lessons/edit_lesson.html:71
 msgid "Available Worksheets and Prints"
 msgstr "編集したいプリントを選べます"
 
-#: lessons/templates/lessons/edit_lesson.html:84
+#: lessons/templates/lessons/edit_lesson.html:86
 msgid "Add Worksheet"
 msgstr "追加する"
 
 #: lessons/templates/lessons/list_lessons.html:6
 msgid "Lesson List"
-msgstr "あなたの管理学年と単元"
+msgstr "あなたの管理学年とフォルダ"
 
 #: lessons/templates/lessons/list_lessons.html:8
 msgid ""
@@ -250,17 +270,17 @@ msgstr "編集したい学年を選択して"
 msgid "Available Grades"
 msgstr "あなたの管理学年:"
 
-#: lessons/templates/lessons/list_lessons.html:33
+#: lessons/templates/lessons/list_lessons.html:41
 msgid "No lessons"
 msgstr "何もありません。"
 
-#: lessons/templates/lessons/list_lessons.html:39 templates/home.html:16
+#: lessons/templates/lessons/list_lessons.html:47 templates/home.html:16
 msgid "New Lesson..."
 msgstr "新規作成"
 
 #: templates/chrome.html:26
 msgid "Lessons"
-msgstr "単元"
+msgstr "フォルダ"
 
 #: templates/chrome.html:30
 msgid "Accounts"
@@ -282,7 +302,7 @@ msgstr "補習校漢字テスト・宿題プリント生成ソフト"
 msgid ""
 "Please select a lesson from the list below or create a new one with the "
 "\"Add Lesson\" button"
-msgstr "新規作成または、既存のプリント名をクリックしてください。"
+msgstr "新規作成または、既存のフォルダ名をクリックしてください。"
 
 #: templates/index.html:23
 msgid "Hoshuko Kanji Materials"
@@ -470,3 +490,6 @@ msgstr ""
 
 #~ msgid "Kanji Test Worksheet - Grades 3-6"
 #~ msgstr "小三以上漢字テストボーナス付編集"
+
+#~ msgid "Lesson {0} duplicated as {1}."
+#~ msgstr "{0}　フォルダが複製されました。"
