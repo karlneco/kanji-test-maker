@@ -257,6 +257,11 @@
   padding: 15px 10px 0px 20px;
   height: 680px;
 }
+.header-test-instructions{
+  font-size: 16pt;
+  padding: 15px 10px 0px 20px;
+  height: 570px;
+}
 
 .trcp_question{
   color: black;
