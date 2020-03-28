@@ -113,7 +113,10 @@ def edit(id):
             content_to_edit.bonus_available = form.bonus.data
             content_to_edit.scoring_comment = form.scoring_comment.data
         db.session.commit()
-        return redirect(url_for('lessons.edit',id=content_to_edit.lesson_id))
+        flash(_('Saved'), category='info')
+        return redirect(request.url)
+
+        #return redirect(url_for('lessons.edit',id=content_to_edit.lesson_id))
 
     # pre-populate for form for editing
     elif request.method == 'GET':
