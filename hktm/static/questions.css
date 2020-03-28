@@ -266,6 +266,7 @@
   border: 1px black solid;
   margin-left: -1px;
   border-top-style: none;
+  height: 640px;
 }
 .trcp_char{
   border-top: 1px solid black;
