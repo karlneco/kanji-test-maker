@@ -210,6 +210,7 @@
   width: 27px;
   font-size: 20px;
   padding: 12px;
+  height: 700px;
 }
 .header_no_frame{
   display: grid;
@@ -254,7 +255,7 @@
 .header-instructions{
   font-size: 16pt;
   padding: 15px 10px 0px 20px;
-  height: 570px;
+  height: 680px;
 }
 
 .trcp_question{
