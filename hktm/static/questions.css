@@ -312,7 +312,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   height: 600px;
-  /* writing-mode: vertical-rl; */
+  writing-mode: vertical-rl;
 }
 .kjrd_question{
   display: flex;
