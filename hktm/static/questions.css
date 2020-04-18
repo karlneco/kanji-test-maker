@@ -216,6 +216,7 @@
   display: grid;
   grid-template-columns: 380px auto;
   height: 680px;
+  width: 30px;
   font-size: 18pt;
   padding: 12px;
 }
