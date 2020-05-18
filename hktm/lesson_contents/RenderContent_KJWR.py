@@ -24,6 +24,10 @@ class RenderContentKJWR(RenderContentBase):
         '''
         doc, tag, text = Doc().tagtext()
         question_data = question.split('｜')
+        if len(question_data)  == 1:
+            #text(question_data[0])
+            return doc.getvalue()
+
         with tag('div', ('class','kjwr_question')):
             with tag('div',('class','kjwr_hiragana')):
                 i=0
