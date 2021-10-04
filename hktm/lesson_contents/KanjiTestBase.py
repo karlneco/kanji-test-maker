@@ -34,12 +34,12 @@ class KanjiTestBase(RenderContentBase):
 
             # now eat the block nom nom nom
             with tag('div',('class','kanji_reading_brackets-'+self.render_mode[mode])):
-                doc.stag('img', src='/static/top_bracket.png', width="100%")
+                doc.stag('img', src='/static/top_bracket.png', width="27px")
                 with tag('div'):
                     for i in range(len(question[0:question.find(self.te_reading)])):
                         with tag('span',('class','kanji-reading-spacer')):
                             text(' ')
-                doc.stag('img', src='/static/btm_bracket.png', width="100%")
+                doc.stag('img', src='/static/btm_bracket.png', width="27px")
         return (doc.getvalue(), rise_next)
 
 
