@@ -8,6 +8,7 @@ from flask_babel import _
 
 users_bp = Blueprint('users', __name__, template_folder='templates/users')
 
+
 @users_bp.route('/list')
 @login_required
 def admin_list_users():
@@ -18,10 +19,10 @@ def admin_list_users():
     all_users = db.session.query(User).all()
     return render_template('list.html', users=all_users)
 
-@users_bp.route('/profile', methods=['GET','POST'])
+
+@users_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-
     user = User.query.get(current_user.id)
     form = AdminEditForm()
     del form.email
@@ -38,10 +39,10 @@ def profile():
         form.name.default = user.name
         form.process()
 
-    return render_template('my_profile.html',form=form,user_id=user.id)
+    return render_template('my_profile.html', form=form, user_id=user.id)
 
 
-@users_bp.route('/edit/<int:id>', methods=['GET','POST'])
+@users_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def admin_user_edit(id):
     if 'A' not in current_user.grades:
@@ -51,7 +52,7 @@ def admin_user_edit(id):
     user = User.query.get(id)
     form = AdminEditForm()
 
-    if request.method=='GET':
+    if request.method == 'GET':
         form.name.default = user.name
         form.email.default = user.email
         form.grades.default = user.grades
@@ -71,11 +72,12 @@ def admin_user_edit(id):
         form.grades.default = user.grades
         form.process()
 
-    return render_template('admin_user_edit.html',form=form,user_id=user.id)
+    return render_template('admin_user_edit.html', form=form, user_id=user.id)
 
     user.email = form.email.data
 
-@users_bp.route('/add', methods=['GET','POST'])
+
+@users_bp.route('/add', methods=['GET', 'POST'])
 @login_required
 def add():
     if 'A' not in current_user.grades:
@@ -93,9 +95,10 @@ def add():
 
         return redirect(url_for('users.admin_list_users'))
 
-    return render_template('admin_user_add.html',form=form)
+    return render_template('admin_user_add.html', form=form)
 
-@users_bp.route('/delete/<int:id>', methods=['GET','POST'])
+
+@users_bp.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete(id):
     if 'A' not in current_user.grades:
@@ -106,12 +109,13 @@ def delete(id):
 
     user_email = user_to_delete.email
     user_name = user_to_delete.name
-    flash(_('The teacher ') + user_name +'('+ {user_email} + ')' + _(' has been deleted'), category='info')
+    flash(_('The teacher ') + user_name + '(' + ''.join(user_email) + ')' + _(' has been deleted'), category='info')
     db.session.delete(user_to_delete)
     db.session.commit()
     return redirect(url_for('users.admin_list_users'))
 
-@users_bp.route('/register', methods=['GET','POST'])
+
+@users_bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
 
@@ -129,9 +133,11 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-            flash(_('Your account have been created.  You will recieve an email once it has been validated and activated. Thank you.'), category='warning')
+            flash(
+                _('Your account have been created.  You will recieve an email once it has been validated and activated. Thank you.'),
+                category='warning')
             return redirect(url_for('root.index'))
-    return render_template('register.html',form=form)
+    return render_template('register.html', form=form)
 
 
 @users_bp.route('/logout')
