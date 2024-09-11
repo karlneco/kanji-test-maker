@@ -1,7 +1,8 @@
 #!/bin/bash
 app="kanji-test-maker"
 docker build -t ${app} .
-docker run -d -p 9473:80 \
+docker run -p 9473:80 \
   --name=${app} \
   --env-file ~/kanji_test.env \
-  -v $PWD:/app ${app}
+  -v $PWD/migrations:/app/migrations \
+  -v $PWD/instance:/app/instance ${app}
