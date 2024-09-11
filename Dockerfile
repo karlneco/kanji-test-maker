@@ -15,8 +15,5 @@ COPY . .
 # Make the entrypoint script executable
 RUN chmod +x entrypoint.sh
 
-# Expose the port the app runs on
-EXPOSE 5000
-
 # Set the entrypoint script as the command to run on container start
 ENTRYPOINT ["./entrypoint.sh"]
