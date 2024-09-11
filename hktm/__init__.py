@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, migrate
 from flask_login import LoginManager
 from flask_babel import Babel, gettext
 
@@ -38,6 +38,7 @@ def create_app(config_filename=None):
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app, db)
     babel.init_app(app)
 
     # Set up login manager settings
