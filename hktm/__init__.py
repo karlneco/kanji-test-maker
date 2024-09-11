@@ -10,6 +10,7 @@ from flask_babel import Babel, gettext
 ####################################################
 db = SQLAlchemy()
 login_manager = LoginManager()
+migrate = Migrate()
 login_manager.login_view = 'root.index'
 babel = Babel()
 
