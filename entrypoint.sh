@@ -21,7 +21,7 @@ migrate_db() {
 migrate_db
 
 # Allow time for database migrations to complete
-sleep 3
+sleep 2
 
 # Create admin user
 echo "Creating admin user..."
