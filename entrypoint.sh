@@ -29,4 +29,4 @@ flask create-admin
 
 # Start the Flask application with Gunicorn
 echo "Starting Flask application with Gunicorn..."
-exec gunicorn -w 4 -b 0.0.0.0:7953 --keyfile '/app/server.key' --certfile '/app/server.crt' "main:app"
+exec gunicorn -w 4 -b 0.0.0.0:9473 --keyfile '/app/server.key' --certfile '/app/server.crt' "main:app"
