@@ -1,6 +1,7 @@
 #!/bin/bash
-app="hktm"
+app="kanji-test-maker"
 docker build -t ${app} .
-docker run -d -p 10475:80 \
+docker run -d -p 9473:80 \
   --name=${app} \
+  --env-file ~/kanji_trak.env \
   -v $PWD:/app ${app}

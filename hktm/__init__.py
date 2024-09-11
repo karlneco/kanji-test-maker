@@ -16,26 +16,47 @@ babel = Babel()
 ####################################################
 ### App Factory
 ####################################################
-def create_app(cf=None):
-    print("config at: " + cf)
+def create_app(config_filename=None):
+    print("config at: " + config_filename)
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_pyfile(cf)
-    initialize_extensions(app)
-    register_blueprints(app)
+
+    if config_filename:
+        # Load the specified configuration file
+        app.config.from_pyfile(config_filename)
+
+    # Check if we are in testing mode
+    if app.config.get('TESTING', False):
+        # Use a default secret key for testing
+        app.config['SECRET_KEY'] = 'test-secret-key'
+    else:
+        # Override the SECRET_KEY with the value from the environment variable
+        secret_key = os.getenv('SECRET_KEY')
+        if not secret_key:
+            raise RuntimeError('SECRET_KEY environment variable is not set. The application cannot start without it.')
+        app.config['SECRET_KEY'] = secret_key
+
+    # Initialize extensions
+    db.init_app(app)
+    login_manager.init_app(app)
     babel.init_app(app)
-    #migration support
-    Migrate(app,db)
+
+    # Set up login manager settings
+    login_manager.login_view = 'staff.staff_login'
+    login_manager.login_message = "Please log in to access the requested resource."
+    login_manager.login_message_category = "info"
+
+    # Initialize models
+    from hktm import models
+
+    # Register blueprints
+    register_blueprints(app)
+
+    # Register custom CLI commands
+    register_commands(app)
 
     return app
 
 
-# attach app
-def initialize_extensions(app):
-    db.init_app(app)
-    login_manager.init_app(app)
-
-
-# load blue  prints
 def register_blueprints(app):
     from hktm.lessons.views import lessons_bp
     from hktm.lesson_contents.views import lesson_contents_bp
@@ -47,5 +68,29 @@ def register_blueprints(app):
     app.register_blueprint(lesson_contents_bp, url_prefix='/lesson_contents')
     app.register_blueprint(users_bp, url_prefix='/users')
     app.register_blueprint(worksheets_bp, url_prefix='/worksheets/')
-    app.register_blueprint(root_bp,url_prefix='/')
+    app.register_blueprint(root_bp, url_prefix='/')
     from hktm import views
+
+
+def register_commands(app):
+    @app.cli.command("create-admin")
+    def create_admin():
+        """Create the default admin user."""
+        from hktm.models import User  # Make sure this import is inside the function to avoid early import issues
+        admin_email = "admin@example.com"
+        default_password = "admin123"
+
+        # Check if the admin user already exists
+        existing_admin = User.query.filter_by(email=admin_email).first()
+        if not existing_admin:
+            new_admin = User(
+                email=admin_email,
+                password=default_password,
+                # name="Default Admin",
+                # grades="A123456789"
+            )
+            db.session.add(new_admin)
+            db.session.commit()
+            print("Default admin user created")
+        else:
+            print("Admin user already exists")
