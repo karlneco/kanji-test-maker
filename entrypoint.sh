@@ -21,12 +21,12 @@ migrate_db() {
 migrate_db
 
 # Allow time for database migrations to complete
-sleep 2
+sleep 3
 
 # Create admin user
 echo "Creating admin user..."
 flask create-admin
 
 # Start the Flask application with Gunicorn
-echo "Starting Flask application with Gunicorn..."
-exec gunicorn -w 4 -b 0.0.0.0:9473 --keyfile '/app/server.key' --certfile '/app/server.crt' "main:app"
+echo "Starting Kanji Test app with Gunicorn..."
+exec gunicorn -w 4 -b 0.0.0.0:8000 "main:app"
